@@ -263,7 +263,7 @@ class MainController extends Controller
             ]
         ])
         ->add("date", "datetime", [
-            "format" => "dd - MM - YYYY / HH:mm",
+            "format" => "YYYY/MM/DD HH:mm",
             "widget" => "single_text",
             "data" => new \DateTime("now"),
             "years" => range(date('Y')-10,date('Y')+10),

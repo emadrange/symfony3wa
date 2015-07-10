@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <p>Produit(s) dont la quantité est inférieur à 5 :</p>
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Quantité</th>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
