@@ -1,0 +1,113 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.structure.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.datetimepicker.css') }}">
+{% endblock %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block h1 %}<i class="fa fa-bug"></i> Feedback{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">
+        <i class="fa fa-bug"></i> Feebback
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(formFeedback) }}
+
+    <div class="form-group">
+        {{ form_errors(formFeedback.firstname) }}
+        {{ form_label(formFeedback.firstname, "Prénom") }}
+        {{ form_widget(formFeedback.firstname, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(formFeedback.lastname) }}
+        {{ form_label(formFeedback.lastname, "Nom") }}
+        {{ form_widget(formFeedback.lastname, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(formFeedback.mail) }}
+        {{ form_label(formFeedback.mail) }}
+        {{ form_widget(formFeedback.mail, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(formFeedback.url) }}
+        {{ form_label(formFeedback.url, "URL") }}
+        {{ form_widget(formFeedback.url, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {#% for item in formFeedback.statut.children %#}
+        <!--label class="radio-inline">
+            {#{ form_widget(formFeedback.statut.0) }#}
+            {#{ formFeedback.statut.children.0.vars.label }#}
+        </label-->
+        {#% endfor %#}
+
+        {{ form_errors(formFeedback.statut) }}
+        {{ form_label(formFeedback.statut, "Cause") }}
+        {{ form_widget(formFeedback.statut, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_errors(formFeedback.date) }}
+        {{ form_label(formFeedback.date, "Date") }}
+        {{ form_widget(formFeedback.date, {
+            id: "datetimepicker",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(formFeedback.description) }}
+        {{ form_label(formFeedback.description, "Message") }}
+        {{ form_widget(formFeedback.description, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    {{ form_end(formFeedback) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.datetimepicker.js') }}"></script>
+
+    <script>
+      /*$(function() {
+        $( "#datepicker" ).datepicker();
+      });*/
+
+      $('#datetimepicker').datetimepicker();
+
+    </script>
+{% endblock %}

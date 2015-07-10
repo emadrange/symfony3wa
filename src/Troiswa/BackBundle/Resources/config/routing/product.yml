@@ -1,0 +1,40 @@
+troiswa_back_product_add:
+    path: add
+    defaults: { _controller: TroiswaBackBundle:Product:add}
+
+troiswa_back_product_list:
+    path: /
+    defaults: { _controller:TroiswaBackBundle:Product:list }
+
+troiswa_back_product_listactive:
+    path: /listactive
+    defaults: { _controller:TroiswaBackBundle:Product:listactive }
+
+troiswa_back_product_listlimite:
+    path: /listlimit
+    defaults: { _controller:TroiswaBackBundle:Product:listlimit }
+
+troiswa_back_product_show:
+    path: /show/{idproduct}
+    defaults: { _controller:TroiswaBackBundle:Product:show }
+    requirements:
+        idproduct: \d+
+
+troiswa_back_product_edit:
+    path: /edit/{idproduct}
+    defaults: { _controller:TroiswaBackBundle:Product:edit }
+    requirements:
+        idproduct: \d+
+
+troiswa_back_product_delete:
+    path: /delete/{idproduct}
+    defaults: { _controller:TroiswaBackBundle:Product:delete }
+    requirements:
+        idproduct: \d+
+
+troiswa_back_product_change_active:
+    path: /changeactive/{idproduct}/{statut}
+    defaults: { _controller:TroiswaBackBundle:Product:changeActive}
+    requirements:
+        idproduct: \d+
+        statut: "[0-1]"

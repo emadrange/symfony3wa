@@ -1,0 +1,6 @@
+{# Template pour le render demandé dans twig #}
+{% for category in categorys %}
+    <li style="width: 100%;">
+        <a href="{{ path('troiswa_back_category_show', {'idcategory': category.id}) }}"><i class="fa"></i>{{ category.titre }}</a>
+    </li>
+{% endfor %}

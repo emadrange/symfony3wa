@@ -1,0 +1,41 @@
+troiswa_back_cgv:
+    path: /cgv
+    defaults: { _controller:TroiswaBackBundle:Static:index }
+
+troiswa_back_training:
+    path: /training/{chaine}
+    defaults: { _controller:TroiswaBackBundle:Static:training, chaine: "Le gag du RegEx" }
+    requirements:
+        chaine: "[a-zA-Z]{5}"
+#        chaine: "[a-z]{4}"
+#        chaine: "[a-zA-Z]+"
+#        chaine: "^Moi$"
+#        chaine: \w+
+
+troiswa_back_heritage_template:
+    path: /template
+    defaults: { _controller:TroiswaBackBundle:Static:heritage }
+
+troiswa_back_heritage_templating:
+    path: /templating
+    defaults: { _controller:TroiswaBackBundle:Static:templating }
+
+
+
+
+
+troiswa_back_category:
+    path: /category
+    defaults: { _controller:TroiswaBackBundle:Category:category }
+
+troiswa_back_category_info:
+    path: /category/info/{iditem}
+    defaults: { _controller:TroiswaBackBundle:Category:info }
+    requirements:
+        iditem: \d+
+
+troiswa_back_equipes:
+    path: /equipes
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: "TroiswaBackBundle:Statics:equipes.html.twig"

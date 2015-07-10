@@ -1,0 +1,46 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block h1 %}<i class="fa fa-fw fa-cubes"></i> Liste des catégories ({{ categorys | length }}){% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">
+        <i class="fa fa-cubes"></i> Lister les catégories
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="table-responsive">
+        <a class="btn btn-success" href="{{ path('troiswa_back_category_add') }}">Ajouter une catégorie</a>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categorys %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.titre }}</td>
+                    <td>{{ category.position }}</td>
+                    <td><a class="btn btn-sm btn-info" href="{{ path('troiswa_back_category_show', {"idcategory": category.id}) }}">Voir</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_category_edit', {"idcategory": category.id}) }}">Editer</a>
+                        <a class="btn btn-sm btn-danger" href="{{ path('troiswa_back_category_delete', {"idcategory": category.id}) }}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/remove.js') }}" type="text/javascript"></script>
+{% endblock %}
+

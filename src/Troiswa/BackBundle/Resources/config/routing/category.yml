@@ -1,0 +1,25 @@
+troiswa_back_category_add:
+    path: /add
+    defaults: { _controller: TroiswaBackBundle:Category:add }
+
+troiswa_back_category_list:
+    path: /
+    defaults: { _controller: TroiswaBackBundle:Category:list }
+
+troiswa_back_category_show:
+    path: /show/{idcategory}
+    defaults: { _controller: TroiswaBackBundle:Category:show }
+    requirements:
+        idcategory: \d+
+
+troiswa_back_category_edit:
+    path: /edit/{idcategory}
+    defaults: { _controller: TroiswaBackBundle:Category:edit }
+    requirements:
+        idcategory: \d+
+
+troiswa_back_category_delete:
+    path: /delete/{idcategory}
+    defaults: { _controller: TroiswaBackBundle:Category:delete }
+    requirements:
+        idcategory: \d+

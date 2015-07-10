@@ -1,0 +1,259 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: wap75
+ * Date: 03/07/15
+ * Time: 09:41
+ */
+
+namespace Troiswa\BackBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Troiswa\BackBundle\Entity\Category;
+use Troiswa\BackBundle\Form\CategoryType;
+
+
+class CategoryController extends Controller {
+
+    /**
+     * Ajout d'une catégorie
+     * @author Eric
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addAction(Request $request) {
+
+        $category = new Category();
+
+        $formCategory = $this->createForm(new CategoryType(), $category, [
+            "attr" => [
+                "novalidate" => "novalidate"
+            ]
+        ])
+            ->add("submit", "submit", [
+            "label" => "Enregistrer",
+            "attr" => [
+                "class" => "btn btn-success"
+            ]
+        ]);
+
+        $formCategory->handleRequest($request);
+
+        if ($formCategory->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add("success", "La catégorie a bien été ajoutée");
+            return $this->redirectToRoute("troiswa_back_category_add");
+        }
+
+        return $this->render("TroiswaBackBundle:category:add.html.twig", [
+            "formCategory" => $formCategory->createView()
+        ]);
+    }
+
+    /**
+     * Liste des catégories
+     * @author Eric
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function listAction() {
+
+        $em = $this->getDoctrine()->getManager();
+        $categorys = $em->getRepository("TroiswaBackBundle:Category")->findAll();
+
+        return $this->render("TroiswaBackBundle:category:categorys.html.twig", [
+            "categorys" => $categorys
+        ]);
+    }
+
+    /**
+     * Visualisation d'une catégorie
+     * @author Eric
+     * @param $idcategory
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction($idcategory, Request $request) {
+
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository("TroiswaBackBundle:Category")
+            ->find($idcategory);
+
+        if (!$category) {
+            throw $this->createNotFoundException("Catégorie inconnue...");
+        }
+
+        return $this->render("TroiswaBackBundle:category:show.html.twig", [
+            "category" => $category
+        ]);
+
+    }
+
+    /**
+     * Edition d'une catégorie
+     * @author Eric
+     * @param Request $request
+     * @param $idcategory
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Request $request, $idcategory) {
+
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository("TroiswaBackBundle:Category")
+            ->find($idcategory);
+
+        if (!$category) {
+            throw $this->createNotFoundException("Catégorie inconnue...");
+        }
+
+        $formCategory = $this->createForm(new CategoryType(), $category, [
+            "attr" => [
+                "novalidate" => "novalidate"
+            ]
+        ])
+        ->add("submit", "submit", [
+            "label" => "Enregistrer",
+            "attr" => [
+                "class" => "btn btn-success"
+            ]
+        ]);
+
+        $formCategory->handleRequest($request);
+
+        if ($formCategory->isValid()) {
+
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add("success", "La catégorie a bien été modifiée");
+            return $this->redirectToRoute("troiswa_back_category_edit", [
+                "idcategory" => $idcategory
+            ]);
+        }
+
+        return $this->render("TroiswaBackBundle:category:edit.html.twig", [
+            "formCategory" => $formCategory->createView()
+        ]);
+    }
+
+    /**
+     * Suppression d'une catégorie
+     * @author Eric
+     * @param $idcategory
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction($idcategory) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository("TroiswaBackBundle:Category")
+            ->find($idcategory);
+
+        if (!$category) {
+            throw $this->createNotFoundException("Catégorie inconnu...");
+        }
+
+        $em->remove($category);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add("success", "La catégorie a bien été supprimée");
+        return $this->redirectToRoute("troiswa_back_category_list");
+
+    }
+
+    /**
+     * Liste des catégories pour la sidebar
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allCategoryAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $categorys = $em->getRepository("TroiswaBackBundle:Category")
+            ->findBy([], ["position" => "ASC"]);
+
+        return $this->render("TroiswaBackBundle:category:category-sidebar.html.twig", [
+            "categorys" => $categorys
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+     public function categoryAction() {
+        $categories = [
+            1 => [
+                "id" => 1,
+                "title" => "Homme",
+                "description" => "lorem ipsum",
+                "date_created" => new \DateTime('now'),
+                "active" => true
+            ],
+            2 => [
+                "id" => 2,
+                "title" => "Femme",
+                "description" => "lorem ipsum",
+                "date_created" => new \DateTime('-10 Days'),
+                "active" => true
+            ],
+            3 => [
+                "id" => 3,
+                "title" => "Enfant",
+                "description" => "lorem ipsum",
+                "date_created" => new \DateTime('-1 Days'),
+                "active" => false
+            ],
+        ];
+
+        return $this->render("TroiswaBackBundle:category:index.html.twig", [
+            "categorys" => $categories
+        ]);
+    }
+
+    public function infoAction($iditem) {
+
+        $categories = [
+            1 => [
+                "id" => 1,
+                "title" => "Homme",
+                "description" => "lorem ipsum \n suite du contenu",
+                "date_created" => new \DateTime('now'),
+                "active" => true
+            ],
+            2 => [
+                "id" => 2,
+                "title" => "Femme",
+                "description" => "<strong>lorem</strong> ipsum",
+                "date_created" => new \DateTime('-10 Days'),
+                "active" => true
+            ],
+            3 => [
+                "id" => 3,
+                "title" => "Enfant",
+                "description" => "lorem ipsum",
+                "date_created" => new \DateTime('-1 Days'),
+                "active" => false
+            ],
+        ];
+
+        if (!isset($categories[$iditem])) {
+            throw $this->createNotFoundException("Catégorie inconnue...");
+        }
+
+        return $this->render("TroiswaBackBundle:category:show.html.twig", [
+            "category" => $categories[$iditem]
+        ]);
+    }
+}

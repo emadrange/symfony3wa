@@ -1,0 +1,16 @@
+######################################
+#          pages statics             #
+#          By Eric - 07/2015         #
+######################################
+
+troiswa_back_administration:
+    path: /admin
+    defaults: { _controller:TroiswaBackBundle:Main:index }
+
+troiswa_back_contact:
+    path: /contact
+    defaults: { _controller:TroiswaBackBundle:Main:contact }
+
+troiswa_back_feedback:
+    path: /feedback
+    defaults: { _controller:TroiswaBackBundle:Main:feedback }

@@ -1,0 +1,47 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}Editer une catégorie{% endblock %}
+
+{% block h1 %}<i class="fa fa-cubes"></i> Editer une catégorie{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('troiswa_back_category_list') }}"><i class="fa fa-cubes"></i> Lister les catégories</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-cubes"></i> Editer une catégorie
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(formCategory) }}
+    <div class="form-group">
+        {{ form_label(formCategory.titre) }}
+        {{ form_errors(formCategory.titre) }}
+        {{ form_widget(formCategory.titre, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(formCategory.description) }}
+        {{ form_errors(formCategory.description) }}
+        {{ form_widget(formCategory.description, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(formCategory.position) }}
+        {{ form_errors(formCategory.position) }}
+        {{ form_widget(formCategory.position, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    {{ form_end(formCategory) }}
+{% endblock %}

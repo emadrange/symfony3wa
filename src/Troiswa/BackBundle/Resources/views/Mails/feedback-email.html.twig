@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <p>Message envoyé le {{ data.date | date("d - m - y") }} à {{ data.date | date("H:i") }} par
+{{ data.firstname ~ " " ~ data.lastname ~ " (" ~ data.mail ~ ")" }}</p>
+
+<p>Défaut : {{ data.statut }}</p>
+<p>Url : {{ data.url }}</p>
+<p>Description du défaut : {{ data.description }}</p>
+</body>
+</html>

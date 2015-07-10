@@ -1,0 +1,98 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{# surcharge au sein d'un template #}
+
+{% form_theme formContact _self  %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="alert alert-danger">
+            {%- for error in errors -%}
+                <li>{{ error.message }} (!!! gag !!!)</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block title %}Contact{% endblock %}
+
+{% block h1 %}<i class="fa fa-phone"></i> Contact{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">
+        <i class="fa fa-phone"></i> Contact
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    {#{ form(formContact) }#}
+
+    {{ form_start(formContact) }}
+    {#{ form_errors(formContact) }#}
+
+    <div class="form-group">
+        {{ form_errors(formContact.firstname) }}
+        {{ form_label(formContact.firstname, "Prénom") }}
+        {{ form_widget(formContact.firstname, {
+            id: "firstnamId",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_errors(formContact.lastname) }}
+        {{ form_label(formContact.lastname, "Nom") }}
+        {{ form_widget(formContact.lastname, {
+            id: "lastnamId",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_errors(formContact.subject) }}
+        {{ form_label(formContact.subject, "Sujet") }}
+        {{ form_widget(formContact.subject, {
+            id: "subjectId",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_errors(formContact.email) }}
+        {{ form_label(formContact.email, "Mail") }}
+        {{ form_widget(formContact.email, {
+            id: "emailId",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div>
+        {{ form_errors(formContact.contenu) }}
+        {{ form_label(formContact.contenu, "Message") }}
+        {{ form_widget(formContact.contenu, {
+            id: "contenuId",
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+
+    <div>
+        {{ form_widget(formContact.submit, {
+            label: "Envoyer"
+        }) }}
+    </div>
+
+
+    {{ form_end(formContact) }}
+{% endblock %}

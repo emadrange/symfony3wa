@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+    <title>Catégories...</title>
+</head>
+<body>
+    <h3>Liste des catégories :</h3>
+    {% for category in categorys if category.active %}
+        <ul>
+            <li><a href="{{ path('troiswa_back_category_info', {"iditem": category.id}) }}">{{ category.title }}</a></li>
+        </ul>
+    {% endfor %}
+</body>
+</html>

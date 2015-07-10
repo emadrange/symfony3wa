@@ -1,0 +1,24 @@
+##########################
+# By Eric - 07/2015      #
+# administration du site #
+##########################
+
+troiswa_back_resource_static:
+    resource: "@TroiswaBackBundle/Resources/config/routing/statics.yml"
+
+troiswa_back_resource_product:
+    resource: "@TroiswaBackBundle/Resources/config/routing/product.yml"
+    prefix: /product
+
+troiswa_back_resource_category:
+    resource: "@TroiswaBackBundle/Resources/config/routing/category.yml"
+    prefix: /category
+
+
+####################
+# divers exercices #
+####################
+
+troiswa_back_resource_exercice:
+    resource: "@TroiswaBackBundle/Resources/config/routing/exercices.yml"
+

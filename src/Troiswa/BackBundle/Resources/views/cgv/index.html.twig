@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>Conditions Générales de vente</title>
+</head>
+<body>
+<h1>Conditions générales de vente...</h1>
+<p>Informations :</p>
+<ul>
+    <li>{{ firstname | capitalize }}</li>
+    <li>{{ lastname | capitalize }}</li>
+    <li>{{ age }}</li>
+</ul>
+<p>Bonjour {{ firstname | capitalize ~ " " ~ lastname | capitalize }}</p>
+
+{% if age > 17 %}
+    <p>Votre age : {{ age }} ans</p>
+{% else %}
+    <p>Votre age : {{ age }} ans (mineur)</p>
+{% endif %}
+
+{% if article is defined %}
+{{ article }}
+{% endif %}
+
+<p>{{ article | default('article') }}</p>
+
+<a href="{{ path('troiswa_back_equipes') }}">équipes cliquez ici</a>
+<p>{{ dump(lastname) }}</p>
+{#% include "TroiswaBackBundle:globals:footercgv.html.twig" %#}
+{#% include "TroiswaBackBundle:globals:footercgv.html.twig" only %#}
+{#% include "TroiswaBackBundle:globals:footercgv.html.twig" with {"name": firstname} %#}
+{% include "TroiswaBackBundle:globals:footercgv.html.twig" with {"name": firstname} only %}
+</body>
+</html>

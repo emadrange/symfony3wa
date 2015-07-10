@@ -1,0 +1,20 @@
+{% extends 'TroiswaBackBundle::layout.html.twig' %}
+
+{% block title %}templating - mon super site{% endblock %}
+
+{% block title_h1 "Bienvenue sur mon site" %}
+
+{% block contenu_1 %}
+    Ceci est du contenu<br />
+    <img src="{{ asset('assets/images/test.jpg', absolute=true) }}" />
+{% endblock %}
+
+{% block contenu_2 %}
+    {{ parent() }}
+    en plus
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/templating.css') }}">
+{% endblock %}

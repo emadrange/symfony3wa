@@ -1,0 +1,6 @@
+Message envoyé le {{ data.date | date("d - m - y") }} à {{ data.date | date("H:i") }} par
+{{ data.firstname ~ " " ~ data.lastname ~ " (" ~ data.mail ~ ")" }}
+
+Défaut : {{ data.statut }}
+Url : {{ data.url }}
+Description du défaut : {{ data.description }}

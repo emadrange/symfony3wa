@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <title>Symfony en formation...</title>
+</head>
+<body>
+    Bonjour{{ " " ~ name }}...
+<div>
+    <a href="{{ path('troiswa_back_equipes') }}">Team...</a><br />
+    <a href="{{ path('troiswa_back_training', {chaine: "mois"}) }}">training...</a><br />
+    <a href="{{ path('troiswa_back_training') }}">training...</a><br />
+    <a href="{{ url('troiswa_back_cgv') }}">Conditions générales de vente...</a><br />
+    <a href="{{ path('troiswa_back_product') }}">Produits...</a>
+</div>
+</body>
+</html>

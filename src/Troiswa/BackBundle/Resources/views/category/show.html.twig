@@ -1,0 +1,35 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}Fiche catégorie{% endblock %}
+
+{% block h1 %}<i class="fa fa-fw fa-cubes"></i> Fiche catégorie{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('troiswa_back_category_list') }}"><i class="fa fa-cubes"></i> Lister les catégories</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-cubes"></i> Fiche catégorie
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ category.titre }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="well">
+            <p>{{ category.description }}</p>
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item">Position :  {{ category.position }}</li>
+        </ul>
+    </div>
+    <div style="padding: 4px 8px;">
+        <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_category_edit', {"idcategory": category.id}) }}">Editer</a>
+    </div>
+{% endblock %}
