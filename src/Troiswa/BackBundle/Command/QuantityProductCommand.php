@@ -49,14 +49,14 @@ class QuantityProductCommand extends ContainerAwareCommand
                 //->setBody("du contenu")
                 ->setBody($templating->render('TroiswaBackBundle:Mails:quantity-products-email.html.twig', [
                     "products" => $products
-                ]))
+                ]), 'text/html')
                 ->addPart(
                     $templating->render('TroiswaBackBundle:Mails:quantity-products-email.txt.twig', [
                         "products" => $products
                     ]), 'text/plain'
                 );
 
-            //$this->getContainer()->get('mailer')->send($message);
+            $this->getContainer()->get('mailer')->send($message);
             $output->writeln("Votre mail est bien envoyé");
 
         }

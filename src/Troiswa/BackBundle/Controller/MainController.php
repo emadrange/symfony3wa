@@ -146,7 +146,7 @@ class MainController extends Controller
                     //->setBody("du contenu")
                     ->setBody($this->renderView('TroiswaBackBundle:Mails:contact-email.html.twig', [
                         "data" => $data
-                    ]))
+                    ]), 'text/html')
                     ->addPart(
                         $this->renderView('TroiswaBackBundle:Mails:contact-email.txt.twig', [
                             "data" => $data
@@ -289,7 +289,7 @@ class MainController extends Controller
                 //->setBody("du contenu")
                 ->setBody($this->renderView('TroiswaBackBundle:Mails:feedback-email.html.twig', [
                     "data" => $data
-                ]))
+                ]), 'text/html')
                 ->addPart(
                     $this->renderView('TroiswaBackBundle:Mails:feedback-email.txt.twig', [
                         "data" => $data

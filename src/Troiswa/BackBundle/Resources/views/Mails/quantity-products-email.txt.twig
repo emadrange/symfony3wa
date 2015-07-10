@@ -3,4 +3,5 @@ Produit(s) dont la quantité est inférieur à 5 :
 {% set compteur = 1 %}
 {% for product in products %}
     {{ compteur }} - {{ product.title }} => {{ product.quantity }}
+    {% set compteur = compteur + 1 %}
 {% endfor %}
