@@ -1,8 +1,6 @@
 Symfony Standard Edition Upgrade
 ================================
 
-Petites modifications...
-
 From Symfony 2.0 to Symfony 2.1
 -------------------------------
 
