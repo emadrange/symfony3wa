@@ -21,7 +21,7 @@ class QuantityProductCommand extends ContainerAwareCommand
     {
         $this
             ->setName('product:quantity')
-            ->setDescription("Permet d'envoyer un mail des produits dont la quantité est inférieur à 5")
+            ->setDescription("Permet d'envoyer un mail pour les produits dont la quantité est inférieur à 5")
             ->addArgument('nombre', InputArgument::OPTIONAL, 'Quantité demandé ?')
             ->addOption('message', '-m', InputOption::VALUE_NONE,
                 'Si définie, un petit message apparaitra'
@@ -30,8 +30,10 @@ class QuantityProductCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Entity Manager
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
+        
+        // Templating
         $templating = $this->getContainer()->get('templating');
 
         $nombre = $input->getArgument('nombre');
@@ -64,6 +66,5 @@ class QuantityProductCommand extends ContainerAwareCommand
         if ($option) {
             $output->writeln('<fg=yellow>Un autre message</fg=yellow>');
         }
-
     }
 }

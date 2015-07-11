@@ -8,6 +8,7 @@ class CategoryRepository extends EntityRepository {
 
     /**
      * Retourne le nombre de catégorie
+     * @author Eric
      * @return mixed
      */
     public function countCategory() {
@@ -20,6 +21,7 @@ class CategoryRepository extends EntityRepository {
 
     /**
      * Retourne les catégories dont la position > 2
+     * @author Eric
      * @param $position
      * @return array
      */
@@ -34,6 +36,7 @@ class CategoryRepository extends EntityRepository {
 
     /**
      * Rtourne les catégories dont le titre commence par "le"
+     * @author Eric
      * @param $text
      * @return array
      */

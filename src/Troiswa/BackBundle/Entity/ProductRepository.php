@@ -13,8 +13,9 @@ use Doctrine\ORM\EntityRepository;
 class ProductRepository extends EntityRepository
 {
     /**
-     * 
-     * @return 
+     * Exercice du findAll()
+     * @author Eric
+     * @return array
      */
     public function findAllMaison() {
         $em = $this->getEntityManager();
@@ -42,7 +43,6 @@ class ProductRepository extends EntityRepository
         }
 
         return $query->getQuery()->getResult();
-
     }
 
     /**
@@ -61,7 +61,8 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne le nombre de produit dont la quantité est à 0
-     * @return mixed
+     * @author Eric
+     * @return integer
      */
     public function countProductByQuantityIsZero() {
 
@@ -75,6 +76,7 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les produits dont la quantité est inférieur à une valeur
+     * @author Eric
      * @param $quantity
      * @return array
      */
@@ -86,12 +88,11 @@ class ProductRepository extends EntityRepository
             ->setParameter("quantity", $quantity);
 
         return $query->getQuery()->getResult();
-
-
     }
 
     /**
      * Retroune le nombre d'actif et non actif
+     * @author Eric
      * @return array
      */
     public function countStatesActiveProduct() {
@@ -105,6 +106,7 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les produits dont le prix est entre 2 valeurs
+     * @author Eric
      * @param $firstprice
      * @param $lastprice
      * @return array

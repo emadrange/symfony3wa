@@ -53,6 +53,7 @@ class Category
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
+     * @Assert\NotBlank(message="position obligatoire")
      * @Assert\GreaterThanOrEqual(
      *     value = 0,
      *     message="Valeur impossible"
