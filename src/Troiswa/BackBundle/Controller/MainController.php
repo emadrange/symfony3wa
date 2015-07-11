@@ -58,7 +58,7 @@ class MainController extends Controller
 
         // Repository
 
-        $products = $em->getRepository("TroiswaBackBundle:Product")->findAllMaison();
+        //$products = $em->getRepository("TroiswaBackBundle:Product")->findAllMaison();
 
         //$pdroductsByQuantity = $em->getRepository("TroiswaBackBundle:Product")->findProductsByQuantity();
 
@@ -108,7 +108,7 @@ class MainController extends Controller
     }
 
     /**
-     * Contact
+     * Contact avec utilisation du formulaire ContactType
      * @author Eric
      * @param Request $request
      * @return Response

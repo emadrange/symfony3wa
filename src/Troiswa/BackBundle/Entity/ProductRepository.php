@@ -12,6 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    /**
+     * 
+     * @return 
+     */
     public function findAllMaison() {
         $em = $this->getEntityManager();
 
@@ -41,6 +45,11 @@ class ProductRepository extends EntityRepository
 
     }
 
+    /**
+     * Retourne le nombre de produit
+     * @author Eric
+     * @return integer
+     */
     public function countActiveProduct() {
         $query = $this->createQueryBuilder("prod");
 

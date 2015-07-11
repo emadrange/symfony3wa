@@ -54,7 +54,7 @@
         </li>
 
         <li{% if routeActive in routes %} class="active"{% endif %}>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-phone-square"></i> Mail <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo" class="collapse nav navbar-nav{% if routeActive in routes %} in{% endif %}">
                 <li{% if routeActive == "troiswa_back_feedback" %} class="active"{% endif %}>
                     <a href="{{ path('troiswa_back_feedback') }}"><i class="fa fa-fw fa-bug"></i> Feedback</a>
@@ -62,12 +62,12 @@
                 <li{% if routeActive == "troiswa_back_contact" %} class="active"{% endif %}>
                     <a href="{{ path('troiswa_back_contact') }}"><i class="fa fa-fw fa-phone"></i> Contact</a>
                 </li>
-                <li>
+                <!--li>
                     <a href="#">Dropdown Item</a>
                 </li>
                 <li>
                     <a href="#">Dropdown Item</a>
-                </li>
+                </li-->
             </ul>
         </li>
         <li>
