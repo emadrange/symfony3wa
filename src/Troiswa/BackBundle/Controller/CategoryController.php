@@ -50,7 +50,7 @@ class CategoryController extends Controller {
             return $this->redirectToRoute("troiswa_back_category_add");
         }
 
-        return $this->render("TroiswaBackBundle:category:add.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:add.html.twig", [
             "formCategory" => $formCategory->createView()
         ]);
     }
@@ -65,7 +65,7 @@ class CategoryController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $categorys = $em->getRepository("TroiswaBackBundle:Category")->findAll();
 
-        return $this->render("TroiswaBackBundle:category:categorys.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:categorys.html.twig", [
             "categorys" => $categorys
         ]);
     }
@@ -87,7 +87,7 @@ class CategoryController extends Controller {
             throw $this->createNotFoundException("Catégorie inconnue...");
         }
 
-        return $this->render("TroiswaBackBundle:category:show.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:show.html.twig", [
             "category" => $category
         ]);
 
@@ -134,7 +134,7 @@ class CategoryController extends Controller {
             ]);
         }
 
-        return $this->render("TroiswaBackBundle:category:edit.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:edit.html.twig", [
             "formCategory" => $formCategory->createView()
         ]);
     }
@@ -176,7 +176,7 @@ class CategoryController extends Controller {
         $categorys = $em->getRepository("TroiswaBackBundle:Category")
             ->findBy([], ["position" => "ASC"]);
 
-        return $this->render("TroiswaBackBundle:category:category-sidebar.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:category-sidebar.html.twig", [
             "categorys" => $categorys
         ]);
     }
@@ -210,7 +210,7 @@ class CategoryController extends Controller {
             ],
         ];
 
-        return $this->render("TroiswaBackBundle:category:index.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:index.html.twig", [
             "categorys" => $categories
         ]);
     }
@@ -251,7 +251,7 @@ class CategoryController extends Controller {
             throw $this->createNotFoundException("Catégorie inconnue...");
         }
 
-        return $this->render("TroiswaBackBundle:category:show.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:show.html.twig", [
             "category" => $categories[$iditem]
         ]);
     }

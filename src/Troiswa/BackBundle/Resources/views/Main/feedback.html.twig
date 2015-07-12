@@ -23,8 +23,8 @@
     {{ form_start(formFeedback) }}
 
     <div class="form-group">
-        {{ form_errors(formFeedback.firstname) }}
         {{ form_label(formFeedback.firstname, "Prénom") }}
+        {{ form_errors(formFeedback.firstname) }}
         {{ form_widget(formFeedback.firstname, {
             attr: {
                 class: "form-control",
@@ -33,8 +33,8 @@
         }) }}
     </div>
     <div class="form-group">
-        {{ form_errors(formFeedback.lastname) }}
         {{ form_label(formFeedback.lastname, "Nom") }}
+        {{ form_errors(formFeedback.lastname) }}
         {{ form_widget(formFeedback.lastname, {
             attr: {
                 class: "form-control",
@@ -43,8 +43,8 @@
         }) }}
     </div>
     <div class="form-group">
-        {{ form_errors(formFeedback.mail) }}
         {{ form_label(formFeedback.mail) }}
+        {{ form_errors(formFeedback.mail) }}
         {{ form_widget(formFeedback.mail, {
             attr: {
                 class: "form-control",
@@ -53,8 +53,8 @@
         }) }}
     </div>
     <div class="form-group">
-        {{ form_errors(formFeedback.url) }}
         {{ form_label(formFeedback.url, "URL") }}
+        {{ form_errors(formFeedback.url) }}
         {{ form_widget(formFeedback.url, {
             attr: {
                 class: "form-control",
@@ -70,8 +70,8 @@
         </label-->
         {#% endfor %#}
 
-        {{ form_errors(formFeedback.statut) }}
         {{ form_label(formFeedback.statut, "Cause") }}
+        {{ form_errors(formFeedback.statut) }}
         {{ form_widget(formFeedback.statut, {
             attr: {
                 class: "form-control"
@@ -80,8 +80,8 @@
     </div>
 
     <div class="form-group">
-        {{ form_errors(formFeedback.date) }}
         {{ form_label(formFeedback.date, "Date") }}
+        {{ form_errors(formFeedback.date) }}
         {{ form_widget(formFeedback.date, {
             id: "datetimepicker",
             attr: {
@@ -91,8 +91,8 @@
         }) }}
     </div>
     <div class="form-group">
-        {{ form_errors(formFeedback.description) }}
         {{ form_label(formFeedback.description, "Message") }}
+        {{ form_errors(formFeedback.description) }}
         {{ form_widget(formFeedback.description, {
             attr: {
                 class: "form-control"
