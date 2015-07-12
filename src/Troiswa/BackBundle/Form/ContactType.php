@@ -82,8 +82,7 @@ class ContactType extends AbstractType
                         "maxMessage" => "Votre message est trop long"
                     ])
                 ]
-            ])
-            ->add("submit", "submit");
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

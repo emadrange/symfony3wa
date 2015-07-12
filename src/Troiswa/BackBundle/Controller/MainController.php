@@ -127,7 +127,13 @@ class MainController extends Controller
             "attr" => [
                 "novalidate" => "novalidate"
             ]
-        ]);
+        ])
+            ->add("submit", "submit", [
+                "label" => "Envoyer",
+                "attr" => [
+                    "class" => "btn btn-success"
+                ]
+            ]);
 
         //if ($request->isMethod("POST")) {
         //    $formContact->submit($request);
@@ -274,7 +280,10 @@ class MainController extends Controller
             ]
         ])
         ->add("submit", "submit", [
-            "label" => "Envoyer"
+            "label" => "Envoyer",
+            "attr" => [
+                "class" => "btn btn-success"
+            ]
         ])
         ->getForm();
 

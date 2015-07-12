@@ -27,8 +27,7 @@ class ProductType extends AbstractType
             ])
             ->add('active', 'checkbox', [
                 'label' => 'Activé'
-            ])
-        ;
+            ]);
     }
     
     /**

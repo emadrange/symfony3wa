@@ -8,11 +8,11 @@ troiswa_back_product_list:
 
 troiswa_back_product_listactive:
     path: /listactive
-    defaults: { _controller:TroiswaBackBundle:Product:listactive }
+    defaults: { _controller:TroiswaBackBundle:Product:listActive }
 
 troiswa_back_product_listlimite:
     path: /listlimit
-    defaults: { _controller:TroiswaBackBundle:Product:listlimit }
+    defaults: { _controller:TroiswaBackBundle:Product:listLimit }
 
 troiswa_back_product_show:
     path: /show/{idproduct}

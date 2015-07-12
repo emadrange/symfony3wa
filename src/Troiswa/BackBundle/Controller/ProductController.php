@@ -184,7 +184,7 @@ class ProductController extends Controller {
      * @author Eric
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listactiveAction() {
+    public function listActiveAction() {
 
         //$products = [];
 
@@ -206,7 +206,7 @@ class ProductController extends Controller {
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listlimitAction(Request $request) {
+    public function listLimitAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
 

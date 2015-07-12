@@ -36,23 +36,11 @@
                 <li{% if routeActive == "troiswa_back_category_add" %} class="active"{% endif %}>
                     <a href="{{ path('troiswa_back_category_add') }}"><i class="fa fa-fw fa-cubes"></i> Ajouter une catégorie</a>
                 </li>
+                {#+++++++++ appel d'un rendu dans twig d'une vue +++++++++#}
                 {{ render(controller('TroiswaBackBundle:Category:allCategory')) }}
             </ul>
         </li>
-
-        <li>
-            <!--a href="{{ path('troiswa_back_contact') }}"><i class="fa fa-fw fa-bar-chart-o"></i> Contact</a-->
-        </li>
-        <li>
-            <!--a href="{{ path('troiswa_back_feedback') }}"><i class="fa fa-fw fa-table"></i> Feedback</a-->
-        </li>
-        <li>
-            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-        </li>
-        <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-        </li>
-
+        <!-- contact - feddback -->
         <li{% if routeActive in routes %} class="active"{% endif %}>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-phone-square"></i> Mail <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo" class="collapse nav navbar-nav{% if routeActive in routes %} in{% endif %}">
@@ -70,6 +58,21 @@
                 </li-->
             </ul>
         </li>
+
+        <li>
+            <!--a href="{{ path('troiswa_back_contact') }}"><i class="fa fa-fw fa-bar-chart-o"></i> Contact</a-->
+        </li>
+        <li>
+            <!--a href="{{ path('troiswa_back_feedback') }}"><i class="fa fa-fw fa-table"></i> Feedback</a-->
+        </li>
+        <li>
+            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+        </li>
+        <li>
+            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+        </li>
+
+        
         <li>
             <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
         </li>
