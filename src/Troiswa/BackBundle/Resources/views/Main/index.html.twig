@@ -55,9 +55,9 @@
     </div>
 
 
-
-        <div class="panel panel-yellow">
-            <div class="panel-heading">Produits dont la quantité < 5 ({{ productsByMinimumQuantity | length }})</div>
+    {#+++++++++ produit avec quantité < 5 +++++++++#}
+    <div class="panel panel-yellow">
+        <div class="panel-heading">Produits dont la quantité < 5 ({{ productsByMinimumQuantity | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -78,10 +78,11 @@
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">Catégorie dont la position > 2 ({{ categorysByPosition | length }})</div>
+    {#+++++++++ position des catégories +++++++++#}
+    <div class="panel panel-info">
+        <div class="panel-heading">Catégorie dont la position > 2 ({{ categorysByPosition | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -102,9 +103,10 @@
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
-        <div class="panel panel-info">
+    {#+++++++++ produit actif et non actif +++++++++#}
+    <div class="panel panel-info">
         <div class="panel-heading">Nombre de produit actif et non actif</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
@@ -125,9 +127,10 @@
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
-        <div class="panel panel-info">
+    {#+++++++++ table des prix entre 2 valeurs +++++++++#}
+    <div class="panel panel-info">
         <div class="panel-heading">Produits dont le prix est entre 250€ et 400€ ({{ pricesBeetweenPrice | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
@@ -147,10 +150,10 @@
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
-
-        <div class="panel panel-info">
+    {#+++++++++ catégory avec "le" +++++++++#}
+    <div class="panel panel-info">
         <div class="panel-heading">Titre de catégorie avec "le" ({{ titleCategorysByBeginText | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
@@ -168,7 +171,7 @@
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
 
 

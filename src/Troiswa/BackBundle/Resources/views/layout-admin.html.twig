@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{################ Feuilles de style - 07/2015 ############}
+{#+++++++++ Feuilles de style - 07/2015 +++++++++#}
 {% block stylesheets %}
 
     <!-- Bootstrap Core CSS -->
@@ -13,11 +13,11 @@
     <link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
 {% endblock stylesheets %}
-{#########################################################}
+{#+++++++++++++++++++++++++++++++++++++++++++++++#}
 
 
 
-{################ body du site - 07/2015  ################}
+{#+++++++++ body du site - 07/2015  +++++++++#}
 {% block body %}
 
 <div id="wrapper">
@@ -26,13 +26,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 
-        {################ header navigation - 07/2015################}
+        {#+++++++++ header navigation - 07/2015 +++++++++#}
         {% include 'TroiswaBackBundle:globals:header-nav.html.twig' only %}
-        {############################################################}
+        {#+++++++++++++++++++++++++++++++++++++++++++++++#}
 
-        {################ sidebar navigation - 07/2015 ###############}
+        {#+++++++++ sidebar navigation - 07/2015 +++++++++#}
         {% include 'TroiswaBackBundle:globals:sidebar-nav.html.twig' only %}
-        {#############################################################}
+        {#++++++++++++++++++++++++++++++++++++++++++++++++#}
 
     </nav>
 
@@ -44,9 +44,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        {################ Titre H1 des pages - 07/2015 ################}
+                        {#+++++++++ Titre H1 des pages - 07/2015 +++++++++#}
                         {% block h1 %}<i class="fa fa-dashboard"></i> Dashboard <small>Statistics Overview</small>{% endblock h1 %}
-                        {##############################################################}
+                        {#++++++++++++++++++++++++++++++++++++++++++++++++#}
                     </h1>
                     <ol class="breadcrumb">
                         {% block breadcrumb %}
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            {################ Message FlashBag - 07/2015 ################}
+            {#+++++++++ Message FlashBag - 07/2015 +++++++++#}
             {% for flashMessage in app.session.flashbag.get('success') %}
                 <div class="row">
                     <div class="col-lg-12">
@@ -68,16 +68,17 @@
                         </div>
                     </div>
                 </div>
+                <!-- /.row -->
             {% endfor %}
-            {############################################################}
+            {#++++++++++++++++++++++++++++++++++++++++++++++#}
 
-            <!-- /.row -->
-            {################ corps du site - 07/2015 ################}
+            
+            {#+++++++++ corps du site - 07/2015 +++++++++#}
             {% block content %}
 
 
             {% endblock content %}
-            {#########################################################}
+            {#+++++++++++++++++++++++++++++++++++++++++++#}
 
         </div>
         <!-- /.container-fluid -->
@@ -89,18 +90,30 @@
 <!-- /#wrapper -->
 
 {% endblock body %}
-{#########################################################}
+{#++++++++++++++++++++++++++++++++++++++++++++#}
 
 
 
-{################ Script javascripts - 07/2015 ################}
+{#+++++++++ Script javascripts - 07/2015+++++++++#}
 {% block javascripts %}
 <!-- jQuery -->
-<script src="{{ asset('assets/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+ <!-- Tooltips -->
+<script type="text/javascript">
+
+    $(document).ready(
+        $(function() {
+            $('*').tooltip();
+        })
+    );
+
+</script>
 
 {% endblock javascripts %}
-{##############################################################}
+{#+++++++++++++++++++++++++++++++++++++++++++++++#}
 

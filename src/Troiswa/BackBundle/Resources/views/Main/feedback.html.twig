@@ -27,7 +27,8 @@
         {{ form_label(formFeedback.firstname, "Prénom") }}
         {{ form_widget(formFeedback.firstname, {
             attr: {
-                class: "form-control"
+                class: "form-control",
+                placeholder: "Votre prénom"
             }
         }) }}
     </div>
@@ -36,7 +37,8 @@
         {{ form_label(formFeedback.lastname, "Nom") }}
         {{ form_widget(formFeedback.lastname, {
             attr: {
-                class: "form-control"
+                class: "form-control",
+                placeholder: "Votre nom"
             }
         }) }}
     </div>
@@ -45,7 +47,8 @@
         {{ form_label(formFeedback.mail) }}
         {{ form_widget(formFeedback.mail, {
             attr: {
-                class: "form-control"
+                class: "form-control",
+                placeholder: "Votre mail"
             }
         }) }}
     </div>
@@ -54,7 +57,8 @@
         {{ form_label(formFeedback.url, "URL") }}
         {{ form_widget(formFeedback.url, {
             attr: {
-                class: "form-control"
+                class: "form-control",
+                placeholder: "L'adresse de la page en défaut"
             }
         }) }}
     </div>
@@ -81,7 +85,8 @@
         {{ form_widget(formFeedback.date, {
             id: "datetimepicker",
             attr: {
-                class: "form-control"
+                class: "form-control",
+                title: "Date du défaut"
             }
         }) }}
     </div>
