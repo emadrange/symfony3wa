@@ -57,7 +57,7 @@
 
 
         <div class="panel panel-yellow">
-        <div class="panel-heading">Produits dont la quantité < 5</div>
+            <div class="panel-heading">Produits dont la quantité < 5 ({{ productsByMinimumQuantity | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="panel panel-info">
-        <div class="panel-heading">Catégorie dont la position > 2</div>
+            <div class="panel-heading">Catégorie dont la position > 2 ({{ categorysByPosition | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -151,7 +151,7 @@
 
 
         <div class="panel panel-info">
-        <div class="panel-heading">Titre de catégorie commençant par "le" ({{ titleCategorysByBeginText | length }})</div>
+        <div class="panel-heading">Titre de catégorie avec "le" ({{ titleCategorysByBeginText | length }})</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover table-striped">
                 <thead>

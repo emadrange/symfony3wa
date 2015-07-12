@@ -14,6 +14,11 @@ use Troiswa\BackBundle\Entity\Category;
 
 class LoadCategoryData implements FixtureInterface {
 
+    /**
+     * Fixtures catégorie
+     * @author Eric
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager) {
 
         $categorys = [
@@ -37,10 +42,10 @@ class LoadCategoryData implements FixtureInterface {
                 "description" => "Tout type de wagon",
                 "position" => 2
             ],
-            3 => [
+            4 => [
                 "titre" => "Le moteur",
                 "description" => "Motorisation",
-                "position" => 1
+                "position" => 3
             ],
         ];
 

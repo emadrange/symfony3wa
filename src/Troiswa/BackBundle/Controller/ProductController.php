@@ -105,8 +105,6 @@ class ProductController extends Controller {
         return $this->render("TroiswaBackBundle:Product:product.html.twig", [
             "product" => $product
         ]);
-
-
     }
 
     /**
@@ -157,6 +155,7 @@ class ProductController extends Controller {
 
     /**
      * Suppression d'un produit
+     * @author Eric
      * @param $idproduct
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

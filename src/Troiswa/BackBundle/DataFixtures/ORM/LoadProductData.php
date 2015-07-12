@@ -15,6 +15,11 @@ use Troiswa\BackBundle\Entity\Product;
 class LoadProductData implements FixtureInterface
 {
 
+    /**
+     * Fixtures produits
+     * @author Eric
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $products = [
@@ -52,6 +57,27 @@ class LoadProductData implements FixtureInterface
                 "quantity" => 7,
                 "price" => 522.00,
                 "active" => false
+            ],
+            5 => [
+                "title" => "Baldwin RF-16 Baltimore & Ohio",
+                "description" => "Baldwin Sharknose avec DCC et son",
+                "quantity" => 1,
+                "price" => 267.30,
+                "active" => false
+            ],
+            6 => [
+                "title" => "Transfert caboose RI",
+                "description" => "Transfert caboose de la Chicago, Rock Island and Pacific",
+                "quantity" => 2,
+                "price" => 46.20,
+                "active" => true
+            ],
+            7 => [
+                "title" => "Citerne 3 dômes ESSO",
+                "description" => "Citerne 3 dôme avec chassi métal",
+                "quantity" => 0,
+                "price" => 42.00,
+                "active" => true
             ]
         ];
 

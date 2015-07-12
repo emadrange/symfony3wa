@@ -29,7 +29,14 @@
             </thead>
             <tbody>
             {% for product in products %}
-            <tr class="{% if not product.active %}warning{% endif %}">
+                {% if not product.active %}
+                    {% set class="warning" %}
+                {% elseif product.quantity == 0 %}
+                    {% set class="danger" %}
+                {% else %}
+                    {% set class="" %}
+                {% endif %}
+            <tr class="{{ class }}">
                 <td>{{ product.id }}</td>
                 <td>{{ product.title }}</td>
                 <td>{{ product.quantity }}</td>

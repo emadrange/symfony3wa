@@ -165,7 +165,8 @@ class CategoryController extends Controller {
     }
 
     /**
-     * Liste des catégories pour la sidebar
+     * Liste des catégories pour la sidebar avec {{ render }}
+     * @author Eric
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allCategoryAction()
@@ -180,19 +181,11 @@ class CategoryController extends Controller {
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-     public function categoryAction() {
+    /**
+     * 
+     * @return type
+     */
+    public function categoryAction() {
         $categories = [
             1 => [
                 "id" => 1,
@@ -222,6 +215,12 @@ class CategoryController extends Controller {
         ]);
     }
 
+    /**
+     * 
+     * @param type $iditem
+     * @return type
+     * @throws type
+     */
     public function infoAction($iditem) {
 
         $categories = [
