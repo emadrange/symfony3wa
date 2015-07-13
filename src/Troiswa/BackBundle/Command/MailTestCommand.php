@@ -32,7 +32,7 @@ class MailTestCommand extends ContainerAwareCommand {
             ->setBody("Message du mail test");
 
         $this->getContainer()->get('mailer')->send($message);
-        $output->writeln("Le mail est bien envoyé");
+        $output->writeln("<info>Le mail est bien envoyé</info>");
 
     }
 }

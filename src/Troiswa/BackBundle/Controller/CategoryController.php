@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Category;
 use Troiswa\BackBundle\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class CategoryController extends Controller {
@@ -76,16 +77,18 @@ class CategoryController extends Controller {
      * @param $idcategory
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
      */
-    public function showAction($idcategory, Request $request) {
+    public function showAction(Category $category, Request $request) {
 
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $category = $em->getRepository("TroiswaBackBundle:Category")
             ->find($idcategory);
 
         if (!$category) {
             throw $this->createNotFoundException("Catégorie inconnue...");
-        }
+        }*/
 
         return $this->render("TroiswaBackBundle:Category:show.html.twig", [
             "category" => $category
@@ -99,16 +102,18 @@ class CategoryController extends Controller {
      * @param Request $request
      * @param $idcategory
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
      */
-    public function editAction(Request $request, $idcategory) {
+    public function editAction(Request $request, Category $category) {
 
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository("TroiswaBackBundle:Category")
+        /*$category = $em->getRepository("TroiswaBackBundle:Category")
             ->find($idcategory);
 
         if (!$category) {
             throw $this->createNotFoundException("Catégorie inconnue...");
-        }
+        }*/
 
         $formCategory = $this->createForm(new CategoryType(), $category, [
             "attr" => [
@@ -144,17 +149,19 @@ class CategoryController extends Controller {
      * @author Eric
      * @param $idcategory
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
      */
-    public function deleteAction($idcategory) {
+    public function deleteAction(Category $category) {
 
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository("TroiswaBackBundle:Category")
+        /*$category = $em->getRepository("TroiswaBackBundle:Category")
             ->find($idcategory);
 
         if (!$category) {
             throw $this->createNotFoundException("Catégorie inconnu...");
-        }
+        }*/
 
         $em->remove($category);
         $em->flush();

@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Product;
 use Troiswa\BackBundle\Form\ProductType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class ProductController extends Controller {
@@ -90,17 +91,23 @@ class ProductController extends Controller {
      * @author Eric
      * @param $idproduct
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
      */
-    public function showAction($idproduct) {
+    public function showAction(Product $product) {
 
-        $em = $this->getDoctrine()->getManager();
+        //dump($product);
+        //die();
+
+        /* les commandes ci-dessous sont exécutées par l'annotation @ParamConverter */
+        /*$em = $this->getDoctrine()->getManager();
 
         $product = $em->getRepository("TroiswaBackBundle:Product")
             ->find($idproduct);
 
         if (!$product) {
             throw $this->createNotFoundException("Produit inconnu...");
-        }
+        }*/
 
         return $this->render("TroiswaBackBundle:Product:product.html.twig", [
             "product" => $product
@@ -113,17 +120,19 @@ class ProductController extends Controller {
      * @param $idproduct
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
      */
-    public function editAction($idproduct, Request $request) {
+    public function editAction(Product $product, Request $request) {
 
         $em = $this->getDoctrine()->getManager();
 
-        $product = $em->getRepository("TroiswaBackBundle:Product")
+        /*$product = $em->getRepository("TroiswaBackBundle:Product")
             ->find($idproduct);
 
         if (!$product) {
             throw $this->createNotFoundException("Produit inconnu...");
-        }
+        }*/
 
         $formEditProduct = $this->createForm(new ProductType(), $product, [
             "attr" => [
@@ -159,17 +168,19 @@ class ProductController extends Controller {
      * @param $idproduct
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
      */
-    public function deleteAction($idproduct, Request $request) {
+    public function deleteAction(Product $product, Request $request) {
 
         $em = $this->getDoctrine()->getManager();
 
-        $product = $em->getRepository("TroiswaBackBundle:Product")
+        /*$product = $em->getRepository("TroiswaBackBundle:Product")
             ->find($idproduct);
 
         if (!$product) {
             throw $this->createNotFoundException("Produit inconnu...");
-        }
+        }*/
 
         $em->remove($product);
         $em->flush();
