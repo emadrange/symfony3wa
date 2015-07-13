@@ -21,6 +21,7 @@
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
+                <th>Catégorie</th>
                 <th>Quantité</th>
                 <th>Prix</th>
                 <th>Visible</th>
@@ -39,6 +40,7 @@
             <tr class="{{ class }}">
                 <td>{{ product.id }}</td>
                 <td>{{ product.title }}</td>
+                <td>{% if product.cat is not null %} {{ product.cat.titre }} {% endif %}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price | number_format(2, '.', ' ') }} €</td>
                 <td>

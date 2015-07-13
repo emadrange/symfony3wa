@@ -3,6 +3,7 @@
 namespace Troiswa\BackBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,6 +80,42 @@ class Product
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false, separator="_")
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /**
+     * @var \DateTime $contentChanged
+     *
+     * @ORM\Column(name="content_changed", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="change", field={"title"})
+     */
+    private $contentChanged;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Category", inversedBy="products")
+     * @ORM\JoinColumn(name="id_category", referencedColumnName="id")
+     */
+    private $cat;
 
     /**
      * Constructor
@@ -212,5 +249,121 @@ class Product
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Product
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Product
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set contentChanged
+     *
+     * @param \DateTime $contentChanged
+     * @return Product
+     */
+    public function setContentChanged($contentChanged)
+    {
+        $this->contentChanged = $contentChanged;
+
+        return $this;
+    }
+
+    /**
+     * Get contentChanged
+     *
+     * @return \DateTime 
+     */
+    public function getContentChanged()
+    {
+        return $this->contentChanged;
+    }
+
+
+    /**
+     * Set cat
+     *
+     * @param \Troiswa\BackBundle\Entity\Category $cat
+     * @return Product
+     */
+    public function setCat(\Troiswa\BackBundle\Entity\Category $cat = null)
+    {
+        $this->cat = $cat;
+
+        return $this;
+    }
+
+    /**
+     * Get cat
+     *
+     * @return \Troiswa\BackBundle\Entity\Category 
+     */
+    public function getCat()
+    {
+        return $this->cat;
     }
 }

@@ -4,6 +4,7 @@ namespace Troiswa\BackBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Troiswa\BackBundle\Entity\Product;
 
 /**
  * Category
@@ -60,6 +61,13 @@ class Category
      * )
      */
     private $position;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="cat")
+     */
+    private $products;
 
 
     /**
@@ -139,5 +147,49 @@ class Category
     public function getPosition()
     {
         return $this->position;
+    }
+
+    public function __toString() {
+        return $this->titre;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Troiswa\BackBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\Troiswa\BackBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Troiswa\BackBundle\Entity\Product $products
+     */
+    public function removeProduct(\Troiswa\BackBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

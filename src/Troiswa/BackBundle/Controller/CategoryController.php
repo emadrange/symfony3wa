@@ -64,7 +64,9 @@ class CategoryController extends Controller {
     public function listAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $categorys = $em->getRepository("TroiswaBackBundle:Category")->findAll();
+        $categorys = $em->getRepository("TroiswaBackBundle:Category")
+            ->getCategorysWithProducts();
+            //->findAll();
 
         return $this->render("TroiswaBackBundle:Category:categorys.html.twig", [
             "categorys" => $categorys
@@ -78,7 +80,7 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
+     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}, "repository_method": "getCategoryWithProductsById"})
      */
     public function showAction(Category $category, Request $request) {
 
@@ -135,7 +137,7 @@ class CategoryController extends Controller {
 
             $this->get('session')->getFlashBag()->add("success", "La catégorie a bien été modifiée");
             return $this->redirectToRoute("troiswa_back_category_edit", [
-                "idcategory" => $idcategory
+                "idcategory" => $category->getId()
             ]);
         }
 

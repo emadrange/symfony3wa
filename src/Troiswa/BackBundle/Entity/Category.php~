@@ -4,12 +4,13 @@ namespace Troiswa\BackBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Troiswa\BackBundle\Entity\Product;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\CategoryRepository")
  */
 class Category
 {
@@ -53,8 +54,20 @@ class Category
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
+     * @Assert\NotBlank(message="position obligatoire")
+     * @Assert\GreaterThanOrEqual(
+     *     value = 0,
+     *     message="Valeur impossible"
+     * )
      */
     private $position;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="cat")
+     */
+    private $products;
 
 
     /**
@@ -111,5 +124,32 @@ class Category
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Category
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function __toString() {
+        return $this->titre;
     }
 }

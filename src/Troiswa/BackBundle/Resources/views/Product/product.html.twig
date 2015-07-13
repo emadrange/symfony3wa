@@ -26,6 +26,7 @@
             </div>
 
             <ul class="list-group">
+                <li class="list-group-item">Catégorie : {% if product.cat.titre is defined  %} {{ product.cat.titre }} {% endif %}</li>
                 <li class="list-group-item">Quantité :  {{ product.quantity }}</li>
                 <li class="list-group-item">Prix : {{ product.price | number_format(2, '.', ' ') }} €</li>
                 {% if product.active %}

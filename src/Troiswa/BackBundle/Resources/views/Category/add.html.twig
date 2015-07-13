@@ -43,5 +43,14 @@
             }
         }) }}
     </div>
+    <div class="form-group">
+        {{ form_label(formCategory.products) }}
+        {{ form_errors(formCategory.products) }}
+        {{ form_widget(formCategory.products, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
     {{ form_end(formCategory) }}
 {%  endblock %}

@@ -51,6 +51,7 @@ class ProductController extends Controller {
             //die();
 
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($product);
 
             //$product->setTitle("titre modifié après persist");
@@ -75,7 +76,8 @@ class ProductController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
-            ->findBy([], ["title" => "ASC"]);
+            ->findProductsWithCategory();
+            //->findBy([], ["title" => "ASC"]);
             //->findAll();
 
         //dump($products);
@@ -96,8 +98,9 @@ class ProductController extends Controller {
      */
     public function showAction(Product $product) {
 
-        //dump($product);
-        //die();
+        var_dump($product);
+        dump($product);
+        die();
 
         /* les commandes ci-dessous sont exécutées par l'annotation @ParamConverter */
         /*$em = $this->getDoctrine()->getManager();

@@ -18,6 +18,11 @@ class CategoryType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('position')
+            ->add('products', 'entity', [
+                'class' => 'TroiswaBackBundle:Product',
+                'property' => 'title',
+                'multiple' => true
+            ])
         ;
     }
     

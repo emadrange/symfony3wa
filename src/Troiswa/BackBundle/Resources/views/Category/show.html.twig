@@ -17,19 +17,28 @@
 {% block content %}
     <div class="panel panel-info">
 
-    <div class="panel-heading">
-        <h3 class="panel-title">{{ category.titre }}</h3>
-    </div>
-    <div class="panel-body">
-        <div class="well">
-            <p>{{ category.description }}</p>
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ category.titre }}</h3>
         </div>
+        <div class="panel-body">
+            <div class="well">
+                <p>{{ category.description }}</p>
+            </div>
 
-        <ul class="list-group">
-            <li class="list-group-item">Position :  {{ category.position }}</li>
-        </ul>
-    </div>
-    <div style="padding: 4px 8px;">
-        <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_category_edit', {"idcategory": category.id}) }}">Editer</a>
+            <ul class="list-group">
+                <li class="list-group-item">Position :  {{ category.position }}</li>
+                <li class="list-group-item">Liste des produits associés :
+                    <ul class="list-group">
+                        {% for product in category.products %}
+                            <li class="list-group-item">{{ product.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div style="padding: 4px 8px;">
+            <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_category_edit', {"idcategory": category.id}) }}">Editer</a>
+        </div>
     </div>
 {% endblock %}

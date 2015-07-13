@@ -20,11 +20,36 @@ class ProductRepository extends EntityRepository
     public function findAllMaison() {
         $em = $this->getEntityManager();
 
+        /* requete DQL */
         $query = $em->createQuery("
             SELECT prod
             FROM TroiswaBackBundle:Product prod");
 
         return $query->getResult();
+    }
+
+    /**
+     * Retourne la liste des produits avec la catégorie associée
+     * @author Eric
+     * @return array
+     */
+    public function findProductsWithCategory() {
+
+        /*$query = $this->getEntityManager()->createQuery(
+            "
+            SELECT prod, cat
+            FROM TroiswaBackBundle:Product prod
+            LEFT JOIN prod.cat cat
+            ORDER BY prod.title
+            "
+        );*/
+
+        $query = $this->createQueryBuilder('prod')
+            ->select("prod, cat")
+            ->leftJoin("prod.cat", "cat")
+            ->orderBy("prod.title");
+
+        return $query->getQuery()->getResult();
     }
 
     /**

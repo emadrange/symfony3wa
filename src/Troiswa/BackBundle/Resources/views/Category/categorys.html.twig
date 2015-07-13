@@ -19,6 +19,7 @@
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
+                <td>Produits</td>
                 <th>Position</th>
                 <th>Actions</th>
             </tr>
@@ -28,6 +29,15 @@
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.titre }}</td>
+                    <td>
+                        <ul class="list-group">
+                            {% for product in category.products %}
+                            <li class="list-group-item">
+                                {{ product.title }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ category.position }}</td>
                     <td><a class="btn btn-sm btn-info" href="{{ path('troiswa_back_category_show', {"idcategory": category.id}) }}">Voir</a>
                         <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_category_edit', {"idcategory": category.id}) }}">Editer</a>

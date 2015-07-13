@@ -48,4 +48,52 @@ class CategoryRepository extends EntityRepository {
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Retourne les catégories par ordre de position
+     * @author Eric
+     * @return array
+     */
+    public function getCategorysByPosition() {
+
+        $query = $this->createQueryBuilder('cat')
+            ->orderBy('cat.position');
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Retourne les catégories avec les produits associès
+     * @author Eric
+     * @return array
+     */
+    public function getCategorysWithProducts() {
+
+        $query = $this->createQueryBuilder('cat')
+            ->select('cat, prod')
+            ->leftJoin('cat.products', 'prod')
+            ->orderBy('cat.titre', 'ASC');
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Retourne une catégory avec ses produits associés
+     * @author Eric
+     * @param $dataUrl array
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getCategoryWithProductsById($dataUrl) {
+
+        $query = $this->createQueryBuilder('cat')
+            ->select('cat, prod')
+            ->leftJoin('cat.products', 'prod')
+            ->where('cat.id = :id')
+            ->orderBy('cat.titre', 'ASC')
+            ->setParameter('id', $dataUrl['id']);
+
+        return $query->getQuery()->getSingleResult();
+    }
 }
