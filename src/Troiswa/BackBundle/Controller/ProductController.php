@@ -83,7 +83,7 @@ class ProductController extends Controller {
         //dump($products);
         //die();
 
-        return $this->render("TroiswaBackBundle:Product:products.html.twig", [
+        return $this->render("TroiswaBackBundle:Product:list.html.twig", [
             "products" => $products
         ]);
     }
@@ -98,9 +98,9 @@ class ProductController extends Controller {
      */
     public function showAction(Product $product) {
 
-        var_dump($product);
-        dump($product);
-        die();
+        //var_dump($product);
+        //dump($product);
+        //die();
 
         /* les commandes ci-dessous sont exécutées par l'annotation @ParamConverter */
         /*$em = $this->getDoctrine()->getManager();
@@ -112,7 +112,7 @@ class ProductController extends Controller {
             throw $this->createNotFoundException("Produit inconnu...");
         }*/
 
-        return $this->render("TroiswaBackBundle:Product:product.html.twig", [
+        return $this->render("TroiswaBackBundle:Product:show.html.twig", [
             "product" => $product
         ]);
     }

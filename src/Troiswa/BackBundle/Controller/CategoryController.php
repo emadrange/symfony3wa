@@ -68,7 +68,7 @@ class CategoryController extends Controller {
             ->getCategorysWithProducts();
             //->findAll();
 
-        return $this->render("TroiswaBackBundle:Category:categorys.html.twig", [
+        return $this->render("TroiswaBackBundle:Category:list.html.twig", [
             "categorys" => $categorys
         ]);
     }
