@@ -26,6 +26,15 @@
         }) }}
     </div>
     <div class="form-group">
+        {{ form_label(formProduct.cat) }}
+        {{ form_errors(formProduct.cat) }}
+        {{ form_widget(formProduct.cat, {
+            attr: {
+                class: "form-control"
+            }
+        }) }}
+    </div>
+    <div class="form-group">
         {{ form_label(formProduct.description) }}
         {{ form_errors(formProduct.description) }}
         {{ form_widget(formProduct.description, {
