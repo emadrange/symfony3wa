@@ -18,33 +18,11 @@
 
 {% block content %}
     {{ form_start(formProduct) }}
-    <div class="form-group">
-        {{ form_label(formProduct.title) }}
-        {{ form_errors(formProduct.title) }}
-        {{ form_widget(formProduct.title, {
-            attr: {
-                class: "form-control"
-            }
-        }) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(formProduct.cat) }}
-        {{ form_errors(formProduct.cat) }}
-        {{ form_widget(formProduct.cat, {
-            attr: {
-                class: "form-control"
-            }
-        }) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(formProduct.description) }}
-        {{ form_errors(formProduct.description) }}
-        {{ form_widget(formProduct.description, {
-            attr: {
-                class: "form-control"
-            }
-        }) }}
-    </div>
+    
+    {{ form_row(formProduct.title) }}
+    {{ form_row(formProduct.cat) }}
+    {{ form_row(formProduct.description) }}
+    
     <div class="form-group">
         {{ form_label(formProduct.active) }}
         {{ form_errors(formProduct.active) }}
@@ -54,23 +32,9 @@
             }
         }) }}
     </div>
-    <div class="form-group">
-        {{ form_label(formProduct.quantity) }}
-        {{ form_errors(formProduct.quantity) }}
-        {{ form_widget(formProduct.quantity, {
-            attr: {
-                class: "form-control"
-            }
-        }) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(formProduct.price) }}
-        {{ form_errors(formProduct.price) }}
-        {{ form_widget(formProduct.price, {
-            attr: {
-                class: "form-control"
-            }
-        }) }}
-    </div>
+    
+    {{ form_row(formProduct.quantity) }}
+    {{ form_row(formProduct.price) }}
+
     {{ form_end(formProduct) }}
 {%  endblock %}

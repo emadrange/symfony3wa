@@ -1,3 +1,4 @@
+{# message d'erreur bootstrap #}
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         <div class="alert alert-danger">
@@ -10,3 +11,17 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+
+{# row de formulaire bootstrap #}
+{%- block form_row -%}
+{%- if errors | length > 0 -%}
+    {%- set class = " has-error" -%}
+{%- else -%}
+    {%- set class = "" -%}
+{%- endif -%}
+    <div class="form-group{{ class }}">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form, {attr: {class: "form-control"}}) -}}
+    </div>
+{%- endblock form_row -%}
