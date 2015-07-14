@@ -14,10 +14,9 @@ class MainController extends Controller
     /**
      * Index
      * @author Eric
-     * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         //die("Ok!!!");
         //return new Response("Hello!!!");
@@ -131,7 +130,7 @@ class MainController extends Controller
             ->add("submit", "submit", [
                 "label" => "Envoyer",
                 "attr" => [
-                    "class" => "btn btn-success"
+                    "class" => "btn btn-default"
                 ]
             ]);
 
@@ -282,7 +281,7 @@ class MainController extends Controller
         ->add("submit", "submit", [
             "label" => "Envoyer",
             "attr" => [
-                "class" => "btn btn-success"
+                "class" => "btn btn-default"
             ]
         ])
         ->getForm();

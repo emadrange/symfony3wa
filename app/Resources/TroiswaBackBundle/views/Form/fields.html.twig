@@ -19,7 +19,7 @@
 {%- else -%}
     {%- set class = "" -%}
 {%- endif -%}
-    <div class="form-group{{ class }}">
+    <div class="form-group{{- class -}}">
         {{- form_label(form) -}}
         {{- form_errors(form) -}}
         {{- form_widget(form, {attr: {class: "form-control"}}) -}}

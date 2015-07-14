@@ -17,24 +17,16 @@
 {% endblock %}
 
 {% block content %}
+    <div class="col-lg-8">
     {{ form_start(formProduct) }}
     
     {{ form_row(formProduct.title) }}
     {{ form_row(formProduct.cat) }}
     {{ form_row(formProduct.description) }}
-    
-    <div class="form-group">
-        {{ form_label(formProduct.active) }}
-        {{ form_errors(formProduct.active) }}
-        {{ form_widget(formProduct.active, {
-            attr: {
-                class: ""
-            }
-        }) }}
-    </div>
-    
+    {{ form_row(formProduct.active, {attr: {style: "width: auto;"}}) }}
     {{ form_row(formProduct.quantity) }}
     {{ form_row(formProduct.price) }}
 
     {{ form_end(formProduct) }}
+    </div>
 {%  endblock %}

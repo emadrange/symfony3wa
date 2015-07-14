@@ -20,6 +20,7 @@
 {% endblock %}
 
 {% block content %}
+    <div class="col-lg-8">
     {{ form_start(formFeedback) }}
 
     <div class="form-group">
@@ -86,7 +87,7 @@
             id: "datetimepicker",
             attr: {
                 class: "form-control",
-                title: "Date du défaut"
+                placeholder: "aaaa/mm/jj hh:mm"
             }
         }) }}
     </div>
@@ -95,12 +96,14 @@
         {{ form_errors(formFeedback.description) }}
         {{ form_widget(formFeedback.description, {
             attr: {
-                class: "form-control"
+                class: "form-control",
+                placeholder: "Description du défaut constaté"
             }
         }) }}
     </div>
 
     {{ form_end(formFeedback) }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
