@@ -88,8 +88,11 @@ class MainController extends Controller
         // Retourne les catégories dont les produits ont une marque donnée
         $categorysFromProductByBrand = $em->getRepository("TroiswaBackBundle:Product")->getCategoryFromProductByBrand('Bachmann');
 
+        // Retourne le nombre de produit dont la catégorie est "Diesel"
+        $nbProductFromCategory = $em->getRepository("TroiswaBackBundle:Category")->countProductFromCategory("Diesel");
 
-        //dump($categorysFromProductByBrand);
+
+        //dump($nbProductFromCategory);
         //die();
 
 
@@ -103,7 +106,8 @@ class MainController extends Controller
             "statesActiveProduct" => $statesActiveProduct,
             "pricesBeetweenPrice" => $pricesBeetweenPrice,
             "titleCategorysByBeginText" => $titleCategorysByBeginText,
-            "categorysFromProductByBrand" => $categorysFromProductByBrand
+            "categorysFromProductByBrand" => $categorysFromProductByBrand,
+            "nbProductFromCategory" => $nbProductFromCategory
         ]/*, [
             "name" => $name,
             "page" => $page

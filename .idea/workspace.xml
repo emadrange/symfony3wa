@@ -25,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProductType.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProductType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Form/ProductType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56551725" vertical-offset="660" max-vertical-offset="1656">
+            <state vertical-scroll-proportion="-18.222221" vertical-offset="660" max-vertical-offset="1656">
               <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
               <folding>
                 <element signature="e#43#77#0#PHP" expanded="true" />
@@ -74,20 +74,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="marque.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/config/routing/marque.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
-              <folding>
-                <marker date="1436970982693" expanded="true" signature="357:510" placeholder="troiswa_back_marque_edit:" />
-                <marker date="1436970982693" expanded="true" signature="474:510" placeholder="requirements:" />
-                <marker date="1436970982693" expanded="true" signature="571:627" placeholder="defaults:" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Marque.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/Marque.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -110,11 +96,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="CategoryRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/CategoryRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-22.88889" vertical-offset="1308" max-vertical-offset="2214">
+              <caret line="107" column="44" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MainController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/MainController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.666667" vertical-offset="1260" max-vertical-offset="6012">
-              <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
+            <state vertical-scroll-proportion="-22.0" vertical-offset="1368" max-vertical-offset="6084">
+              <caret line="109" column="34" selection-start-line="109" selection-start-column="13" selection-end-line="109" selection-end-column="34" />
               <folding>
                 <element signature="e#49#106#0#PHP" expanded="true" />
               </folding>
@@ -132,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Main/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.407408" vertical-offset="2779" max-vertical-offset="8100">
-              <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9451575" vertical-offset="0" max-vertical-offset="8100">
+              <caret line="45" column="60" selection-start-line="45" selection-start-column="60" selection-end-line="45" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -176,7 +172,6 @@
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Category/categorys.html.twig" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/CategoryRepository.php" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Category/add.html.twig" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Form/CategoryType.php" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/Category.php" />
@@ -195,9 +190,10 @@
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Marque/list.html.twig" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/Marque.php" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/ProductRepository.php" />
-        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Main/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/MainController.php" />
         <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Form/ProductType.php" />
+        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/CategoryRepository.php" />
+        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/MainController.php" />
+        <option value="$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Main/index.html.twig" />
       </list>
     </option>
   </component>
@@ -997,14 +993,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/CategoryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1724138" vertical-offset="786" max-vertical-offset="1926">
-          <caret line="52" column="84" selection-start-line="52" selection-start-column="84" selection-end-line="52" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Product/add.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49655172" vertical-offset="0" max-vertical-offset="870">
@@ -1060,9 +1048,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
           <folding>
-            <marker date="1436970982693" expanded="true" signature="357:510" placeholder="troiswa_back_marque_edit:" />
-            <marker date="1436970982693" expanded="true" signature="474:510" placeholder="requirements:" />
-            <marker date="1436970982693" expanded="true" signature="571:627" placeholder="defaults:" />
+            <marker date="1436970982693" expanded="true" signature="-1:-1" placeholder="troiswa_back_marque_edit:" />
+            <marker date="1436970982693" expanded="true" signature="-1:-1" placeholder="requirements:" />
+            <marker date="1436970982693" expanded="true" signature="-1:-1" placeholder="defaults:" />
           </folding>
         </state>
       </provider>
@@ -1124,39 +1112,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/ProductRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.222221" vertical-offset="2280" max-vertical-offset="3150">
-          <caret line="160" column="30" selection-start-line="160" selection-start-column="30" selection-end-line="160" selection-end-column="30" />
-          <folding>
-            <marker date="1436973441141" expanded="true" signature="502:561" placeholder="SELECT prod ..TroiswaBackBundle..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.111111" vertical-offset="2877" max-vertical-offset="4680">
           <caret line="178" column="49" selection-start-line="178" selection-start-column="8" selection-end-line="178" selection-end-column="49" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Main/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.407408" vertical-offset="2779" max-vertical-offset="8100">
-          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/MainController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.666667" vertical-offset="1260" max-vertical-offset="6012">
-          <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
-          <folding>
-            <element signature="e#49#106#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1170,11 +1130,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Form/ProductType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56551725" vertical-offset="660" max-vertical-offset="1656">
+        <state vertical-scroll-proportion="-18.222221" vertical-offset="660" max-vertical-offset="1656">
           <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
           <folding>
             <element signature="e#43#77#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/ProductRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.222221" vertical-offset="2280" max-vertical-offset="3150">
+          <caret line="160" column="30" selection-start-line="160" selection-start-column="30" selection-end-line="160" selection-end-column="30" />
+          <folding>
+            <marker date="1436973441141" expanded="true" signature="502:561" placeholder="SELECT prod ..TroiswaBackBundle..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Entity/CategoryRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.88889" vertical-offset="1308" max-vertical-offset="2214">
+          <caret line="107" column="44" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Controller/MainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.0" vertical-offset="1368" max-vertical-offset="6084">
+          <caret line="109" column="34" selection-start-line="109" selection-start-column="13" selection-end-line="109" selection-end-column="34" />
+          <folding>
+            <element signature="e#49#106#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Troiswa/BackBundle/Resources/views/Main/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9451575" vertical-offset="0" max-vertical-offset="8100">
+          <caret line="45" column="60" selection-start-line="45" selection-start-column="60" selection-end-line="45" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>

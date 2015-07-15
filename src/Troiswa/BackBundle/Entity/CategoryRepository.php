@@ -99,4 +99,20 @@ class CategoryRepository extends EntityRepository {
 
         return $query->getQuery()->getSingleResult();
     }
+
+    /**
+     * Retourne le nombre de produit d'une catégorie donnée
+     * @param $title
+     * @return mixed
+     */
+    public function countProductFromCategory($title) {
+
+        $query = $this->createQueryBuilder("cat")
+            ->select("COUNT(prod.title)")
+            ->where("cat.titre = :title")
+            ->leftJoin("cat.products", "prod")
+            ->setParameter("title", $title);
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
 }
