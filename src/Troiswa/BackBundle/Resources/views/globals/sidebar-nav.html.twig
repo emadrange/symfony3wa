@@ -3,6 +3,7 @@
 {% set routes = ['troiswa_back_feedback', 'troiswa_back_contact'] %}
 {% set productRoutes = ['troiswa_back_product_listlimite', 'troiswa_back_product_listactive', 'troiswa_back_product_list', 'troiswa_back_product_add', 'troiswa_back_product_show', "troiswa_back_product_edit"] %}
 {% set categoryRoutes = ['troiswa_back_category_add', 'troiswa_back_category_list', 'troiswa_back_category_show', 'troiswa_back_category_edit'] %}
+{% set marqueRoutes = ['troiswa_back_marque_add', 'troiswa_back_marque_list', 'troiswa_back_marque_show', 'troiswa_back_marque_edit'] %}
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li{% if routeActive == "troiswa_back_administration" %} class="active"{% endif %}>
@@ -38,6 +39,18 @@
                 </li>
                 {#+++++++++ appel d'un rendu dans twig d'une vue +++++++++#}
                 {{ render(controller('TroiswaBackBundle:Category:allCategory')) }}
+            </ul>
+        </li>
+        <!-- marque -->
+        <li{% if routeActive in marqueRoutes %} class="active"{% endif %}>
+            <a href="javascript:;" data-toggle="collapse" data-target="#marque"><i class="fa fa-fw fa-certificate"></i> Marque <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="marque" class="collapse nav navbar-nav{% if routeActive in marqueRoutes %} in{% endif %}">
+                <li{% if routeActive == "troiswa_back_marque_list" %} class="active"{% endif %}>
+                    <a href="{{ path('troiswa_back_marque_list') }}"><i class="fa fa-fw fa-certificat"></i> Lister les marques</a>
+                </li>
+                <li{% if routeActive == "troiswa_back_marque_add" %} class="active"{% endif %}>
+                    <a href="{{ path('troiswa_back_marque_add') }}"><i class="fa fa-fw fa-certificat"></i> Ajouter une marque</a>
+                </li>
             </ul>
         </li>
         <!-- contact - feddback -->

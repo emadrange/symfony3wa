@@ -14,6 +14,10 @@ troiswa_back_resource_category:
     resource: "@TroiswaBackBundle/Resources/config/routing/category.yml"
     prefix: /category
 
+troiswa_back_resource_marque:
+    resource: "@TroiswaBackBundle/Resources/config/routing/marque.yml"
+    prefix: /marque
+
 
 ####################
 # divers exercices #

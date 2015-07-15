@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategoryType extends AbstractType
+class MarqueType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,18 +15,15 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', 'text')
-            ->add('description', 'textarea')
-            ->add('position', 'integer')
+            ->add('title')
+            ->add('description')
             ->add('products', 'entity', [
                 'class' => 'TroiswaBackBundle:Product',
                 'choice_label' => 'title',
                 'multiple' => true,
-                // by_reference est expliqué dans la doc du type collection
                 'by_reference' => false,
                 'label' => 'Produits'
-            ])
-        ;
+            ]);
     }
     
     /**
@@ -35,7 +32,7 @@ class CategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Troiswa\BackBundle\Entity\Category'
+            'data_class' => 'Troiswa\BackBundle\Entity\Marque'
         ));
     }
 
@@ -44,6 +41,6 @@ class CategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'troiswa_backbundle_category';
+        return 'troiswa_backbundle_marque';
     }
 }

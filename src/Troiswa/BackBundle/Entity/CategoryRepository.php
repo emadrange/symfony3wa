@@ -50,14 +50,17 @@ class CategoryRepository extends EntityRepository {
     }
 
     /**
-     * Retourne les catégories par ordre de position
+     * Retourne les catégories par ordre de position pour un formType si form = true
      * @author Eric
      * @return array
      */
-    public function getCategorysByPosition() {
+    public function getCategorysByPosition($form = false) {
 
         $query = $this->createQueryBuilder('cat')
             ->orderBy('cat.position');
+
+        if ($form)
+            return $query;
 
         return $query->getQuery()->getResult();
     }
@@ -95,5 +98,21 @@ class CategoryRepository extends EntityRepository {
             ->setParameter('id', $dataUrl['id']);
 
         return $query->getQuery()->getSingleResult();
+    }
+
+    /**
+     * Retourne le nombre de produit d'une catégorie donnée
+     * @param $title
+     * @return mixed
+     */
+    public function countProductFromCategory($title) {
+
+        $query = $this->createQueryBuilder("cat")
+            ->select("COUNT(prod.title)")
+            ->where("cat.titre = :title")
+            ->leftJoin("cat.products", "prod")
+            ->setParameter("title", $title);
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 }

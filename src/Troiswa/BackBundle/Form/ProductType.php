@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Troiswa\BackBundle\Entity\CategoryRepository;
+use Troiswa\BackBundle\Entity\MarqueRepository;
 
 class ProductType extends AbstractType
 {
@@ -30,28 +31,39 @@ class ProductType extends AbstractType
             ->add('active', 'checkbox', [
                 'label' => 'Activé'
             ])
-            /**/
-            /*->add('cat', 'entity', [
+            /* la requete doit être forcement executé avec un createQueryBuilder */
+            ->add('cat', 'entity', [
+                'label' => 'Catégorie',
+                'required' => false,
                 'class' => 'TroiswaBackBundle:Category',
                 'query_builder' => function(CategoryRepository $cr) {
-                    return $cr->getCategorysByPosition();
+                    return $cr->getCategorysByPosition(true);
                 }
-            ])*/
+            ])
             /* requete dans la déclaration du champ */
-            ->add('cat', 'entity', [
+            /*->add('cat', 'entity', [
                 'required' => false,
                 'class' => 'TroiswaBackBundle:Category',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.position', 'ASC');
                 }
-            ])
+            ])*/
             /* récupération direct de l'entité */
             /*->add('cat', 'entity', [
                 'label' => 'Catégorie',
                 'class' => 'TroiswaBackBundle:Category',
                 'property' => 'titre'
-            ])*/;
+            ])*/
+            ->add('marque', 'entity', [
+                'class' => 'TroiswaBackBundle:Marque',
+                'query_builder' => function(MarqueRepository $mr) {
+                    return $mr->findMarquesByOrderTitle(true);
+                },
+                'property' => 'titleAndDate',
+                'required' => false
+            ])
+            ;
     }
     
     /**

@@ -17,6 +17,7 @@
 {% block content %}
     <div class="col-lg-8">
     {{ form_start(formCategory) }}
+    {{ form_errors(formCategory) }}
         <div class="form-group">
             {{ form_label(formCategory.titre) }}
             {{ form_errors(formCategory.titre) }}
