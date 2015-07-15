@@ -1,0 +1,25 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}Editer la marque{% endblock %}
+
+{% block h1 %}<i class="fa fa-certificate"></i> Editer la marque{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('troiswa_back_marque_list') }}"><i class="fa fa-certificate"></i> Lister les marques</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-certificate"></i> Editer la marque
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(formMarque) }}
+
+    {{ form_row(formMarque.title) }}
+    {{ form_row(formMarque.description) }}
+    {{ form_row(formMarque.products) }}
+
+    {{ form_end(formMarque) }}
+{% endblock %}

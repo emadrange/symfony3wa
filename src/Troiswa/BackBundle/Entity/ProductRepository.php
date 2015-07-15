@@ -150,4 +150,20 @@ class ProductRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /**
+     * Retourne les catégories dont les produits ont une marque donnée
+     * @param $brand
+     * @return array
+     */
+    public function getCategoryFromProductByBrand($brand) {
+
+        $query = $this->createQueryBuilder("prod")
+            ->select("cat.titre")
+            ->where("ma.title = :brand")
+            ->leftJoin("prod.cat", "cat")
+            ->leftJoin("prod.marque", "ma")
+            ->setParameter("brand", $brand);
+
+        return $query->getQuery()->getResult();
+    }
 }

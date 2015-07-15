@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\ProductRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Product
 {
@@ -112,10 +113,22 @@ class Product
     private $contentChanged;
 
     /**
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id")
      */
     private $cat;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Marque", inversedBy="products")
+     * @ORM\JoinColumn(name="id_marque", referencedColumnName="id")
+     */
+    private $marque;
 
     /**
      * Constructor
@@ -365,5 +378,51 @@ class Product
     public function getCat()
     {
         return $this->cat;
+    }
+
+    /**
+     * Set deletedAt
+     *
+     * @param \DateTime $deletedAt
+     * @return Product
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deletedAt
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * Set marque
+     *
+     * @param \Troiswa\BackBundle\Entity\Marque $marque
+     * @return Product
+     */
+    public function setMarque(\Troiswa\BackBundle\Entity\Marque $marque = null)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return \Troiswa\BackBundle\Entity\Marque 
+     */
+    public function getMarque()
+    {
+        return $this->marque;
     }
 }

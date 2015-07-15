@@ -85,8 +85,11 @@ class MainController extends Controller
         // Retourne les titres commençant par "le"
         $titleCategorysByBeginText = $em->getRepository("TroiswaBackBundle:Category")->findTitleCategorysByBeginText('le');
 
+        // Retourne les catégories dont les produits ont une marque donnée
+        $categorysFromProductByBrand = $em->getRepository("TroiswaBackBundle:Product")->getCategoryFromProductByBrand('Bachmann');
 
-        //dump($titleCategorysByBeginText);
+
+        //dump($categorysFromProductByBrand);
         //die();
 
 
@@ -99,7 +102,8 @@ class MainController extends Controller
             "categorysByPosition" => $categorysByPosition,
             "statesActiveProduct" => $statesActiveProduct,
             "pricesBeetweenPrice" => $pricesBeetweenPrice,
-            "titleCategorysByBeginText" => $titleCategorysByBeginText
+            "titleCategorysByBeginText" => $titleCategorysByBeginText,
+            "categorysFromProductByBrand" => $categorysFromProductByBrand
         ]/*, [
             "name" => $name,
             "page" => $page

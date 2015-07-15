@@ -1,0 +1,25 @@
+troiswa_back_marque_add:
+    path: add
+    defaults: { _controller: TroiswaBackBundle:Marque:add }
+
+troiswa_back_marque_list:
+    path: list
+    defaults: { _controller: TroiswaBackBundle:Marque:list }
+
+troiswa_back_marque_show:
+    path: show/{idmarque}
+    defaults: { _controller: TroiswaBackBundle:Marque:show }
+    requirements:
+        idmarque: \d+
+
+troiswa_back_marque_edit:
+    path: edit/{idmarque}
+    defaults: { _controller: TroiswaBackBundle:Marque:edit }
+    requirements:
+        idmarque: \d+
+
+troiswa_back_marque_delete:
+    path: delete/{idmarque}
+    defaults: { _controller: TroiswaBackBundle:Marque:delete }
+    requirements:
+        idmarque: \d+

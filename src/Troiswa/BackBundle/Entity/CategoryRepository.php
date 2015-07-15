@@ -50,14 +50,17 @@ class CategoryRepository extends EntityRepository {
     }
 
     /**
-     * Retourne les catégories par ordre de position
+     * Retourne les catégories par ordre de position pour un formType si form = true
      * @author Eric
      * @return array
      */
-    public function getCategorysByPosition() {
+    public function getCategorysByPosition($form = false) {
 
         $query = $this->createQueryBuilder('cat')
             ->orderBy('cat.position');
+
+        if ($form)
+            return $query;
 
         return $query->getQuery()->getResult();
     }
