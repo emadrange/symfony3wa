@@ -27,6 +27,12 @@ class Marque
     /**
      * @var string
      * @Assert\NotBlank(message="Il faut une marque")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "Le titre doit faire {{ limit }} caractères minimum",
+     *      maxMessage = "Le titre doit faire {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
@@ -34,6 +40,12 @@ class Marque
     /**
      * @var string
      * @Assert\NotBlank(message="Il faut une description")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 500,
+     *      minMessage = "La description doit faire {{ limit }} caractères minimum",
+     *      maxMessage = "La description doit faire {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(name="description", type="text")
      */
     private $description;

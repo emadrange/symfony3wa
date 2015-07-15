@@ -5,10 +5,13 @@ namespace Troiswa\BackBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 class MarqueType extends AbstractType
 {
     /**
+     * Formulaire de l'entité Marque
+     * @author Eric
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -19,6 +22,10 @@ class MarqueType extends AbstractType
             ->add('description')
             ->add('products', 'entity', [
                 'class' => 'TroiswaBackBundle:Product',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('prod')
+                            ->orderBy('prod.title', 'ASC');
+                },
                 'choice_label' => 'title',
                 'multiple' => true,
                 'by_reference' => false,
