@@ -8,11 +8,13 @@
 
 namespace Troiswa\BackBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+//use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Troiswa\BackBundle\Entity\Product;
 
-class LoadProductData implements FixtureInterface
+class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
 {
 
     /**
@@ -25,14 +27,14 @@ class LoadProductData implements FixtureInterface
         $products = [
             0 => [
                 "title" => "EMD FT AT&SF",
-                "description" => "EMD FTA/B de la Atchinson, Topeka and Santa Fe cigar band",
+                "description" => "EMD FTA/B de la Atchison, Topeka and Santa Fe cigar band",
                 "quantity" => 12,
                 "price" => 220,
                 "active" => true
             ],
             1 => [
                 "title" => "EMD F7A AT&SF",
-                "description" => "EMD F7A de la Atchinson, Topeka and Santa Fe passager jaune avec DCC",
+                "description" => "EMD F7A de la Atchison, Topeka and Santa Fe passager jaune avec DCC",
                 "quantity" => 7,
                 "price" => 315.5,
                 "active" => true
@@ -88,6 +90,8 @@ class LoadProductData implements FixtureInterface
             $prod->setActive($product['active']);
             $prod->setPrice($product['price']);
             $prod->setQuantity($product['quantity']);
+            $prod->setCat($this->getReference('cat' . rand(0, 4)));
+            $prod->setMarque($this->getReference('brand' . rand(0, 2)));
 
             $manager->persist($prod);
         }
@@ -102,5 +106,16 @@ class LoadProductData implements FixtureInterface
 
         $manager->persist($product);*/
         $manager->flush();
+    }
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return 3;
+        // TODO: Implement getOrder() method.
     }
 }

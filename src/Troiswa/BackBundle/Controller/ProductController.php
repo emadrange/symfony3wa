@@ -50,8 +50,19 @@ class ProductController extends Controller {
             //dump($product);
             //die();
 
+            $cover = $product->getCover();
+            $cover->setAlt($product->getTitle());
+
+            $cover->upload();
+
+
+
+            //die();
+
+
             $em = $this->getDoctrine()->getManager();
 
+            $em->persist($cover);
             $em->persist($product);
 
             //$product->setTitle("titre modifié après persist");

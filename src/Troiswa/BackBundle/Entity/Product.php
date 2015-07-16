@@ -126,9 +126,18 @@ class Product
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Marque", inversedBy="products")
-     * @ORM\JoinColumn(name="id_marque", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_marque", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank(message="marque obligatoire")
      */
     private $marque;
+
+    /**
+     * @var
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover")
+     * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
+     * @Assert\Valid
+     */
+    private $cover;
 
     /**
      * Constructor
@@ -403,13 +412,15 @@ class Product
         return $this->deletedAt;
     }
 
+
+
     /**
      * Set marque
      *
      * @param \Troiswa\BackBundle\Entity\Marque $marque
      * @return Product
      */
-    public function setMarque(\Troiswa\BackBundle\Entity\Marque $marque = null)
+    public function setMarque(\Troiswa\BackBundle\Entity\Marque $marque)
     {
         $this->marque = $marque;
 
@@ -424,5 +435,28 @@ class Product
     public function getMarque()
     {
         return $this->marque;
+    }
+
+    /**
+     * Set cover
+     *
+     * @param \Troiswa\BackBundle\Entity\ProductCover $cover
+     * @return Product
+     */
+    public function setCover(\Troiswa\BackBundle\Entity\ProductCover $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \Troiswa\BackBundle\Entity\ProductCover 
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 }

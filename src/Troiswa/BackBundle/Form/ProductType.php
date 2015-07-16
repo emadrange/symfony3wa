@@ -60,10 +60,12 @@ class ProductType extends AbstractType
                 'query_builder' => function(MarqueRepository $mr) {
                     return $mr->findMarquesByOrderTitle(true);
                 },
-                'property' => 'titleAndDate',
-                'required' => false
+                'choice_label' => 'titleAndDate',
+                'required' => true
             ])
-            ;
+            ->add('cover', new ProductCoverType(), [
+                'label' => ' '
+            ]);
     }
     
     /**

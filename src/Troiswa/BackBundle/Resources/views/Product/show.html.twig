@@ -21,8 +21,14 @@
             <h3 class="panel-title">{{ product.title }}</h3>
         </div>
         <div class="panel-body">
+
             <div class="well">
-                <p>{{ product.description }}</p>
+                {% if product.cover is null %}
+                    {% set image = '/assets/images/default.png' %}
+                {% else %}
+                    {% set image =  product.cover.getwebpath%}
+                {% endif %}
+                <p><img src="{{ asset(image) }}" class="img-thumbnail" />{{ product.description }}</p>
             </div>
 
             <ul class="list-group">

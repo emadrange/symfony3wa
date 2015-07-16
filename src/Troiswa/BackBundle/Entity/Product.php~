@@ -126,9 +126,17 @@ class Product
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Marque", inversedBy="products")
-     * @ORM\JoinColumn(name="id_marque", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_marque", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank(message="marque obligatoire")
      */
     private $marque;
+
+    /**
+     * @var
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover")
+     * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
+     */
+    private $cover;
 
     /**
      * Constructor
@@ -401,5 +409,30 @@ class Product
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+
+
+    /**
+     * Set marque
+     *
+     * @param \Troiswa\BackBundle\Entity\Marque $marque
+     * @return Product
+     */
+    public function setMarque(\Troiswa\BackBundle\Entity\Marque $marque)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return \Troiswa\BackBundle\Entity\Marque 
+     */
+    public function getMarque()
+    {
+        return $this->marque;
     }
 }

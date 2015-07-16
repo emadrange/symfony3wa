@@ -5,6 +5,7 @@ namespace Troiswa\BackBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Marque
@@ -25,14 +26,26 @@ class Marque
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Il faut une marque")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "Le titre doit faire {{ limit }} caractères minimum",
+     *      maxMessage = "Le titre doit faire {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Il faut une description")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 500,
+     *      minMessage = "La description doit faire {{ limit }} caractères minimum",
+     *      maxMessage = "La description doit faire {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -223,5 +236,80 @@ class Marque
     public function getContentChanged()
     {
         return $this->contentChanged;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Troiswa\BackBundle\Entity\Product $products
+     * @return Marque
+     */
+    public function addProduct(\Troiswa\BackBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        $products->setMarque($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Troiswa\BackBundle\Entity\Product $products
+     */
+    public function removeProduct(\Troiswa\BackBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+
+        $products->setMarque(null);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+
+        return $this->title;
+    }
+
+    /**
+     * Label spécial pour afficher le titre avec sa date de création
+     * @return string
+     */
+    public function getTitleAndDate() {
+
+        return $this->title . ' (' . $this->created->format('d - m - Y') . ')';
+    }
+
+    /**
+     * Validation de titre interdit
+     *
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context) {
+
+        if (strtolower($this->title) == "3wa" || strtolower($this->title == "troiswa")) {
+            $context->buildViolation("La marque 3wa est interdite")
+                ->atPath('title')
+                ->addViolation();
+        }
     }
 }
