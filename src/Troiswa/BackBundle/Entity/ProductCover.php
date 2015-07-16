@@ -140,15 +140,15 @@ class ProductCover
 
         //$nameImage = $date->format('YmdHis') . '-' . $this->fichier->getClientOriginalName();
         $extension = $this->fichier->guessExtension();
-        $nameImage = $this->alt . uniqid() . "." . $extension;
+        $nameImage = str_replace(' ', '-', $this->alt) . uniqid();
 
         // move (param 1 chemin vers dossier, param 2 nom image)
 
-        $this->name = $nameImage;
+        $this->name = $nameImage . "." . $extension;
 
         $this->fichier->move(
             $this->getUploadRootDir(),
-            $nameImage
+            $nameImage . "." . $extension
         );
 
 

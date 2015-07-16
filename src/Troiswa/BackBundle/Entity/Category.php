@@ -242,7 +242,7 @@ class Category
     }*/
 
     /**
-     * Validation par Callback
+     * Validation par Callback, le titre doit commencer par une majuscule
      *
      * @Assert\Callback()
      */
