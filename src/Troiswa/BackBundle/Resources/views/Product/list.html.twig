@@ -19,8 +19,8 @@
         <table class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Titre</th>
+                <th>Marque</th>
                 <th>Catégorie</th>
                 <th>Quantité</th>
                 <th>Prix</th>
@@ -38,8 +38,8 @@
                     {% set class="" %}
                 {% endif %}
             <tr class="{{ class }}">
-                <td>{{ product.id }}</td>
                 <td>{{ product.title }}</td>
+                <td>{% if product.cat is not null %} {{ product.marque.title }} {% endif %}</td>
                 <td>{% if product.cat is not null %} {{ product.cat.titre }} {% endif %}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price | number_format(2, '.', ' ') }} €</td>

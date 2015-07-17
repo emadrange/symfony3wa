@@ -21,6 +21,12 @@
             <h3 class="panel-title">{{ marque.title }}</h3>
         </div>
         <div class="panel-body">
+            {% if marque.logo is not null %}
+            <figure>
+                <img src="{{ asset(marque.logo.getwebpath) }}" alt="{{ marque.logo.alt }}" />
+                <figcaption>{{ marque.logo.legende }}</figcaption>
+            </figure>
+            {% endif %}
             <div class="well">
                 <p>{{ marque.description }}</p>
             </div>

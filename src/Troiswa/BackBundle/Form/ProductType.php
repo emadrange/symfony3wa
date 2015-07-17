@@ -63,9 +63,7 @@ class ProductType extends AbstractType
                 'choice_label' => 'titleAndDate',
                 'required' => true
             ])
-            ->add('cover', new ProductCoverType(), [
-                'label' => ' '
-            ]);
+            ->add('cover', new ProductCoverType());
     }
     
     /**

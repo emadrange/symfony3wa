@@ -29,7 +29,7 @@ class Marque
      * @var string
      * @Assert\NotBlank(message="Il faut une marque")
      * @Assert\Length(
-     *      min = 10,
+     *      min = 2,
      *      max = 100,
      *      minMessage = "Le titre doit faire {{ limit }} caractères minimum",
      *      maxMessage = "Le titre doit faire {{ limit }} caractères maximum"
@@ -90,6 +90,16 @@ class Marque
      * @ORM\OneToMany(targetEntity="Product", mappedBy="marque")
      */
     private $products;
+
+    /**
+     * @var BrandLogo
+     *
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\BrandLogo")
+     * @ORM\JoinColumn(name="id_logo", referencedColumnName="id")
+     * @Assert\Valid()
+     *
+     */
+    private $logo;
 
 
     /**
@@ -313,5 +323,28 @@ class Marque
                 ->atPath('title')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Set logo
+     *
+     * @param \Troiswa\BackBundle\Entity\BrandLogo $logo
+     * @return Marque
+     */
+    public function setLogo(\Troiswa\BackBundle\Entity\BrandLogo $logo = null)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \Troiswa\BackBundle\Entity\BrandLogo 
+     */
+    public function getLogo()
+    {
+        return $this->logo;
     }
 }

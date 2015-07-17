@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Troiswa\BackBundle\Validator\Antigrosmots;
 
 /**
  * Marque
@@ -47,6 +48,7 @@ class Marque
      *      maxMessage = "La description doit faire {{ limit }} caractères maximum"
      * )
      * @ORM\Column(name="description", type="text")
+     * @Antigrosmots()
      */
     private $description;
 
@@ -88,6 +90,16 @@ class Marque
      * @ORM\OneToMany(targetEntity="Product", mappedBy="marque")
      */
     private $products;
+
+    /**
+     * @var BrandLogo
+     *
+     * @ORM\OneToOne(targetEntity = "Troiswa\BackBundle\Entity\BrandLogo")
+     * @ORM\JoinColumn(name="id_logo", referencedColumnName="id")
+     * @Assert\Valid()
+     *
+     */
+    private $logo;
 
 
     /**

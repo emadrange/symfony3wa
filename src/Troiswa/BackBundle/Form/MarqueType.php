@@ -30,7 +30,8 @@ class MarqueType extends AbstractType
                 'multiple' => true,
                 'by_reference' => false,
                 'label' => 'Produits'
-            ]);
+            ])
+            ->add('logo', new BrandLogoType());
     }
     
     /**

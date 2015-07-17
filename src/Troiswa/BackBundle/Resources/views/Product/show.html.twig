@@ -22,17 +22,26 @@
         </div>
         <div class="panel-body">
 
-            <div class="well">
-                {% if product.cover is null %}
-                    {% set image = '/assets/images/default.png' %}
-                {% else %}
-                    {% set image =  product.cover.getwebpath%}
-                {% endif %}
-                <p><img src="{{ asset(image) }}" class="img-thumbnail" />{{ product.description }}</p>
+            <div class="row">
+
+            {% if product.cover is null %}
+                {% set image = '/assets/images/default.png' %}
+            {% else %}
+                {% set image =  product.cover.getwebpath('thumb-small') %}
+            {% endif %}
+            <figure class="col-lg-5">
+                <img src="{{ asset(image) }}" class="img-thumbnail" />
+            </figure>
+
+            <div class="well col-lg-6">
+                <p>{{ product.description }}</p>
+            </div>
+
             </div>
 
             <ul class="list-group">
-                <li class="list-group-item">Catégorie : {% if product.cat.titre is defined  %} {{ product.cat.titre }} {% endif %}</li>
+                <li class="list-group-item">Marque : {% if product.marque.title is defined %} {{ product.marque.title }}{% endif %}</li>
+                <li class="list-group-item">Catégorie : {% if product.cat.titre is defined %} {{ product.cat.titre }} {% endif %}</li>
                 <li class="list-group-item">Quantité :  {{ product.quantity }}</li>
                 <li class="list-group-item">Prix : {{ product.price | number_format(2, '.', ' ') }} €</li>
                 {% if product.active %}

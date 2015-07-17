@@ -23,14 +23,7 @@
     {{ form_row(formProduct.title) }}
     {{ form_row(formProduct.cat) }}
     {{ form_row(formProduct.marque) }}
-
-    <div>
-        {{ form_label(formProduct.cover) }}
-        {{ form_errors(formProduct.cover) }}
-        {{ form_widget(formProduct.cover) }}
-    </div>
-
-    {#{ form_row(formProduct.cover, { attr: { style: "margin-bottom: 40px;" } }) }#}
+    {{ form_row(formProduct.cover.fichier) }}
     {{ form_row(formProduct.description) }}
     {{ form_row(formProduct.active, {attr: {style: "width: auto;"}}) }}
     {{ form_row(formProduct.quantity) }}

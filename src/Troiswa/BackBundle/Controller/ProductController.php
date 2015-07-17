@@ -53,16 +53,18 @@ class ProductController extends Controller {
             $cover = $product->getCover();
             $cover->setAlt($product->getTitle());
 
-            $cover->upload();
-
-
+            //$cover->upload();
 
             //die();
 
 
             $em = $this->getDoctrine()->getManager();
 
-            $em->persist($cover);
+            // permet au slug d'incrémenter au cas d'un doublon de titre
+            $em->getFilters()->disable('softdeleteable');
+
+            // plus besoin de persister car c'est en CASCADE
+            //$em->persist($cover);
             $em->persist($product);
 
             //$product->setTitle("titre modifié après persist");
@@ -160,9 +162,16 @@ class ProductController extends Controller {
             ]
         ]);
 
+
         $formEditProduct->handleRequest($request);
 
         if ($formEditProduct->isValid()) {
+
+            $cover = $product->getCover();
+            $cover->setAlt($product->getTitle());
+
+            //$cover->upload();
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add("success", "Le produit a bien été modifié");

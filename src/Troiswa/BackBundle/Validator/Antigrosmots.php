@@ -11,5 +11,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class Antigrosmots extends Constraint
 {
-    public $message = "Il y a %nombre% gros mot(s) dans le texte.";
+    public $message = "Il y a un gros mot(s) dans le texte.";
+    //public $message = "Il y a %nombre% gros mot(s) dans le texte.";
 }

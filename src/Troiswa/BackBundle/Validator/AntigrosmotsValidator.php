@@ -23,21 +23,25 @@ class AntigrosmotsValidator extends ConstraintValidator
             'connard'
         ];
         
-        $nbWord = 0;
+        //$nbWord = 0;
 
         foreach($badWords as $badWord) {
             if (preg_match('/\b' . $badWord . '\b/i', $value)) {
-                //$this->context->addViolation($constraint->message);
-                //break;
-                $nbWord++;
-                
+                $this->context->addViolation($constraint->message);
+                break;
+                //$nbWord++;
+
             }
         }
+
+        /*$this->context->buildViolation($constraint->message)
+            ->setParameter('%nombre%', $nbWord)
+            ->addViolation();*/
         
-        $this->buildViolation($constraint->message)
+        /*$this->buildViolation($constraint->message)
                 ->atPath('description')
                 ->setParameter('%nombre%', $nbWord)
-                ->addViolation();
+                ->addViolation();*/
 
         // Créer un tableau de gros mots
         // Si la valeur tapé par l'utilisateur est dans le tableau

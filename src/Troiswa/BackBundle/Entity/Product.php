@@ -113,7 +113,7 @@ class Product
     private $contentChanged;
 
     /**
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     private $deletedAt;
 
@@ -133,7 +133,7 @@ class Product
 
     /**
      * @var
-     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover")
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover", cascade={"persist"})
      * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
      * @Assert\Valid
      */

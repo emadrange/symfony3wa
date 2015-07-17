@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="product_cover")
  * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\ProductCoverRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class ProductCover
 {
@@ -40,22 +41,36 @@ class ProductCover
     /**
      * @var
      *
+     * @Assert\NotBlank(message="Il faut une photo ou une image")
      * @Assert\Image(
      *      maxWidth = 400,
      *      maxHeight = 400,
      *      maxWidthMessage = "Largeur de l'image trop grande",
      *      maxHeightMessage = "Hauteur de l'image trop grande",
      *      mimeTypes = {"image/jpeg", "image/gif", "image/png"},
-     *      mimeTypesMessage = "Type d'image non valide"
+     *      mimeTypesMessage = "Type d'image non valide",
+     *      sizeNotDetectedMessage = "Impossible de charger l'image",
+     *      maxSize = "400k",
+     *      maxSizeMessage = "L'image est trop importante"
      * )
      */
     private $fichier;
 
+    /**
+     * @var array
+     */
+    private $thumbnails = [
+        "thumb-small"  => [100, 50],
+        "thumb-medium" => [150, 100],
+        "thumb-large"  => [300, 160]
+    ];
+
+    private $oldFichier;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -116,6 +131,15 @@ class ProductCover
     {
         $this->fichier = $fichier;
 
+        // Test si j'ai déjà une image
+        if ($this->name)
+        {
+            // J'ajoute dans oldFichier l'ancienne image
+            $this->oldFichier = $this->name;
+            // ecrasement de name pour que Doctrine voit le changement
+            $this->name = null;
+        }
+
         return $this;
     }
 
@@ -128,7 +152,18 @@ class ProductCover
     }
 
     /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+        $this->name = str_replace(' ', '-', $this->alt) . uniqid() . "." . $this->fichier->guessExtension();
+    }
+
+    /**
      * Charge l'image et initialise le nom avec la valeur du alt
+     *
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
      */
     public function upload() {
 
@@ -136,33 +171,49 @@ class ProductCover
             return;
         }
 
-        $date = new \DateTime('now');
+        if ($this->oldFichier) {
+            // suppression de l'ancienne image
+            unlink($this->getUploadRootDir() . '/' . $this->oldFichier);
+
+            // suppression des anciens thumbnails
+            foreach ($this->thumbnails as $key => $thumbnail) {
+                unlink($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier);
+            }
+        }
+
+        //$date = new \DateTime('now');
 
         //$nameImage = $date->format('YmdHis') . '-' . $this->fichier->getClientOriginalName();
-        $extension = $this->fichier->guessExtension();
-        $nameImage = str_replace(' ', '-', $this->alt) . uniqid();
+        //$extension = $this->fichier->guessExtension();
+        //$nameImage = str_replace(' ', '-', $this->alt) . uniqid();
 
         // move (param 1 chemin vers dossier, param 2 nom image)
 
-        $this->name = $nameImage . "." . $extension;
+        //$this->name = $nameImage . "." . $extension;
 
         $this->fichier->move(
             $this->getUploadRootDir(),
-            $nameImage . "." . $extension
+            $this->name
+            //$nameImage . "." . $extension
         );
 
 
-        $imagine = new \Imagine\Gd\Imagine();
+        //$imagine = new \Imagine\Gd\Imagine();
 
-        $imagine
+        /*$imagine
             ->open($this->getAbsolutePath())
             ->thumbnail(new \Imagine\Image\Box(350, 160))
             ->save(
                 $this->getUploadRootDir().'/' .
-                $nameImage.'-thumb-small.'.$extension);
+                $nameImage . '-thumb-small.' . $extension);*/
 
+        $imagine = new \Imagine\Gd\Imagine();
+        $imagineOpen = $imagine->open($this->getAbsolutePath());
 
-
+        foreach ($this->thumbnails as $key => $thumbnail) {
+            $imagineOpen->thumbnail(new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]))
+                ->save($this->getUploadRootDir() . '/' . $key . '-' . $this->name);
+        }
     }
 
     /**
@@ -172,7 +223,7 @@ class ProductCover
      */
     private function getUploadRootDir() {
 
-        return __DIR__ . "/../../../../web/upload/products";
+        return __DIR__ . "/../../../../web" . $this->getUploadDir();
     }
 
     /**
@@ -180,9 +231,19 @@ class ProductCover
      *
      * @return string
      */
-    public function getWebPath() {
+    public function getWebPath($thumb = null) {
 
-        return "/upload/products/" . $this->name;
+        /*$thumbnail = "";
+
+        if (null != $thumb) {
+            $thumbnail = $thumb . "-";
+        }*/
+
+        if (array_key_exists($thumb, $this->thumbnails)) {
+            return $this->getUploadDir() . "/" . $thumb . "-". $this->name;
+        } else {
+            return $this->getUploadDir() . "/" . $this->name;
+        }
     }
 
     /**
@@ -192,5 +253,10 @@ class ProductCover
     public function getAbsolutePath()
     {
         return $this->getUploadRootDir().'/'.$this->name;
+    }
+
+    private function getUploadDir() {
+
+        return "/upload/products";
     }
 }

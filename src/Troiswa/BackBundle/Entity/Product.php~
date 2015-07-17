@@ -113,7 +113,7 @@ class Product
     private $contentChanged;
 
     /**
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     private $deletedAt;
 
@@ -135,6 +135,7 @@ class Product
      * @var
      * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover")
      * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
+     * @Assert\Valid
      */
     private $cover;
 
@@ -434,5 +435,28 @@ class Product
     public function getMarque()
     {
         return $this->marque;
+    }
+
+    /**
+     * Set cover
+     *
+     * @param \Troiswa\BackBundle\Entity\ProductCover $cover
+     * @return Product
+     */
+    public function setCover(\Troiswa\BackBundle\Entity\ProductCover $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \Troiswa\BackBundle\Entity\ProductCover 
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 }

@@ -43,8 +43,14 @@ class MarqueController extends Controller {
         if ($formMarque->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            $em->getFilters()->disable('softdeleteable');
+
+            $logo = $marque->getLogo();
+            $logo->setAlt($marque->getTitle());
+            $logo->upload();
 
             $em->persist($marque);
+            $em->persist($logo);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add("success", "La marque a bien été ajoutée");
@@ -114,6 +120,10 @@ class MarqueController extends Controller {
         $formMarque->handleRequest($request);
 
         if ($formMarque->isValid()) {
+
+            $logo = $marque->getLogo();
+            $logo->upload();
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add("success", "La marque a bien été modifiée");
