@@ -47,10 +47,11 @@ class MarqueController extends Controller {
 
             $logo = $marque->getLogo();
             $logo->setAlt($marque->getTitle());
-            $logo->upload();
+            
+            //$logo->upload();
 
             $em->persist($marque);
-            $em->persist($logo);
+            //$em->persist($logo);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add("success", "La marque a bien été ajoutée");
@@ -122,7 +123,10 @@ class MarqueController extends Controller {
         if ($formMarque->isValid()) {
 
             $logo = $marque->getLogo();
-            $logo->upload();
+            if ($logo->getAlt() == null) {
+                $logo->setAlt($marque->getTitle());
+            }
+            //$logo->upload();
 
             $em->flush();
 

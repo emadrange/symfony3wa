@@ -27,10 +27,6 @@ class ProductController extends Controller {
 
         $product = new Product();
 
-        //dump($product);
-
-        //$product->setTitle("Prod");
-
         $formProduct = $this->createForm(new ProductType(), $product, [
             "attr" => [
                 "novalidate" => "novalidate"
@@ -47,23 +43,17 @@ class ProductController extends Controller {
 
         if ($formProduct->isValid()) {
 
-            //dump($product);
-            //die();
-
             $cover = $product->getCover();
             $cover->setAlt($product->getTitle());
 
             //$cover->upload();
-
-            //die();
-
 
             $em = $this->getDoctrine()->getManager();
 
             // permet au slug d'incrémenter au cas d'un doublon de titre
             $em->getFilters()->disable('softdeleteable');
 
-            // plus besoin de persister car c'est en CASCADE
+            // plus besoin de persister $cover car c'est en CASCADE
             //$em->persist($cover);
             $em->persist($product);
 
@@ -168,15 +158,17 @@ class ProductController extends Controller {
         if ($formEditProduct->isValid()) {
 
             $cover = $product->getCover();
-            $cover->setAlt($product->getTitle());
-
+            if ($cover->getAlt() == null) {
+                $cover->setAlt($product->getTitle());
+            }
+            
             //$cover->upload();
 
             $em->flush();
 
             $this->get('session')->getFlashBag()->add("success", "Le produit a bien été modifié");
             return $this->redirectToRoute("troiswa_back_product_edit", [
-                "idproduct" => $product->getId()
+                "idproduct" => $product->getId(),
             ]);
         }
 

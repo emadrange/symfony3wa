@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\BrandLogoRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class BrandLogo
 {
@@ -64,6 +65,12 @@ class BrandLogo
      * )
      */
     private $logofile;
+    
+    /**
+     *
+     * @var string
+     */
+    private $oldLogo;
 
 
     /**
@@ -154,7 +161,13 @@ class BrandLogo
     public function setLogofile($logofile)
     {
         $this->logofile = $logofile;
-
+                
+        // Préparation au nouveau nom du logo
+        if ($this->name) {
+            $this->oldLogo = $this->name;
+            $this->name = null;
+        }
+        
         return $this;
     }
 
@@ -166,10 +179,26 @@ class BrandLogo
     {
         return $this->logofile;
     }
+    
+    /**
+     * Formate le nom avant le persist
+     * @author Eric
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+       
+        // formatage du nom du logo
+        $this->name = str_replace(' ', '-', $this->alt)
+               . "-" . uniqid() . "."
+               . $this->logofile->guessExtension(); 
+    }
 
     /**
-     * Upload le fichier sélectionné dans le formulaire
+     * Upload le fichier sélectionné dans le formulaire après le persist
      * @author Eric
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
      */
     public function upload() {
 
@@ -177,21 +206,15 @@ class BrandLogo
             return;
         }
 
-        if ($this->name) {
-            unlink($this->getUploadRootDir() . '/' . $this->name);
+        if ($this->oldLogo) {
+            // supprime l'ancien logo
+            unlink($this->getUploadRootDir() . '/' . $this->oldLogo);
         }
-
-        // formatage du nom du logo
-        $extension = $this->logofile->guessExtension();
-        $nameLogo = str_replace(' ', '-', $this->alt) . uniqid();
-
-        // set le nom du logo
-        $this->name = $nameLogo . "." . $extension;
 
         // charge le logo dans le répertoire
         $this->logofile->move(
             $this->getUploadRootDir(),
-            $nameLogo . "." . $extension
+            $this->name
         );
     }
 

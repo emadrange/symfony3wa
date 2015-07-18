@@ -94,7 +94,7 @@ class Marque
     /**
      * @var BrandLogo
      *
-     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\BrandLogo")
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\BrandLogo", cascade={"persist"})
      * @ORM\JoinColumn(name="id_logo", referencedColumnName="id")
      * @Assert\Valid()
      *
