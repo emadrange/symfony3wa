@@ -26,11 +26,15 @@
 
             {% if product.cover is null %}
                 {% set image = '/assets/images/default.png' %}
+                {% set title = "" %}
+                {% set alt = "default" %}
             {% else %}
                 {% set image =  product.cover.getwebpath('thumb-small') %}
+                {% set title =  product.cover.alt %}
+                {% set alt = product.cover.alt %}
             {% endif %}
             <figure class="col-lg-3">
-                <img src="{{ asset(image) }}" alt="{{ product.cover.alt }}" title="{{ product.cover.alt }}" class="img-thumbnail" />
+                <img src="{{ asset(image) }}" alt="{{ alt }}" title="{{ title }}" class="img-thumbnail" />
             </figure>
 
             <div class="col-lg-8">
