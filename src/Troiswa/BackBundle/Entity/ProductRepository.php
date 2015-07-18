@@ -53,6 +53,22 @@ class ProductRepository extends EntityRepository
     }
 
     /**
+     * Retourne les produits avec leur marque et leur catégorie
+     * @return array
+     */
+    public function findProductsWithBrandAndCategory() {
+        
+        $query = $this->createQueryBuilder('prod')
+                ->select('prod, cat, brand, logo')
+                ->leftJoin('prod.cat', 'cat')
+                ->leftJoin('prod.marque', 'brand')
+                ->leftJoin('brand.logo', 'logo')
+                ->orderBy('prod.title');
+        
+        return $query->getQuery()->getResult();
+    }
+
+        /**
      * Retourne les produits par quandtité
      * @author Eric
      * @param null $quantity

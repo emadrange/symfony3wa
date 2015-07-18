@@ -39,7 +39,12 @@
                 {% endif %}
             <tr class="{{ class }}">
                 <td>{{ product.title }}</td>
-                <td>{% if product.cat is not null %} {{ product.marque.title }} {% endif %}</td>
+                <td>
+                    {% if product.marque.logo is not null %}
+                        <img src="{{ asset(product.marque.logo.getwebpath) }}" alt="{{ product.marque.logo.alt }}" style="height: 16px;">
+                    {% endif %}
+                    {% if product.marque is not null %} {{ product.marque.title }} {% endif %}
+                </td>
                 <td>{% if product.cat is not null %} {{ product.cat.titre }} {% endif %}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price | number_format(2, '.', ' ') }} €</td>

@@ -229,7 +229,7 @@ class BrandLogo
     }
 
     /**
-     * Retourne le chemin depuis la racine web
+     * Retourne le chemin du logo depuis la racine web
      * @author Eric
      * @return string
      */
