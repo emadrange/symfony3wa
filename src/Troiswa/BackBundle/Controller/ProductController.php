@@ -145,6 +145,7 @@ class ProductController extends Controller {
                 "novalidate" => "novalidate"
             ]
         ])
+        ->add('id', 'hidden')
         ->add("submit", "submit", [
             'label' => 'Enregistrer',
             'attr' => [
