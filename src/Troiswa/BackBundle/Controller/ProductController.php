@@ -79,7 +79,7 @@ class ProductController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
-            ->findProductsWithBrandAndCategory();
+            ->findAllProductWithBrandAndCategory();
             //->findBy([], ["title" => "ASC"]);
             //->findAll();
 
@@ -97,7 +97,11 @@ class ProductController extends Controller {
      * @param $idproduct
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
+     * @ParamConverter("product", options={
+     *      "mapping": {"idproduct": "id"},
+     *      "repository_method" = "findOneProductWithBrandAndCategory",
+     *      "map_method_signature" = true
+     * })
      */
     public function showAction(Product $product) {
 

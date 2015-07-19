@@ -33,7 +33,7 @@ class ProductRepository extends EntityRepository
      * @author Eric
      * @return array
      */
-    public function findProductsWithCategory() {
+    public function findAllProductWithCategory() {
 
         /*$query = $this->getEntityManager()->createQuery(
             "
@@ -51,12 +51,31 @@ class ProductRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+    
+    /**
+     * 
+     * @param type $id
+     * @return mixed
+     */
+    public function findOneProductWithBrandAndCategory($id) {
+        
+        $query = $this->createQueryBuilder('prod')
+                ->select('prod, brand, cat, photo')
+                ->leftJoin('prod.marque', 'brand')
+                ->leftJoin('prod.cat', 'cat')
+                ->leftJoin('prod.cover', 'photo')
+                ->where('prod.id = :id')
+                ->setParameter('id', $id);
+        
+        return $query->getQuery()->getSingleResult();
+        
+    }
 
     /**
      * Retourne les produits avec leur marque et leur catégorie
      * @return array
      */
-    public function findProductsWithBrandAndCategory() {
+    public function findAllProductWithBrandAndCategory() {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, cat, brand, logo')
