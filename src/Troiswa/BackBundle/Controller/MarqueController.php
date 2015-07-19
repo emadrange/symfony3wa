@@ -74,7 +74,7 @@ class MarqueController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $marques = $em->getRepository("TroiswaBackBundle:Marque")
-            ->findMarquesByOrderTitle();
+            ->findAllBrandOrderByTitle();
 
         return $this->render("TroiswaBackBundle:Marque:list.html.twig", [
             "marques" => $marques
@@ -82,11 +82,15 @@ class MarqueController extends Controller {
     }
 
     /**
-     * Affichage d'une marque
+     * Visualisation d'une marque
      * @author Eric
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @ParamConverter("marque", options={"mapping": {"idmarque": "id"}})
+     * @ParamConverter("marque", options={
+     *      "mapping": {"idmarque": "id"},
+     *      "repository_method" = "findOneBrandWithLogoById",
+     *      "map_method_signature" = true
+     * })
      */
     public function showAction(Marque $marque) {
 
@@ -142,7 +146,8 @@ class MarqueController extends Controller {
     }
 
     /**
-     * Efface une marque
+     * Supprime une marque
+     * @author Eric
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @ParamConverter("marque", options={"mapping": {"idmarque": "id"}})

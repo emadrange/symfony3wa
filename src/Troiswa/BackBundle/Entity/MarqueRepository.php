@@ -12,15 +12,39 @@ use Doctrine\ORM\EntityRepository;
  */
 class MarqueRepository extends EntityRepository
 {
-    public function findMarquesByOrderTitle($form = false) {
-        $query = $this->createQueryBuilder('m')
-            ->orderBy('m.title');
+    
+    /**
+     * Retourne la liste des marque par ordre alphabétique
+     * @author Eric
+     * @param type $form
+     * @return mixed
+     */
+    public function findAllBrandOrderByTitle($form = false) {
+        
+        $query = $this->createQueryBuilder('brand')
+            ->orderBy('brand.title');
 
         if ($form) {
             return $query;
         }
 
         return $query->getQuery()->getResult();
-
+    }
+    
+    /**
+     * Retourne la marque avec son logo
+     * @author Eric
+     * @param integer $id
+     * @return mixed
+     */
+    public function findOneBrandWithLogoById($id) {
+        
+        $query = $this->createQueryBuilder('brand')
+                ->select('brand, logo')
+                ->leftJoin('brand.logo', 'logo')
+                ->where('brand.id = :id')
+                ->setParameter('id', $id);
+        
+        return $query->getQuery()->getSingleResult();
     }
 }

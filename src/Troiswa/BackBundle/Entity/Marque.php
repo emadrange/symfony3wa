@@ -97,7 +97,6 @@ class Marque
      * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\BrandLogo", cascade={"persist"})
      * @ORM\JoinColumn(name="id_logo", referencedColumnName="id")
      * @Assert\Valid()
-     *
      */
     private $logo;
 
@@ -249,6 +248,7 @@ class Marque
     {
         return $this->contentChanged;
     }
+    
     /**
      * Constructor
      */
@@ -304,6 +304,7 @@ class Marque
 
     /**
      * Label spécial pour afficher le titre avec sa date de création
+     * @author Eric
      * @return string
      */
     public function getTitleAndDate() {
@@ -312,8 +313,8 @@ class Marque
     }
 
     /**
-     * Validation de titre interdit
-     *
+     * Validation de titre interdit par callback
+     * @author Eric
      * @Assert\Callback
      */
     public function validate(ExecutionContextInterface $context) {

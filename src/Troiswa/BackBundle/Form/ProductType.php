@@ -58,8 +58,9 @@ class ProductType extends AbstractType
             ->add('marque', 'entity', [
                 'class' => 'TroiswaBackBundle:Marque',
                 'query_builder' => function(MarqueRepository $mr) {
-                    return $mr->findMarquesByOrderTitle(true);
+                    return $mr->findAllBrandOrderByTitle(true);
                 },
+                // appel la method getTitleAndDate() dans l'entité Marque
                 'choice_label' => 'titleAndDate',
                 'required' => true
             ])
