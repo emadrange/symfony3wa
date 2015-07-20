@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * ProductCover
  *
  * @ORM\Table(name="product_cover")
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\ProductCoverRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\ProductCoverRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class ProductCover
@@ -213,6 +213,38 @@ class ProductCover
         foreach ($this->thumbnails as $key => $thumbnail) {
             $imagineOpen->thumbnail(new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]))
                 ->save($this->getUploadRootDir() . '/' . $key . '-' . $this->name);
+        }
+    }
+
+    /**
+     * Récupération de l'objet à deleter avec le PreRemove()
+     * @ORM\PreRemove()
+     */
+    public function preRemoveImage() {
+        // cette method peut être vide
+        // dump($this);
+        // die();
+    }
+
+    /**
+     * Supprime les images du produit
+     * @ORM\PostRemove()
+     */
+    public function removeImage() {
+
+        // Suppression de l'image principale
+        $fichier = $this->getAbsolutePath();
+
+        if (file_exists($fichier)) {
+            unlink($fichier);
+        }
+
+        // Suppression des thumbnails
+        foreach($this->thumbnails as $key => $thumbnail) {
+            $thumb = $this->getUploadRootDir() . '/' . $key . '-' . $this->name;
+            if (file_exists($thumb)) {
+                unlink($thumb);
+            }
         }
     }
 

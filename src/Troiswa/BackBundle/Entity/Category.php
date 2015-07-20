@@ -11,7 +11,7 @@ use Troiswa\BackBundle\Entity\Product;
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\CategoryRepository")
  */
 class Category
 {

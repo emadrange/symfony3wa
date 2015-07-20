@@ -75,19 +75,27 @@ class ProductController extends Controller {
      * @author Eric
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction() {
+    public function listAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
-            ->findAllProductWithBrandAndCategory();
+            ->findAllProductWithBrandAndCategory(true);
             //->findBy([], ["title" => "ASC"]);
             //->findAll();
 
         //dump($products);
         //die();
 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
         return $this->render("TroiswaBackBundle:Product:list.html.twig", [
-            "products" => $products
+            //"products" => $products
+            "pagination" => $pagination
         ]);
     }
 

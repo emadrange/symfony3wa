@@ -1,6 +1,7 @@
 {% extends "TroiswaBackBundle::layout-admin.html.twig" %}
 
-{% set nbProducts = products | length %}
+{#% set nbProducts = products | length %#}
+{% set nbProducts = pagination.getTotalItemCount %}
 
 {% block title %}Liste des produits{% endblock %}
 
@@ -19,9 +20,9 @@
         <table class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
-                <th>Titre</th>
-                <th>Marque</th>
-                <th>Catégorie</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Titre', 'prod.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Marque', 'brand.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Catégorie', 'cat.titre') }}</th>
                 <th>Quantité</th>
                 <th>Prix</th>
                 <th>Visible</th>
@@ -29,7 +30,8 @@
             </tr>
             </thead>
             <tbody>
-            {% for product in products %}
+            {#% for product in products %#}
+            {% for product in pagination %}
                 {% if not product.active %}
                     {% set class="warning" %}
                 {% elseif product.quantity == 0 %}
@@ -63,6 +65,9 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
     </div>
 {% endblock %}
 

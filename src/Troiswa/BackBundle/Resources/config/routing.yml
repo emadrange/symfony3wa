@@ -1,3 +1,7 @@
+troiswa_back_user:
+    resource: "@TroiswaBackBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
 ##########################
 # By Eric - 07/2015      #
 # administration du site #

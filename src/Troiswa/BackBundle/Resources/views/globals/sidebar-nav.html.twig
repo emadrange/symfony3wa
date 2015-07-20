@@ -4,6 +4,7 @@
 {% set productRoutes = ['troiswa_back_product_listlimite', 'troiswa_back_product_listactive', 'troiswa_back_product_list', 'troiswa_back_product_add', 'troiswa_back_product_show', "troiswa_back_product_edit"] %}
 {% set categoryRoutes = ['troiswa_back_category_add', 'troiswa_back_category_list', 'troiswa_back_category_show', 'troiswa_back_category_edit'] %}
 {% set marqueRoutes = ['troiswa_back_marque_add', 'troiswa_back_marque_list', 'troiswa_back_marque_show', 'troiswa_back_marque_edit'] %}
+{% set userRoutes = ['troiswa_back_user_add', 'troiswa_back_user_list', 'troiswa_back_user_show', 'troiswa_back_user_edit'] %}
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li{% if routeActive == "troiswa_back_administration" %} class="active"{% endif %}>
@@ -53,6 +54,20 @@
                 </li>
             </ul>
         </li>
+        <!-- utilisateur -->
+
+        <li{% if routeActive in userRoutes %} class="active"{% endif %}>
+            <a href="javascript:;" data-toggle="collapse" data-target="#user"><i class="fa fa-fw fa-user"></i> Utilisateur <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="user" class="collapse nav navbar-nav{% if routeActive in userRoutes %} in{% endif %}">
+                <li{% if routeActive == "troiswa_back_user_list" %} class="active"{% endif %}>
+                    <a href="{{ path('troiswa_back_user_list') }}"><i class="fa fa-fw fa-user"></i> Lister les utilisateurs</a>
+                </li>
+                <li{% if routeActive == "troiswa_back_user_add" %} class="active"{% endif %}>
+                    <a href="{{ path('troiswa_back_user_add') }}"><i class="fa fa-fw fa-user"></i> Ajouter un utilisateur</a>
+                </li>
+            </ul>
+        </li>
+
         <!-- contact - feddback -->
         <li{% if routeActive in routes %} class="active"{% endif %}>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-phone-square"></i> Mail <i class="fa fa-fw fa-caret-down"></i></a>

@@ -12,7 +12,7 @@ use Troiswa\BackBundle\Validator\Antigrosmots;
  * Marque
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\MarqueRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\MarqueRepository")
  */
 class Marque
 {

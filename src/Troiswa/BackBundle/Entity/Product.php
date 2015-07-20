@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Product
  *
  * @ORM\Table(name="product")
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\ProductRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\ProductRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Product
@@ -133,7 +133,7 @@ class Product
 
     /**
      * @var
-     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
      * @Assert\Valid
      */

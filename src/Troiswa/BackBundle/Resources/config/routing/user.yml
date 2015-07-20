@@ -1,0 +1,30 @@
+troiswa_back_user_list:
+    path:     /
+    defaults: { _controller: "TroiswaBackBundle:User:index" }
+
+troiswa_back_user_show:
+    path:     /{id}/show
+    defaults: { _controller: "TroiswaBackBundle:User:show" }
+
+troiswa_back_user_add:
+    path:     /new
+    defaults: { _controller: "TroiswaBackBundle:User:new" }
+
+troiswa_back_user_create:
+    path:     /create
+    defaults: { _controller: "TroiswaBackBundle:User:create" }
+    methods:  POST
+
+troiswa_back_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TroiswaBackBundle:User:edit" }
+
+troiswa_back_user_update:
+    path:     /{id}/update
+    defaults: { _controller: "TroiswaBackBundle:User:update" }
+    methods:  [POST, PUT]
+
+troiswa_back_user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TroiswaBackBundle:User:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,45 @@
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
+
+{% block title %}Ajouter un utilisateur{% endblock %}
+
+{% block h1 %}<i class="fa fa-user"></i> Ajouter un utilisateur{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('troiswa_back_user_list') }}"><i class="fa fa-user"></i> Lister les utilisateurs</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-user"></i> Ajouter un utilisateur
+    </li>
+{% endblock %}
+
+{% block content -%}
+    <div class="col-lg-8">
+        {{ form_start(form) }}
+
+        <div class="well">
+        {{ form_row(form.username) }}
+        {{ form_row(form.password) }}
+        </div>
+        <div class="well">
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.birthday) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.submit) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+        <!--ul class="record_actions">
+    <li>
+        <a href="{#{ path('user') }#}">
+            Back to the list
+        </a>
+    </li-->
+</ul>
+{% endblock %}

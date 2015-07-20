@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * BrandLogo
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Entity\BrandLogoRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\BrandLogoRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class BrandLogo

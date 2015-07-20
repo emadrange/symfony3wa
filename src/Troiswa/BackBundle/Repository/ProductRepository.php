@@ -1,6 +1,6 @@
 <?php
 
-namespace Troiswa\BackBundle\Entity;
+namespace Troiswa\BackBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -73,19 +73,27 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les produits avec leur marque et leur catégorie
+     * @param boolean $isPaginable
      * @return array
      */
-    public function findAllProductWithBrandAndCategory() {
+    public function findAllProductWithBrandAndCategory($isPaginable) {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, cat, brand, logo')
                 ->leftJoin('prod.cat', 'cat')
                 ->leftJoin('prod.marque', 'brand')
-                ->leftJoin('brand.logo', 'logo')
-                ->orderBy('prod.title');
-        
+                ->leftJoin('brand.logo', 'logo');
+
+        if ($isPaginable) {
+            return $query->getQuery();
+        }
+
+        $query->orderBy('prod.title');
+
         return $query->getQuery()->getResult();
     }
+
+
 
         /**
      * Retourne les produits par quandtité

@@ -1,0 +1,40 @@
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
+
+{% block title %}Editer un utilisateur{% endblock %}
+
+{% block h1 %}<i class="fa fa-user"></i> Editer un utilisateur{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('troiswa_back_user_list') }}"><i class="fa fa-user"></i> Lister les utilisateurs</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-user"></i> Editer un utilisateur
+    </li>
+{% endblock %}
+
+
+{% block content -%}
+
+    <div class="col-lg-8">
+        {{ form_start(edit_form) }}
+
+        <div class="well">
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.password) }}
+        </div>
+        <div class="well">
+            {{ form_row(edit_form.firstname) }}
+            {{ form_row(edit_form.lastname) }}
+            {{ form_row(edit_form.birthday) }}
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.phone) }}
+            {{ form_row(edit_form.address) }}
+            {{ form_row(edit_form.submit) }}
+        </div>
+
+        {{ form_end(edit_form) }}
+    </div>
+
+{% endblock %}
