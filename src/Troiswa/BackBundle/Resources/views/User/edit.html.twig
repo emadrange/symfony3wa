@@ -20,18 +20,25 @@
     <div class="col-lg-8">
         {{ form_start(edit_form) }}
 
-        <div class="well">
-            {{ form_row(edit_form.username) }}
-            {{ form_row(edit_form.password) }}
+        <div class="panel panel-primary">
+            <div class="panel-heading">Identifiant et mot de passe</div>
+            <div class="panel-body">
+                {{ form_row(edit_form.username) }}
+                {{ form_row(edit_form.password) }}
+            </div>
         </div>
-        <div class="well">
-            {{ form_row(edit_form.firstname) }}
-            {{ form_row(edit_form.lastname) }}
-            {{ form_row(edit_form.birthday) }}
-            {{ form_row(edit_form.email) }}
-            {{ form_row(edit_form.phone) }}
-            {{ form_row(edit_form.address) }}
-            {{ form_row(edit_form.submit) }}
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">Coordonnées</div>
+            <div class="panel-body">
+                {{ form_row(edit_form.firstname) }}
+                {{ form_row(edit_form.lastname) }}
+                {{ form_row(edit_form.birthday) }}
+                {{ form_row(edit_form.email) }}
+                {{ form_row(edit_form.phone) }}
+                {{ form_row(edit_form.address) }}
+                {{ form_row(edit_form.submit) }}
+            </div>
         </div>
 
         {{ form_end(edit_form) }}

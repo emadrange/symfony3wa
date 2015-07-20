@@ -17,14 +17,14 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Email</th>
-                <th>Birthday</th>
-                <th>Phone</th>
-                <th>Username</th>
-                <th>Address</th>
-                <th>Password</th>
+                <th>Naissance</th>
+                <th>Téléphone</th>
+                <th>Identifiant</th>
+                <th>Adresse</th>
+                <th>Mot de passe</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,7 +35,7 @@
                 <td>{{ entity.firstname }}</td>
                 <td>{{ entity.lastname }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{% if entity.birthday %}{{ entity.birthday|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.birthday %}{{ entity.birthday|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.phone }}</td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.address }}</td>

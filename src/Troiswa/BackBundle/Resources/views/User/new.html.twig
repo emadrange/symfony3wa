@@ -18,20 +18,27 @@
     <div class="col-lg-8">
         {{ form_start(form) }}
 
-        <div class="well">
-        {{ form_row(form.username) }}
-        {{ form_row(form.password) }}
+        <div class="panel panel-primary">
+            <div class="panel-heading">Identifiant et mot de passe</div>
+            <div class="panel-body">
+                {{ form_row(form.username) }}
+                {{ form_row(form.password) }}
+            </div>
         </div>
-        <div class="well">
-        {{ form_row(form.firstname) }}
-        {{ form_row(form.lastname) }}
-        {{ form_row(form.birthday) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.address) }}
-        {{ form_row(form.submit) }}
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">Coordonnées</div>
+            <div class="panel-body">
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.birthday) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.submit) }}
+            </div>
         </div>
-
+            
         {{ form_end(form) }}
     </div>
 
