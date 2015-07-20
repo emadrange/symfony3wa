@@ -149,7 +149,6 @@ class ProductController extends Controller {
                 "novalidate" => "novalidate"
             ]
         ])
-        ->add('id', 'hidden')
         ->add("submit", "submit", [
             'label' => 'Enregistrer',
             'attr' => [
@@ -178,7 +177,8 @@ class ProductController extends Controller {
         }
 
         return $this->render("TroiswaBackBundle:Product:edit.html.twig", [
-            "formProduct" => $formEditProduct->createView()
+            "formProduct" => $formEditProduct->createView(),
+            "idProduct" => $product->getId()
         ]);
     }
 
