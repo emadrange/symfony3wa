@@ -44,7 +44,7 @@ class TagController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tag_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('troiswa_back_tag_show', array('id' => $entity->getId())));
         }
 
         return $this->render('TroiswaBackBundle:Tag:new.html.twig', array(
@@ -63,7 +63,7 @@ class TagController extends Controller
     private function createCreateForm(Tag $entity)
     {
         $form = $this->createForm(new TagType(), $entity, [
-            'action' => $this->generateUrl('tag_create'),
+            'action' => $this->generateUrl('troiswa_back_tag_create'),
             'method' => 'POST',
             'attr' => [
                 'novalidate' => 'novalidate'
@@ -151,7 +151,7 @@ class TagController extends Controller
     private function createEditForm(Tag $entity)
     {
         $form = $this->createForm(new TagType(), $entity, [
-            'action' => $this->generateUrl('tag_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('troiswa_back_tag_update', array('id' => $entity->getId())),
             'method' => 'PUT',
             'attr' => [
                 'novalidate' => 'novalidate'
@@ -188,7 +188,7 @@ class TagController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tag_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('troiswa_back_tag_edit', array('id' => $id)));
         }
 
         return $this->render('TroiswaBackBundle:Tag:edit.html.twig', array(
@@ -218,7 +218,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('tag'));
+        return $this->redirect($this->generateUrl('troiswa_back_tag_list'));
     }
 
     /**
@@ -231,7 +231,7 @@ class TagController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tag_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('troiswa_back_tag_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

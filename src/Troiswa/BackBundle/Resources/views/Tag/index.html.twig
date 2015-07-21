@@ -9,37 +9,34 @@
     <li>
         <i class="fa fa-key"></i> Lister les tags
     </li>
-    <li class="active">
-        <i class="fa fa-key"></i> Lister les tags
-    </li>
 {% endblock %}
 
 {% block content -%}
     <h1>Tag list</h1>
 
-    <table class="records_list">
+    <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Word</th>
+                <th>Tag</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('tag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('troiswa_back_tag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.word }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ path('tag_show', { 'id': entity.id }) }}">Voir</a>
-                    <a class="btn btn-warning" href="{{ path('tag_edit', { 'id': entity.id }) }}">Editer</a>
+                    <a class="btn btn-info" href="{{ path('troiswa_back_tag_show', { 'id': entity.id }) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('troiswa_back_tag_edit', { 'id': entity.id }) }}">Editer</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="{{ path('tag_new') }}">Ajouter un tag
+    <a class="btn btn-success" href="{{ path('troiswa_back_tag_add') }}">Ajouter un tag
             </a>
 
     {% endblock %}

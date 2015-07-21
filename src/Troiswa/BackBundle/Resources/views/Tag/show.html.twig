@@ -1,32 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
 
-{% block body -%}
-    <h1>Tag</h1>
+{% block title %}Fiche d'un tag{% endblock %}
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Word</th>
-                <td>{{ entity.word }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block h1 %}Fiche d'un tag{% endblock %}
 
-        <ul class="record_actions">
+{% block breadcrumb %}
+    {{ parent() }}
     <li>
-        <a href="{{ path('tag') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('troiswa_back_tag_list') }}"><i class="fa fa-key"></i> Lister les tags</a>
     </li>
-    <li>
-        <a href="{{ path('tag_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
+    <li class="active">
+        <i class="fa fa-key"></i> Fiche d'un tag
     </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+{% endblock %}
+
+{% block content -%}
+    <div class="row">
+        <ul class="list-group col-lg-4">
+            <li class="list-group-item">ID : {{ entity.id }}</li>
+            <li class="list-group-item">Tag : {{ entity.word }}</li>
+        </ul>
+    </div>
+        
+    <div class="row">
+        <a class="btn btn-warning" href="{{ path('troiswa_back_tag_edit', { 'id': entity.id }) }}">Editer le tag</a>
+        {{ form_start(delete_form) }}
+        {{ form_row(delete_form.submit, {label: 'Supprimer', attr: {class: 'btn btn-danger'}}) }}
+        {{ form_end(delete_form) }}
+    </div>
+
 {% endblock %}

@@ -1,12 +1,12 @@
-troiswa_back_tag:
-    resource: "@TroiswaBackBundle/Resources/config/routing/tag.yml"
-    prefix:   /tag
-
 
 ##########################
 # By Eric - 07/2015      #
 # administration du site #
 ##########################
+
+troiswa_back_tag:
+    resource: "@TroiswaBackBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
 
 troiswa_back_resource_user:
     resource: "@TroiswaBackBundle/Resources/config/routing/user.yml"
