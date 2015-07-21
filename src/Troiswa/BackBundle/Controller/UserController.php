@@ -233,7 +233,9 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('troiswa_back_user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', [
+                'label' => 'Supprimer'
+                ])
             ->getForm()
         ;
     }

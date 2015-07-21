@@ -27,19 +27,8 @@ troiswa_back_resource_marque:
     resource: "@TroiswaBackBundle/Resources/config/routing/marque.yml"
     prefix: /marque
 
-#troiswa_back_resource_marque:
-#    resource: "@TroiswaBackBundle/Resources/config/routing/login.yml"
-#    prefix: /
-
-troiswa_back_login:
-    pattern:   /login
-    defaults:  { _controller: TroiswaBackBundle:Security:login }
-
-troiswa_back_login_check:
-    pattern:   /login_check
-
-troiswa_back_logout:
-    pattern:   /logout
+troiswa_back_resource_tag:
+    resource: "@TroiswaBackBundle/Resources/config/routing/login.yml"
 
 ####################
 # divers exercices #
