@@ -92,6 +92,7 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
             $prod->setQuantity($product['quantity']);
             $prod->setCat($this->getReference('cat' . rand(0, 4)));
             $prod->setMarque($this->getReference('brand' . rand(0, 2)));
+            $prod->addTag($this->getReference('tag' . rand(0, 4)));
 
             $manager->persist($prod);
         }
@@ -115,7 +116,7 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
         // TODO: Implement getOrder() method.
     }
 }
