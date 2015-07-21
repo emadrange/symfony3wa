@@ -3,6 +3,7 @@
 namespace Troiswa\BackBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tag
@@ -25,6 +26,11 @@ class Tag
      * @var string
      *
      * @ORM\Column(name="word", type="string", length=50)
+     * @Assert\NotBlank(message="Vous devez saisir un mot")
+     * @Assert\Length(
+     *      max=50,
+     *      maxMessage="Le mot est trop long, {{ limit }} caractères maximum"
+     * )
      */
     private $word;
 

@@ -57,20 +57,17 @@
         </li>
         <!-- tag -->
         
-        
         <li{% if routeActive in tagRoutes %} class="active"{% endif %}>
-            <a href="javascript:;" data-toggle="collapse" data-target="#tag"><i class="fa fa-fw fa-key"></i> Tag <i class="fa fa-fw fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#tag"><i class="fa fa-fw fa-tag"></i> Tag <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="tag" class="collapse nav navbar-nav{% if routeActive in tagRoutes %} in{% endif %}">
                 <li{% if routeActive == "troiswa_back_tag_list" %} class="active"{% endif %}>
-                    <a href="{{ path('troiswa_back_tag_list') }}"><i class="fa fa-fw fa-key"></i> Lister les tags</a>
+                    <a href="{{ path('troiswa_back_tag_list') }}"><i class="fa fa-fw fa-tag"></i> Lister les tags</a>
                 </li>
                 <li{% if routeActive == "troiswa_back_tag_add" %} class="active"{% endif %}>
-                    <a href="{{ path('troiswa_back_tag_add') }}"><i class="fa fa-fw fa-key"></i> Ajouter un tag</a>
+                    <a href="{{ path('troiswa_back_tag_add') }}"><i class="fa fa-fw fa-tag"></i> Ajouter un tag</a>
                 </li>
             </ul>
         </li>
-        
-        
         
         <!-- utilisateur -->
 
