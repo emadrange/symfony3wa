@@ -1,11 +1,16 @@
-troiswa_back_user:
-    resource: "@TroiswaBackBundle/Resources/config/routing/user.yml"
-    prefix:   /user
+troiswa_back_tag:
+    resource: "@TroiswaBackBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
+
 
 ##########################
 # By Eric - 07/2015      #
 # administration du site #
 ##########################
+
+troiswa_back_resource_user:
+    resource: "@TroiswaBackBundle/Resources/config/routing/user.yml"
+    prefix:   /user
 
 troiswa_back_resource_static:
     resource: "@TroiswaBackBundle/Resources/config/routing/statics.yml"
@@ -22,6 +27,19 @@ troiswa_back_resource_marque:
     resource: "@TroiswaBackBundle/Resources/config/routing/marque.yml"
     prefix: /marque
 
+#troiswa_back_resource_marque:
+#    resource: "@TroiswaBackBundle/Resources/config/routing/login.yml"
+#    prefix: /
+
+troiswa_back_login:
+    pattern:   /login
+    defaults:  { _controller: TroiswaBackBundle:Security:login }
+
+troiswa_back_login_check:
+    pattern:   /login_check
+
+troiswa_back_logout:
+    pattern:   /logout
 
 ####################
 # divers exercices #

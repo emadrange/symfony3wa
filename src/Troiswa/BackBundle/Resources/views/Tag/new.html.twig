@@ -1,0 +1,23 @@
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
+
+{% block title %}Ajouter un tag{% endblock %}
+
+{% block h1 %}Ajouter un tag{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('tag') }}"><i class="fa fa-key"></i> Lister les tags</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-key"></i> Ajouter un tag
+    </li>
+{% endblock %}
+
+{% block content -%}
+
+    <div class="well col-lg-8">
+        {{ form(form) }}
+    </div>
+
+{% endblock %}

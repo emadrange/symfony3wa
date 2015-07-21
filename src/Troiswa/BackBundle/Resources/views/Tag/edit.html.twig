@@ -1,0 +1,26 @@
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
+
+{% block title %}Editer un tag{% endblock %}
+
+{% block h1 %}Editer un tag{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('tag') }}"><i class="fa fa-key"></i> Lister les tags</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-key"></i> Editer un tag
+    </li>
+{% endblock %}
+
+{% block content -%}
+    <div class="well col-lg-8">
+        {{ form(edit_form) }}
+
+        {{ form_start(delete_form) }}
+        {{ form_row(delete_form.submit, {label: 'Supprimer', attr: {class: 'btn btn-danger'}}) }}
+        {{ form_end(delete_form) }}
+    </div>
+
+{% endblock %}

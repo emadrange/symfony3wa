@@ -64,7 +64,12 @@ class ProductType extends AbstractType
                 'choice_label' => 'titleAndDate',
                 'required' => true
             ])
-            ->add('cover', new ProductCoverType());
+            ->add('cover', new ProductCoverType())
+            ->add('tag', 'entity', [
+                'multiple' => true,
+                'class' => 'TroiswaBackBundle:Tag',
+                'property' => 'word'
+            ]);
     }
     
     /**

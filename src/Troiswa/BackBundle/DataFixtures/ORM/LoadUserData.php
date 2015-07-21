@@ -35,7 +35,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             ],
             2 => [
                 'username'  => 'marcel',
-                'password'  => 'Marcel_24',
+                'password'  => 'admin',
                 'firstname' => 'Marcel',
                 'lastname'  => 'Dupont',
                 'email'     => 'm.dupont@free.fr',

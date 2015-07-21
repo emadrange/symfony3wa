@@ -1,0 +1,45 @@
+{% extends 'TroiswaBackBundle::layout-admin.html.twig' %}
+
+{% block title %}Lister les tags{% endblock %}
+
+{% block h1 %}Lister les tags{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <i class="fa fa-key"></i> Lister les tags
+    </li>
+    <li class="active">
+        <i class="fa fa-key"></i> Lister les tags
+    </li>
+{% endblock %}
+
+{% block content -%}
+    <h1>Tag list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Word</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.word }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('tag_show', { 'id': entity.id }) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('tag_edit', { 'id': entity.id }) }}">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('tag_new') }}">Ajouter un tag
+            </a>
+
+    {% endblock %}

@@ -1,0 +1,9 @@
+troiswa_back_login:
+    pattern:   /login
+    defaults:  { _controller: TroiswaBackBundle:Security:login }
+
+troiswa_back_login_check:
+    pattern:   /login_check
+
+troiswa_back_logout:
+    pattern:   /logout

@@ -1,0 +1,14 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}An Error Occurred: {{ status_text }}{% endblock %}
+
+{% block h1 %}Oops! An Error Occurred{% endblock %}
+
+{% block content %}
+    <h2 class="alert alert-danger">The server returned a "{{ status_code }} {{ status_text }}".</h2>
+
+    <div class="well">
+        Something is broken. Please let us know what you were doing when this error occurred.
+        We will fix it as soon as possible. Sorry for any inconvenience caused.
+    </div>
+{% endblock %}

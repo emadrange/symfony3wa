@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Product;
 use Troiswa\BackBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class ProductController extends Controller {
@@ -24,6 +25,13 @@ class ProductController extends Controller {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request) {
+
+
+        // Interdit l'accès aux utilisateur si ils ne sont pas administrateur
+        /*if (!$this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas accéder à cette page');
+        }*/
 
         $product = new Product();
 
@@ -107,7 +115,7 @@ class ProductController extends Controller {
      *
      * @ParamConverter("product", options={
      *      "mapping": {"idproduct": "id"},
-     *      "repository_method" = "findOneProductWithBrandAndCategory",
+     *      "repository_method" = "findOneProductWithBrandAndCategoryAndTag",
      *      "map_method_signature" = true
      * })
      */
@@ -140,6 +148,10 @@ class ProductController extends Controller {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
+     *
+     * Cette page n'est accessible que par l'administrateur
+     *
+     *  Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Product $product, Request $request) {
 
@@ -285,5 +297,17 @@ class ProductController extends Controller {
         $em->flush();
 
         return $this->redirectToRoute("troiswa_back_product_list");
+    }
+
+    public function listProductByPriceAction() {
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $products = $em->getRepository('TroiswaBackBundle:Product')
+            ->getExpensiveProductsByLimit(3);
+
+        return $this->render('TroiswaBackBundle:Product:list-product-for-error.html.twig', [
+            "products" => $products
+        ]);
     }
 }

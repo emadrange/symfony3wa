@@ -1,0 +1,14 @@
+{% extends "TroiswaBackBundle::layout-admin.html.twig" %}
+
+{% block title %}Erreur 404{% endblock %}
+
+{% block h1 %}Erreur 404{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    Attention ! Le lien demandé n'existe pas... Vous pouvez <a href="{{ path('troiswa_back_contact') }}">nous contacter</a> ou utiliser le <a href="{{ path('troiswa_back_feedback') }}">formulaire feedback</a> pour nous remonter le problème.
+</div>
+<div class="well">
+    {{ render(controller('TroiswaBackBundle:Product:listProductByPrice')) }}
+</div>
+{% endblock %}

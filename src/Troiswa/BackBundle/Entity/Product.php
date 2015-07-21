@@ -140,6 +140,21 @@ class Product
     private $cover;
 
     /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="Troiswa\BackBundle\Entity\Tag")
+     * @ORM\JoinTable(name="product_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_product", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_tag", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $tag;
+
+    /**
      * Constructor
      * @author Eric
      */
@@ -458,5 +473,38 @@ class Product
     public function getCover()
     {
         return $this->cover;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Troiswa\BackBundle\Entity\Tag $tag
+     * @return Product
+     */
+    public function addTag(\Troiswa\BackBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Troiswa\BackBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Troiswa\BackBundle\Entity\Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 }

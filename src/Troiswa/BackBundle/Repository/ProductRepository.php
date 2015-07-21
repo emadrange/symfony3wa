@@ -57,13 +57,14 @@ class ProductRepository extends EntityRepository
      * @param type $id
      * @return mixed
      */
-    public function findOneProductWithBrandAndCategory($id) {
+    public function findOneProductWithBrandAndCategoryAndTag($id) {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, brand, cat, photo')
                 ->leftJoin('prod.marque', 'brand')
                 ->leftJoin('prod.cat', 'cat')
                 ->leftJoin('prod.cover', 'photo')
+                ->leftJoin('prod.tag', 'tag')
                 ->where('prod.id = :id')
                 ->setParameter('id', $id);
         
@@ -93,9 +94,7 @@ class ProductRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-
-
-        /**
+    /**
      * Retourne les produits par quandtité
      * @author Eric
      * @param null $quantity
@@ -195,6 +194,7 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les catégories dont les produits ont une marque donnée
+     * @author Eric
      * @param $brand
      * @return array
      */
@@ -206,6 +206,20 @@ class ProductRepository extends EntityRepository
             ->leftJoin("prod.cat", "cat")
             ->leftJoin("prod.marque", "ma")
             ->setParameter("brand", $brand);
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Retourne les n produits les plus cher
+     * @author Eric
+     * @return array
+     */
+    public function getExpensiveProductsByLimit($nb = 3) {
+
+        $query = $this->createQueryBuilder("prod")
+            ->orderBy('prod.price', 'DESC')
+            ->setMaxResults($nb);
 
         return $query->getQuery()->getResult();
     }

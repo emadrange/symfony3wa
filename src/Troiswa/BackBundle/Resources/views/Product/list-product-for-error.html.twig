@@ -1,0 +1,14 @@
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>Titre</th>
+            <th>Prix</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td><a href="{{ path('troiswa_back_product_show', {'idproduct': product.id}) }}">{{ product.title }}</a></td>
+            <td>{{ product.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
+use Troiswa\BackBundle\Entity\User;
 use Troiswa\BackBundle\Form\ContactType;
 
 
@@ -18,7 +19,18 @@ class MainController extends Controller
      */
     public function indexAction()
     {
-        //die("Ok!!!");
+        /*
+          Pour générer un mot de passe
+         $user = new User();
+
+        $factory = $this->get('security.encoder_factory');
+
+        $encoder = $factory->getEncoder($user);
+        $password = $encoder->encodePassword('admin', null);
+        echo $password;
+
+        die();*/
+
         //return new Response("Hello!!!");
 
         //dump($request->query->get("page", 1)); // récupération de paramêtre $_GET

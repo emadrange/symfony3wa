@@ -4,7 +4,7 @@
 ######################################
 
 troiswa_back_administration:
-    path: /admin
+    path: /
     defaults: { _controller:TroiswaBackBundle:Main:index }
 
 troiswa_back_contact:

@@ -54,6 +54,15 @@
                     {% set actif = "non" %}
                 {% endif %}
                 <li class="list-group-item">Actif : {{ actif }}</li>
+                <li class="list-group-item">Tags :
+                    <ul>
+                        {% if product.tag is defined %}
+                        {% for tag in product.tag %}
+                            <li>{{ tag.word }}</li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </li>
             </ul>
         </div>
         <div style="padding: 4px 8px;">
