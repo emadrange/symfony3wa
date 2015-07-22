@@ -4,6 +4,7 @@ namespace Troiswa\BackBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Troiswa\BackBundle\Validator\Antigrosmots;
 
 /**
  * Tag
@@ -31,6 +32,11 @@ class Tag
      *      max=50,
      *      maxMessage="Le mot est trop long, {{ limit }} caractères maximum"
      * )
+     * @Assert\Regex(
+     *      pattern = "/^\w+$/",
+     *      message = "Vous devez saisir un seul mot"
+     * )
+     * @Antigrosmots
      */
     private $word;
 
