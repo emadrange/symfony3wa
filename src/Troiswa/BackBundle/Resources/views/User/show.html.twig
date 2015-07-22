@@ -54,11 +54,30 @@
             </tbody>
         </table>
 
-        <ul>
-            {% for coupon in coupons %}
-            <li>{{ coupon.coupon.detail }}</li>
-            {% endfor %}
-        </ul>
+        <div class="col-lg-5">        
+            <div class="panel panel-green">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ses coupons</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% for coupon in coupons %}
+                        {% if coupon.used %}
+                            {% set used = "utilisé" %}
+                        {% else %}
+                            {% set used = "non-utilisé" %}
+                        {% endif %}
+                        <li class="list-group-item">
+                            {{ coupon.coupon.code ~ " - " ~ coupon.coupon.detail }} ({{ used }})
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <a class="btn btn-success" href="{{ path('troiswa_back_user_edit', { 'id': entity.id }) }}">Editer</a>
