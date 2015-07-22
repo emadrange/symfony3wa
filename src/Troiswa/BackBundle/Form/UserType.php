@@ -34,7 +34,7 @@ class UserType extends AbstractType
             ->add('phone', 'text', [
                 'label' => 'Téléphone'
             ])
-            ->add('username', 'text', [
+            ->add('pseudo', 'text', [
                 'label' => 'Identifiant'
             ])
             ->add('address', 'textarea', [

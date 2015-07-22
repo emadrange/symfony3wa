@@ -24,7 +24,6 @@
                 <th>Téléphone</th>
                 <th>Identifiant</th>
                 <th>Adresse</th>
-                <th>Mot de passe</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -39,7 +38,6 @@
                 <td>{{ entity.phone }}</td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.address }}</td>
-                <td>{{ entity.password }}</td>
                 <td>
                     <a class="btn btn-sm btn-info" href="{{ path('troiswa_back_user_show', { 'id': entity.id }) }}">Voir</a>
                     <a class="btn btn-sm btn-warning" href="{{ path('troiswa_back_user_edit', { 'id': entity.id }) }}">Editer</a>

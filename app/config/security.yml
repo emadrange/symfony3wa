@@ -7,13 +7,17 @@ security:
         #    encode_as_base64: false
         #    iterations: 1
 
-        Troiswa\BackBundle\Entity\User: plaintext
-            #algorithm: bcrypt
-            #cost: 15
+        Troiswa\BackBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 15
+            iterations: 1
+            encode_as_base64: true
 
-    #role_hierarchy:
-    #    ROLE_SUPER_ADMIN: [ROLE_ADMIN]
-    #    ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_USER: [ROLE_ALLOWED_TO_SWITCH]
+
 
     providers:
         in_memory:
@@ -24,18 +28,28 @@ security:
                   roles: ROLE_ADMIN
                 toto: { password: bidule, roles: ROLE_USER }
                 #toto: { password: 582fc805980c8508c75c6b162671552d6a468293d4070c03f82b849169c5e88ab1949558f938b98f212f5c53cfbf6a8c5d2401c69e63b9cfb0a6dcc92aae3ec7, roles: ROLE_USER }
+
         provider_back:
-            entity : { class: TroiswaBackBundle:User, property: username }
+            #entity : { class: TroiswaBackBundle:User, property: pseudo }
+            entity : { class: TroiswaBackBundle:User }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
+        login_firewall:
+            pattern: ^/admin/login$
+            anonymous: true
+
+        #register_firewall:
+        #    pattern: ^/admin/user/register$
+        #    anonymous: true
+
         administration:
             # toutes les routes commençant par admin
             pattern: ^/admin
-            anonymous: true
+            anonymous: false
             # Ouvre la boite de dialogue basic pour se connecter
             #http_basic:
                 #realm: "Attention, zone sécurisée"
@@ -45,11 +59,21 @@ security:
             form_login:
                 check_path: troiswa_back_login_check
                 login_path: troiswa_back_login
+                default_target_path: troiswa_back_administration
+                always_use_default_target_path: true
+
+            logout:
+                path: troiswa_back_logout
+                target: /admin
 
             provider: provider_back
 
             # Pour permettre de switcher un utilisateur
-            switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+            # ?_switch_user=toto changer d'utilisateur
+            # ?_switch_user=_exit revenir sur mon utilisateur
+            switch_user: { role: ROLE_USER }
+            #switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+
 
     #access_control:
         # seul l'administrateur à accès aux pages produit

@@ -25,7 +25,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $users = [
             1 => [
                 'username'  => 'roberto.domingo',
-                'password'  => 'Roberto@1932',
+                // password = bidule
+                'password'  => '$2y$15$jel8qdoeDV4SAaw9Cz5ojeH5130LUlrXgQWfjwRkk5e882wG3iAWC',
                 'firstname' => 'Roberto',
                 'lastname'  => 'Domingo',
                 'email'     => 'roberto.domingo@gmail.com',
@@ -35,7 +36,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             ],
             2 => [
                 'username'  => 'marcel',
-                'password'  => 'admin',
+                // password = bidule
+                'password'  => '$2y$15$jel8qdoeDV4SAaw9Cz5ojeH5130LUlrXgQWfjwRkk5e882wG3iAWC',
                 'firstname' => 'Marcel',
                 'lastname'  => 'Dupont',
                 'email'     => 'm.dupont@free.fr',
@@ -45,7 +47,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             ],
             3 => [
                 'username'  => 'jean.maurice',
-                'password'  => 'Jean@Maurice12',
+                // password = bidule
+                'password'  => '$2y$15$jel8qdoeDV4SAaw9Cz5ojeH5130LUlrXgQWfjwRkk5e882wG3iAWC',
                 'firstname' => 'Jean',
                 'lastname'  => 'Maurice',
                 'email'     => 'jean.maurice@orange.fr',
@@ -57,7 +60,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         
         foreach ($users as $user) {
             $newUser = new User();
-            $newUser->setUsername($user['username']);
+            $newUser->setPseudo($user['username']);
             $newUser->setPassword($user['password']);
             $newUser->setFirstname($user['firstname']);
             $newUser->setLastname($user['lastname']);

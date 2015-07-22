@@ -105,6 +105,10 @@ class UserController extends Controller
 
         $entity = $em->getRepository('TroiswaBackBundle:User')->find($id);
 
+        $coupons = $em->getRepository('TroiswaBackBundle:UserCoupon')
+            ->getCouponsFromUser($id);
+
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
@@ -114,6 +118,7 @@ class UserController extends Controller
         return $this->render('TroiswaBackBundle:User:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'coupons'     => $coupons
         ));
     }
 
@@ -238,5 +243,36 @@ class UserController extends Controller
                 ])
             ->getForm()
         ;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registerAction(Request $request)
+    {
+        $newUser = new User();
+        $formRegister = $this->createForm(new UserType(), $newUser, [
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
+        ])
+        ->add('submit', 'submit', [
+            'label' => 'Créer le compte'
+        ]);
+
+        $formRegister->handleRequest($request);
+
+        if ($formRegister->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->flush();
+
+            return $this->redirectToRoute('troiswa_back_login');
+        }
+
+        return $this->render("TroiswaBackBundle:User:register.html.twig", [
+            'form_register' => $formRegister->createView()
+        ]);
     }
 }

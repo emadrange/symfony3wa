@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block content -%}
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <tbody>
@@ -50,12 +51,14 @@
                     <th>Address</th>
                     <td>{{ entity.address }}</td>
                 </tr>
-                <tr>
-                    <th>Password</th>
-                    <td>{{ entity.password }}</td>
-                </tr>
             </tbody>
         </table>
+
+        <ul>
+            {% for coupon in coupons %}
+            <li>{{ coupon.coupon.detail }}</li>
+            {% endfor %}
+        </ul>
     </div>
     <div class="row">
         <a class="btn btn-success" href="{{ path('troiswa_back_user_edit', { 'id': entity.id }) }}">Editer</a>
