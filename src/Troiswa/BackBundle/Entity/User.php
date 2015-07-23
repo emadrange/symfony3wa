@@ -108,7 +108,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var
      *
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Roles", inversedBy="users")
      */
     private $role;
 

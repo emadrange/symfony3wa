@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * Role
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\RoleRepository")
+ * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\RolesRepository")
  */
-class Role implements RoleInterface
+class Roles implements RoleInterface
 {
     /**
      * @var integer
