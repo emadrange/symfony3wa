@@ -223,4 +223,9 @@ class ProductRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function findImagesProduct($limit)
+    {
+        return;
+    }
 }

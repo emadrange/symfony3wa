@@ -81,9 +81,16 @@
     </div>
     <div class="row">
         <a class="btn btn-success" href="{{ path('troiswa_back_user_edit', { 'id': entity.id }) }}">Editer</a>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         {{ form_start(delete_form) }}
         {{ form_row(delete_form.submit, {attr: {class: 'btn btn-danger'}}) }}
         {{ form_end(delete_form) }}
+        {% endif %}
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/remove.js') }}" type="text/javascript"></script>
 {% endblock %}

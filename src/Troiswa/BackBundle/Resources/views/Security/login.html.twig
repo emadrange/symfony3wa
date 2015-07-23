@@ -9,6 +9,13 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="_password" />
 
+    <label>
+        <input type="checkbox" name="_remember_me">
+        Rester connecté
+    </label>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
     <button type="submit">login</button>
 </form>
 

@@ -16,7 +16,7 @@ $(document).ready(function(){
         }
     })*/
 
-    $(".table").on("click", ".btn-danger", function(event) {
+    $("#page-wrapper").on("click", ".btn-danger", function(event) {
         var stop = confirm("Etes-vous certain de le supprimer ?");
         if (stop == false) {
             event.preventDefault();

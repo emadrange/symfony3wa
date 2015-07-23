@@ -2,6 +2,7 @@
 
 namespace Troiswa\BackBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,7 +18,7 @@ use Troiswa\BackBundle\Validator\Password;
  * @ORM\Entity(repositoryClass="Troiswa\BackBundle\Repository\UserRepository")
  *
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -92,6 +93,9 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @var
+     */
     private $username;
 
     /**
@@ -100,6 +104,13 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="UserCoupon", mappedBy="user")
      */
     private $coupon;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     */
+    private $role;
 
 
     /**
@@ -334,7 +345,8 @@ class User implements UserInterface
     public function getRoles()
     {
         // TODO: Implement getRoles() method.
-        return ['ROLE_USER'];
+        //return ['ROLE_ADMIN'];
+        return $this->role->toArray();
     }
 
     /**
@@ -388,6 +400,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->coupon = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->role = new ArrayCollection();
     }
 
     /**
@@ -421,5 +434,65 @@ class User implements UserInterface
     public function getCoupon()
     {
         return $this->coupon;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \Troiswa\BackBundle\Entity\Role $role
+     * @return User
+     */
+    public function addRole(\Troiswa\BackBundle\Entity\Role $role)
+    {
+        $this->role[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \Troiswa\BackBundle\Entity\Role $role
+     */
+    public function removeRole(\Troiswa\BackBundle\Entity\Role $role)
+    {
+        $this->role->removeElement($role);
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+        return serialize([$this->id]);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     */
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+        list ($this->id) = unserialize($serialized);
     }
 }

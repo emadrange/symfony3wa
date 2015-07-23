@@ -4,8 +4,9 @@ namespace Troiswa\BackBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Troiswa\BackBundle\Entity\User;
+use Troiswa\BackBundle\Form\UserEditType;
 use Troiswa\BackBundle\Form\UserType;
 
 /**
@@ -18,6 +19,7 @@ class UserController extends Controller
     /**
      * Lists all User entities.
      *
+     * @Security("has_role('ROLE_CLIENT')");
      */
     public function indexAction()
     {
@@ -32,6 +34,7 @@ class UserController extends Controller
     /**
      * Creates a new User entity.
      *
+     * @Security("has_role('ROLE_COMMERCIAL')");
      */
     public function createAction(Request $request)
     {
@@ -41,6 +44,17 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            // Hachage du mot de passe
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($entity);
+            $newPassword = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+            $entity->setPassword($newPassword);
+
+            // Affectation du role
+            $role = $em->getRepository('TroiswaBackBundle:Role')->findOneByName('client');
+            $entity->addRole($role);
+
             $em->persist($entity);
             $em->flush();
 
@@ -83,6 +97,7 @@ class UserController extends Controller
     /**
      * Displays a form to create a new User entity.
      *
+     * @Security("has_role('ROLE_COMMERCIAL')");
      */
     public function newAction()
     {
@@ -98,6 +113,7 @@ class UserController extends Controller
     /**
      * Finds and displays a User entity.
      *
+     * @Security("has_role('ROLE_CLIENT')");
      */
     public function showAction($id)
     {
@@ -125,6 +141,7 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
+     * @Security("has_role('ROLE_ADMIN')");
      */
     public function editAction($id)
     {
@@ -155,7 +172,7 @@ class UserController extends Controller
     */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(new UserEditType(), $entity, array(
             'action' => $this->generateUrl('troiswa_back_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
             'attr' => [
@@ -175,6 +192,7 @@ class UserController extends Controller
     /**
      * Edits an existing User entity.
      *
+     * @Security("has_role('ROLE_ADMIN')");
      */
     public function updateAction(Request $request, $id)
     {
@@ -191,6 +209,8 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('troiswa_back_user_edit', array('id' => $id)));
@@ -202,9 +222,11 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a User entity.
      *
+     * @Security("has_role('ROLE_SUPER_ADMIN')");
      */
     public function deleteAction(Request $request, $id)
     {

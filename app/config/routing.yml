@@ -1,3 +1,7 @@
+troiswa_front:
+    resource: "@TroiswaFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
 troiswa_back:
     resource: "@TroiswaBackBundle/Resources/config/routing.yml"
     prefix:   /admin

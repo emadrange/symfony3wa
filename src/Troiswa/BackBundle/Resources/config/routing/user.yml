@@ -30,5 +30,5 @@ troiswa_back_user_delete:
     methods:  [POST, DELETE]
 
 troiswa_back_user_register:
-    pattern:  /register
+    path:     /register
     defaults: { _controller: TroiswaBackBundle:User:register }

@@ -94,10 +94,22 @@ class User implements UserInterface
 
     /**
      * @var
+     */
+    private $username;
+
+    /**
+     * @var
      *
      * @ORM\OneToMany(targetEntity="UserCoupon", mappedBy="user")
      */
     private $coupon;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="Role")
+     */
+    private $role;
 
 
     /**
@@ -332,7 +344,9 @@ class User implements UserInterface
     public function getRoles()
     {
         // TODO: Implement getRoles() method.
-        return ['ROLE_USER'];
+        //return ['ROLE_USER'];
+
+        return $this->role->toArray();
     }
 
     /**
@@ -379,5 +393,78 @@ class User implements UserInterface
     public function getPseudo()
     {
         return $this->pseudo;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->coupon = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add coupon
+     *
+     * @param \Troiswa\BackBundle\Entity\UserCoupon $coupon
+     * @return User
+     */
+    public function addCoupon(\Troiswa\BackBundle\Entity\UserCoupon $coupon)
+    {
+        $this->coupon[] = $coupon;
+
+        return $this;
+    }
+
+    /**
+     * Remove coupon
+     *
+     * @param \Troiswa\BackBundle\Entity\UserCoupon $coupon
+     */
+    public function removeCoupon(\Troiswa\BackBundle\Entity\UserCoupon $coupon)
+    {
+        $this->coupon->removeElement($coupon);
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \Troiswa\BackBundle\Entity\Role $role
+     * @return User
+     */
+    public function addRole(\Troiswa\BackBundle\Entity\Role $role)
+    {
+        $this->role[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \Troiswa\BackBundle\Entity\Role $role
+     */
+    public function removeRole(\Troiswa\BackBundle\Entity\Role $role)
+    {
+        $this->role->removeElement($role);
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }
