@@ -224,8 +224,21 @@ class ProductRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function findImagesProduct($limit)
+    /**
+     * Retourne les dernières images les plus récentes
+     * @author Eric
+     * @param type $limit
+     * @return type
+     */
+    public function findRecentImagesProductByLimit($limit)
     {
-        return;
+        $query = $this->createQueryBuilder('prod')
+                ->leftJoin('prod.cover', 'cover')
+                ->where('cover.name IS NOT NULL')
+                ->where('prod.quantity > 0')
+                ->orderBy('prod.created', 'DESC')
+                ->setMaxResults($limit);
+        
+        return $query->getQuery()->getResult();
     }
 }

@@ -11,8 +11,15 @@ class MainController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        
+        // images produit pour le slider
+        $imageProducts = $em->getRepository('TroiswaBackBundle:Product')
+                ->findRecentImagesProductByLimit(3);
 
-        return $this->render('TroiswaFrontBundle:Main:index.html.twig');
+        return $this->render('TroiswaFrontBundle:Main:index.html.twig', [
+            'imageProducts' => $imageProducts
+        ]);
     }
 
 }
