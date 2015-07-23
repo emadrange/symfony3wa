@@ -24,6 +24,7 @@ class TroiswaUserCreateCommand extends ContainerAwareCommand {
             ->setDescription("Création d'un utilisateur avec mot de passe crypté")
             ->addArgument('pseudo', InputArgument::REQUIRED, 'Identifiant')
             ->addArgument('password', InputArgument::REQUIRED, 'Mot de passe')
+            ->addArgument('email', InputArgument::REQUIRED, 'mail')
             ->addOption('existe', null, InputOption::VALUE_NONE, 'Metre à jour un utilisateur');
     }
 
@@ -33,7 +34,7 @@ class TroiswaUserCreateCommand extends ContainerAwareCommand {
         $factory = $this->getContainer()->get('security.encoder_factory');
 
         $style = new OutputFormatterStyle('yellow', 'red', ['bold']);
-        $output->getFormatter()->setStyle('fire', $style);
+        $output->getFormatter()->setStyle('alert', $style);
 
         $option = $input->getOption('existe');
 
@@ -47,31 +48,43 @@ class TroiswaUserCreateCommand extends ContainerAwareCommand {
                 $newPassword = $encoder->encodePassword($input->getArgument('password'), $user->getSalt());
 
                 $user->setPassword($newPassword);
+                $user->setEmail($input->getArgument('email'));
                 $em->persist($user);
                 $em->flush();
                 $output->writeln("<info>L'utilisateur " . $input->getArgument('pseudo') . " a bien été mis à jour</info>");
             } else {
-                $output->writeln("<fire>L'utilisateur " . $input->getArgument('pseudo') . " n'existe pas</fire>");
+                $output->writeln("<alert>L'utilisateur " . $input->getArgument('pseudo') . " n'existe pas</alert>");
             }
 
         } else {
-            $user = new User();
 
-            $encoder = $factory->getEncoder($user);
-            $newPassword = $encoder->encodePassword($input->getArgument('password'), $user->getSalt());
+            $userExist = $em->getRepository('TroiswaBackBundle:User')
+                ->findOneBy(['pseudo' => $input->getArgument('pseudo')]);
 
-            $user->setPseudo($input->getArgument('pseudo'));
-            $user->setPassword($newPassword);
-            $user->setAddress('bla');
-            $user->setBirthday(new \DateTime('now'));
-            $user->setEmail('mad@online.net');
-            $user->setFirstname('Jean');
-            $user->setLastname('Bon');
-            $user->setPhone('+33654478951');
-            $em->persist($user);
-            $em->flush();
+            if (!$userExist)
+            {
+                $user = new User();
 
-            $output->writeln("<info>L'utilisateur a bien été créé</info>");
+                $encoder = $factory->getEncoder($user);
+                $newPassword = $encoder->encodePassword($input->getArgument('password'), $user->getSalt());
+
+                $user->setPseudo($input->getArgument('pseudo'));
+                $user->setPassword($newPassword);
+                $user->setAddress('bla');
+                $user->setBirthday(new \DateTime('now'));
+                $user->setEmail($input->getArgument('email'));
+                $user->setFirstname('Jean');
+                $user->setLastname('Bon');
+                $user->setPhone('+33654478951');
+                $em->persist($user);
+                $em->flush();
+
+                $output->writeln("<info>L'utilisateur a bien été créé</info>");
+            }
+            else
+            {
+                $output->writeln("<alert>L'utilisateur " . $input->getArgument('pseudo') . " existe déjà</alert>");
+            }
         }
     }
 }
