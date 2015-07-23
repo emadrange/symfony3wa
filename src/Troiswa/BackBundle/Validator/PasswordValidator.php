@@ -16,6 +16,7 @@ class PasswordValidator extends ConstraintValidator {
 
     /**
      * Checks if the passed value is valid.
+     * @author Eric
      *
      * @param mixed $value The value that should be validated
      * @param Constraint $constraint The constraint for the validation
@@ -27,7 +28,11 @@ class PasswordValidator extends ConstraintValidator {
         if (strlen($value) < $constraint->min) {
             $this->context->addViolation($constraint->minMessage);
         }
-        elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@_-])[A-Za-z\d$@_-]{8,}$/', $value)) {
+        /*
+         * RegEx pour mot de passe infernal
+         * /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@_-])[A-Za-z\d$@_-]{8,}$/
+         */
+        elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*)[A-Za-z\d]{8,}$/', $value)) {
             $this->context->addViolation($constraint->message);
         }
 

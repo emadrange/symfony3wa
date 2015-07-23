@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Class Password
+ * @author Eric
  * @package Troiswa\BackBundle\Validator
  * @Annotation
  */

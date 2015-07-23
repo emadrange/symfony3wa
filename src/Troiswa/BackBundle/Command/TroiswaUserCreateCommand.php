@@ -18,6 +18,10 @@ use Troiswa\BackBundle\Entity\User;
 
 class TroiswaUserCreateCommand extends ContainerAwareCommand {
 
+    /**
+     * Configuration de la commande
+     * @author Eric
+     */
     protected function configure() {
 
         $this->setName('troiswa:user:create')
@@ -28,6 +32,13 @@ class TroiswaUserCreateCommand extends ContainerAwareCommand {
             ->addOption('existe', null, InputOption::VALUE_NONE, 'Metre à jour un utilisateur');
     }
 
+    /**
+     * Création d'un utilisateur ou mise à jour d'un utilisateur existant
+     * @author Eric
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
