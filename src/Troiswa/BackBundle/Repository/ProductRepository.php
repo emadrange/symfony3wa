@@ -56,10 +56,10 @@ class ProductRepository extends EntityRepository
      * Retourne un produit avec tous ses éléments
      * @author Eric
      *
-     * @param type $id
+     * @param array $dataUrl
      * @return mixed
      */
-    public function findOneProductWithAllElement($id) {
+    public function findOneProductWithAllElement($dataUrl) {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, brand, cat, photo, tag')
@@ -68,7 +68,7 @@ class ProductRepository extends EntityRepository
                 ->leftJoin('prod.cover', 'photo')
                 ->leftJoin('prod.tag', 'tag')
                 ->where('prod.id = :id')
-                ->setParameter('id', $id);
+                ->setParameter('id', $dataUrl['id']);
         
         return $query->getQuery()->getSingleResult();
         
@@ -76,7 +76,7 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les produits avec leur marque et leur catégorie
-     * @param boolean $isPaginable
+     * @param boolean $isPaginable Pour la pagination
      * @return array
      */
     public function findAllProductWithBrandAndCategory($isPaginable) {

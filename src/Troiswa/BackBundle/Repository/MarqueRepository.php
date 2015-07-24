@@ -34,16 +34,16 @@ class MarqueRepository extends EntityRepository
     /**
      * Retourne la marque avec son logo
      * @author Eric
-     * @param integer $id
+     * @param array $dataUrl
      * @return mixed
      */
-    public function findOneBrandWithLogoById($id) {
-        
+    public function findOneBrandWithLogoById($dataUrl) {
+
         $query = $this->createQueryBuilder('brand')
                 ->select('brand, logo')
                 ->leftJoin('brand.logo', 'logo')
                 ->where('brand.id = :id')
-                ->setParameter('id', $id);
+                ->setParameter('id', $dataUrl['id']);
         
         return $query->getQuery()->getSingleResult();
     }

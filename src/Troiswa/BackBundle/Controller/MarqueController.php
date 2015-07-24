@@ -88,8 +88,7 @@ class MarqueController extends Controller {
      *
      * @ParamConverter("marque", options={
      *      "mapping": {"idmarque": "id"},
-     *      "repository_method" = "findOneBrandWithLogoById",
-     *      "map_method_signature" = true
+     *      "repository_method" = "findOneBrandWithLogoById"
      * })
      */
     public function showAction(Marque $marque) {
