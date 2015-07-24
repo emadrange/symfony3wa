@@ -91,10 +91,11 @@ class CategoryRepository extends EntityRepository {
     public function getCategoryWithProductsById($dataUrl) {
 
         $query = $this->createQueryBuilder('cat')
-            ->select('cat, prod')
+            ->select('cat, prod, cover')
             ->leftJoin('cat.products', 'prod')
+            ->leftJoin('prod.cover', 'cover')
             ->where('cat.id = :id')
-            ->orderBy('cat.titre', 'ASC')
+            ->orderBy('prod.title', 'ASC')
             ->setParameter('id', $dataUrl['id']);
 
         return $query->getQuery()->getSingleResult();

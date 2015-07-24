@@ -1,0 +1,5 @@
+troiswa_front_category_show:
+    path: /show/{idcategory}
+    defaults: { _controller: 'TroiswaFrontBundle:Category:show' }
+    requirements:
+        idcategory: \d+

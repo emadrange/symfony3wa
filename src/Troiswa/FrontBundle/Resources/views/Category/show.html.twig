@@ -1,0 +1,41 @@
+{% extends 'TroiswaFrontBundle::layout-front.html.twig' %}
+
+{% block title %}{{ category.titre }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-9">
+
+
+        <header class="jumbotron hero-spacer">
+            <h1>{{ category.titre }}</h1>
+            <p>{{ category.description }}</p>
+        </header>
+
+
+        <div class="row text-center">
+
+            {% for product in category.products %}
+
+                <div class="col-md-4 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}">
+                            <img src="{{ asset(product.cover.getWebPath('thumb-small')) }}" alt="{{ product.cover.alt }}">
+                        </a>
+                        <div class="caption">
+                            <h4>
+                                <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}">{{ product.title }}</a>
+                            </h4>
+
+                            <p>{{ product.description }}</p>
+                            <p>
+                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}" class="btn btn-default">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

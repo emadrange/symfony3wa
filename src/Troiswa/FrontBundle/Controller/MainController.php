@@ -17,8 +17,13 @@ class MainController extends Controller
         $imageProducts = $em->getRepository('TroiswaBackBundle:Product')
                 ->findRecentImagesProductByLimit(3);
 
+        // Produits avec le plus de tag
+        $productsByGreatestTag = $em->getRepository('TroiswaBackBundle:Product')
+                ->findProductsByGreatestTag(6);
+
         return $this->render('TroiswaFrontBundle:Main:index.html.twig', [
-            'imageProducts' => $imageProducts
+            'imageProducts' => $imageProducts,
+            "productsByGreatestTag" => $productsByGreatestTag
         ]);
     }
 

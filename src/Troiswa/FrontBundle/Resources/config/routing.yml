@@ -1,3 +1,15 @@
+# statics
+
 troiswa_front_homepage:
     path:     /
     defaults: { _controller: TroiswaFrontBundle:Main:index }
+
+# dynamics
+
+troiswa_front_resource_product:
+    resource: "@TroiswaFrontBundle/Resources/config/routing/product.yml"
+    prefix: /product
+
+troiswa_front_resource_category:
+    resource: "@TroiswaFrontBundle/Resources/config/routing/category.yml"
+    prefix: /category

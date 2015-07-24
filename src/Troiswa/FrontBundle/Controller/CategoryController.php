@@ -9,6 +9,9 @@
 namespace Troiswa\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Troiswa\BackBundle\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CategoryController extends Controller
 {
@@ -22,10 +25,27 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $categorys = $em->getRepository("TroiswaBackBundle:Category")
-            ->findBy([], ["titre" => "ASC"]);
+            ->findBy([], ["position" => "ASC"]);
 
         return $this->render('TroiswaFrontBundle:Category:category-list.html.twig', [
             'categorys' => $categorys
+        ]);
+    }
+
+    /**
+     * @param Category $category
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @ParamConverter("category", options={
+     *      "mapping": {"idcategory": "id"},
+     *      "repository_method" = "getCategoryWithProductsById"
+     * })
+     */
+    public function showAction(Category $category, Request $request)
+    {
+
+        return $this->render('TroiswaFrontBundle:Category:show.html.twig', [
+            'category' => $category
         ]);
     }
 }

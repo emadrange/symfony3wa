@@ -80,7 +80,9 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @ParamConverter("category", options={"mapping": {"idcategory": "id"}, "repository_method": "getCategoryWithProductsById"})
+     * @ParamConverter("category", options={
+     *      "mapping": {"idcategory": "id"},
+     *      "repository_method": "getCategoryWithProductsById"})
      */
     public function showAction(Category $category, Request $request) {
 

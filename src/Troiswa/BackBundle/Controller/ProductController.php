@@ -115,7 +115,7 @@ class ProductController extends Controller {
      *
      * @ParamConverter("product", options={
      *      "mapping": {"idproduct": "id"},
-     *      "repository_method" = "findOneProductWithBrandAndCategoryAndTag",
+     *      "repository_method" = "findOneProductWithAllElement",
      *      "map_method_signature" = true
      * })
      */

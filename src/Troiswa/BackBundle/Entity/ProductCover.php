@@ -3,8 +3,10 @@
 namespace Troiswa\BackBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Imagine\Image\ImagineInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * ProductCover
@@ -43,8 +45,8 @@ class ProductCover
      *
      * @Assert\NotBlank(message="Il faut une photo ou une image")
      * @Assert\Image(
-     *      maxWidth = 400,
-     *      maxHeight = 400,
+     *      maxWidth = 800,
+     *      maxHeight = 600,
      *      maxWidthMessage = "Largeur de l'image trop grande",
      *      maxHeightMessage = "Hauteur de l'image trop grande",
      *      mimeTypes = {"image/jpeg", "image/gif", "image/png"},
@@ -62,7 +64,8 @@ class ProductCover
     private $thumbnails = [
         "thumb-small"  => [100, 50],
         "thumb-medium" => [150, 100],
-        "thumb-large"  => [300, 160]
+        "thumb-large"  => [300, 160],
+        "thumb-slider" => [800, 300]
     ];
 
     private $oldFichier;
@@ -173,11 +176,19 @@ class ProductCover
 
         if ($this->oldFichier) {
             // suppression de l'ancienne image
-            unlink($this->getUploadRootDir() . '/' . $this->oldFichier);
+            if (file_exists($this->getUploadRootDir() . '/' . $this->oldFichier))
+            {
+                unlink($this->getUploadRootDir() . '/' . $this->oldFichier);
+            }
+
 
             // suppression des anciens thumbnails
             foreach ($this->thumbnails as $key => $thumbnail) {
-                unlink($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier);
+                if (file_exists($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier))
+                {
+                    unlink($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier);
+                }
+
             }
         }
 
@@ -211,7 +222,7 @@ class ProductCover
         $imagineOpen = $imagine->open($this->getAbsolutePath());
 
         foreach ($this->thumbnails as $key => $thumbnail) {
-            $imagineOpen->thumbnail(new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]))
+            $imagineOpen->thumbnail(new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]), \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND)
                 ->save($this->getUploadRootDir() . '/' . $key . '-' . $this->name);
         }
     }

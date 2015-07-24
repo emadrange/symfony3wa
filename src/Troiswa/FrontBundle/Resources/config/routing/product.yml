@@ -1,0 +1,15 @@
+troiswa_front_product_show:
+    path: /show/{idproduct}
+    defaults: { _controller: TroiswaFrontBundle:Product:show }
+    requirements:
+        idproduct: \d+
+
+troiswa_front_product_cartadd:
+    path: /cart/add/{idproduct}
+    defaults: { _controller: TroiswaFrontBundle:Product:cartAdd }
+    requirements:
+        idproduct: \d+
+
+troiswa_front_cart:
+    path: /cart
+    defaults: { _controller: TroiswaFrontBundle:Product:cart }

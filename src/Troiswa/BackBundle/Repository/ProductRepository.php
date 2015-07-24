@@ -53,14 +53,16 @@ class ProductRepository extends EntityRepository
     }
     
     /**
-     * 
+     * Retourne un produit avec tous ses éléments
+     * @author Eric
+     *
      * @param type $id
      * @return mixed
      */
-    public function findOneProductWithBrandAndCategoryAndTag($id) {
+    public function findOneProductWithAllElement($id) {
         
         $query = $this->createQueryBuilder('prod')
-                ->select('prod, brand, cat, photo')
+                ->select('prod, brand, cat, photo, tag')
                 ->leftJoin('prod.marque', 'brand')
                 ->leftJoin('prod.cat', 'cat')
                 ->leftJoin('prod.cover', 'photo')
@@ -227,18 +229,59 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les dernières images les plus récentes
      * @author Eric
-     * @param type $limit
+     *
+     * @param integer $limit
      * @return type
      */
-    public function findRecentImagesProductByLimit($limit)
+    public function findRecentImagesProductByLimit($limit = 3)
     {
         $query = $this->createQueryBuilder('prod')
                 ->leftJoin('prod.cover', 'cover')
                 ->where('cover.name IS NOT NULL')
-                ->where('prod.quantity > 0')
+                ->andWhere('prod.quantity > 0')
+                ->andWhere('prod.active = :state')
                 ->orderBy('prod.created', 'DESC')
-                ->setMaxResults($limit);
+                ->setMaxResults($limit)
+                ->setParameter('state', true);
         
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Retourne une liste de produits avec le plus de tag
+     * @author Eric
+     *
+     * @param integer $limit
+     * @return array
+     */
+    public function findProductsByGreatestTag($limit = 5)
+    {
+        $query = $this->createQueryBuilder('prod')
+            ->select('COUNT(tag.id) AS HIDDEN nbtag, prod')
+            //->select('COUNT(tag.id) AS nbtag, prod.id')
+            //->addSelect('prod.title, prod.price, prod.description')
+            //->addSelect('cover.name, cover.alt')
+            ->leftJoin('prod.tag', 'tag')
+            ->leftJoin('prod.cover', 'cover')
+            ->groupBy('prod.id')
+            ->orderBy('nbtag', 'DESC')
+            ->setMaxResults($limit);
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param string $listId
+     * @return array
+     */
+    public function findProductsByListId($listId)
+    {
+        $query = $this->createQueryBuilder('prod')
+            ->leftJoin('prod.cover', 'cover')
+            ->where('prod.id IN (:listid)')
+            ->setParameter('listid', $listId);
+
+        return $query->getQuery()->getResult();
+
     }
 }
