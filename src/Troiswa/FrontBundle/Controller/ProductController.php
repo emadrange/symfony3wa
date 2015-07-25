@@ -18,8 +18,11 @@ class ProductController extends Controller
 {
 
     /**
+     * Visualise un produit
+     * @author Eric
+     * 
      * @param Product $product
-     *
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @ParamConverter("product", options={
      *      "mapping": {"idproduct": "id"},
@@ -35,21 +38,22 @@ class ProductController extends Controller
 
     /**
      * Gestion de l'ajout de produit avec leur quantité dans le caddie
-     *
      * @author Eric
+     * 
      * @param Product $product
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @ParamConverter("product", options={"mapping": {"idproduct": "id"}})
      */
-    public function cartAddAction(Product $product, Request $request){
+    public function cartAddAction(Product $product, Request $request)
+    {
 
-        $qty = $request->request->getInt('qty');
+        $quantity = $request->request->getInt('quantity');
 
-        if ($qty > 0)
+        if ($quantity > 0)
         {
             $session = $request->getSession();
-            $session->remove('cart');
+            //$session->remove('cart');
 
             if ($session->get('cart'))
             {
@@ -62,18 +66,15 @@ class ProductController extends Controller
 
             if (array_key_exists($product->getId(), $cart))
             {
-                $qty = $qty +  $cart[$product->getId()]['quantity'];
+                $quantity = $quantity +  $cart[$product->getId()]['quantity'];
             }
 
-            $cart[$product->getId()] = ['quantity' => $qty];
+            $cart[$product->getId()] = ['quantity' => $quantity];
 
             $session->set('cart', json_encode($cart));
 
         }
-
-        return $this->redirectToRoute('troiswa_front_cart');
-
-
+        
         //dump($product);
         //dump($request->request->get('quantity'));
         //die();

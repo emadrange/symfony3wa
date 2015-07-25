@@ -14,10 +14,16 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Troiswa\BackBundle\Entity\Tag;
 
-class LoadTagData extends AbstractFixture implements OrderedFixtureInterface {
-    
-
-    public function load(ObjectManager $manager) {
+class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
+{
+    /**
+     * Fixtures tag
+     * @author Eric
+     * 
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager)
+    {
         $tags = [
             0 => ['tag' => 'train'],
             1 => ['tag' => 'fer'],
@@ -26,7 +32,8 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface {
             4 => ['tag' => 'loco']
         ];
         
-        foreach ($tags as $key => $tag) {
+        foreach ($tags as $key => $tag)
+        {
             $word = new Tag();
             $word->setWord($tag['tag']);
             

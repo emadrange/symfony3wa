@@ -7,7 +7,6 @@ use Imagine\Image\ImagineInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * ProductCover
  *
@@ -59,6 +58,8 @@ class ProductCover
     private $fichier;
 
     /**
+     * Table des différentes tailles de vignette
+     * @author Eric
      * @var array
      */
     private $thumbnails = [
@@ -155,26 +156,32 @@ class ProductCover
     }
 
     /**
+     * Set le nom de l'image
+     * @author Eric
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUpload() {
+    public function preUpload()
+    {
         $this->name = str_replace(' ', '-', $this->alt) . uniqid() . "." . $this->fichier->guessExtension();
     }
 
     /**
      * Charge l'image et initialise le nom avec la valeur du alt
-     *
+     * @author Eric
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload() {
+    public function upload()
+    {
 
-        if (null == $this->fichier) {
+        if (null == $this->fichier)
+        {
             return;
         }
 
-        if ($this->oldFichier) {
+        if ($this->oldFichier)
+        {
             // suppression de l'ancienne image
             if (file_exists($this->getUploadRootDir() . '/' . $this->oldFichier))
             {
@@ -183,7 +190,8 @@ class ProductCover
 
 
             // suppression des anciens thumbnails
-            foreach ($this->thumbnails as $key => $thumbnail) {
+            foreach ($this->thumbnails as $key => $thumbnail)
+            {
                 if (file_exists($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier))
                 {
                     unlink($this->getUploadRootDir() . '/' . $key . '-' . $this->oldFichier);
@@ -208,7 +216,6 @@ class ProductCover
             //$nameImage . "." . $extension
         );
 
-
         //$imagine = new \Imagine\Gd\Imagine();
 
         /*$imagine
@@ -221,17 +228,23 @@ class ProductCover
         $imagine = new \Imagine\Gd\Imagine();
         $imagineOpen = $imagine->open($this->getAbsolutePath());
 
-        foreach ($this->thumbnails as $key => $thumbnail) {
-            $imagineOpen->thumbnail(new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]), \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND)
+        foreach ($this->thumbnails as $key => $thumbnail)
+        {
+            $size = new \Imagine\Image\Box($thumbnail[0], $thumbnail[1]);
+            $mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+            
+            $imagineOpen->thumbnail($size, $mode)
                 ->save($this->getUploadRootDir() . '/' . $key . '-' . $this->name);
         }
     }
 
     /**
      * Récupération de l'objet à deleter avec le PreRemove()
+     * @author Eric
      * @ORM\PreRemove()
      */
-    public function preRemoveImage() {
+    public function preRemoveImage()
+    {
         // cette method peut être vide
         // dump($this);
         // die();
@@ -239,21 +252,25 @@ class ProductCover
 
     /**
      * Supprime les images du produit
+     * @author Eric
      * @ORM\PostRemove()
      */
-    public function removeImage() {
-
+    public function removeImage()
+    {
         // Suppression de l'image principale
         $fichier = $this->getAbsolutePath();
 
-        if (file_exists($fichier)) {
+        if (file_exists($fichier))
+        {
             unlink($fichier);
         }
 
         // Suppression des thumbnails
-        foreach($this->thumbnails as $key => $thumbnail) {
+        foreach($this->thumbnails as $key => $thumbnail)
+        {
             $thumb = $this->getUploadRootDir() . '/' . $key . '-' . $this->name;
-            if (file_exists($thumb)) {
+            if (file_exists($thumb))
+            {
                 unlink($thumb);
             }
         }
@@ -261,36 +278,40 @@ class ProductCover
 
     /**
      * Retourne le chemin pour le upload de l'image
-     *
+     * @author Eric
      * @return string
      */
-    private function getUploadRootDir() {
-
+    private function getUploadRootDir()
+    {
         return __DIR__ . "/../../../../web" . $this->getUploadDir();
     }
 
     /**
      * Retourne le chemin avec l'image
-     *
+     * @author Eric
      * @return string
      */
-    public function getWebPath($thumb = null) {
-
+    public function getWebPath($thumb = null)
+    {
         /*$thumbnail = "";
 
         if (null != $thumb) {
             $thumbnail = $thumb . "-";
         }*/
 
-        if (array_key_exists($thumb, $this->thumbnails)) {
+        if (array_key_exists($thumb, $this->thumbnails))
+        {
             return $this->getUploadDir() . "/" . $thumb . "-". $this->name;
-        } else {
+        }
+        else
+        {
             return $this->getUploadDir() . "/" . $this->name;
         }
     }
 
     /**
      * Retourne le chemin absolu
+     * @author Eric
      * @return string
      */
     public function getAbsolutePath()
@@ -298,8 +319,13 @@ class ProductCover
         return $this->getUploadRootDir().'/'.$this->name;
     }
 
-    private function getUploadDir() {
-
+    /**
+     * Retourne le répertoire
+     * @author Eric
+     * @return string
+     */
+    private function getUploadDir()
+    {
         return "/upload/products";
     }
 }

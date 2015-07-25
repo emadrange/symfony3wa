@@ -9,9 +9,11 @@ class CategoryRepository extends EntityRepository {
     /**
      * Retourne le nombre de catégorie
      * @author Eric
+     * 
      * @return mixed
      */
-    public function countCategory() {
+    public function countCategory()
+    {
         $query = $this->createQueryBuilder("cat");
 
         $query->select("COUNT(cat.titre)");
@@ -22,10 +24,12 @@ class CategoryRepository extends EntityRepository {
     /**
      * Retourne les catégories dont la position > 2
      * @author Eric
+     * 
      * @param $position
      * @return array
      */
-    public function findCategorysByPosition($position) {
+    public function findCategorysByPosition($position)
+    {
 
         $query = $this->createQueryBuilder("cat")
             ->where("cat.position > :position")
@@ -37,10 +41,12 @@ class CategoryRepository extends EntityRepository {
     /**
      * Rtourne les catégories dont le titre commence par "le"
      * @author Eric
+     * 
      * @param $text
      * @return array
      */
-    public function findTitleCategorysByBeginText($text) {
+    public function findTitleCategorysByBeginText($text)
+    {
 
         $query = $this->createQueryBuilder("cat")
             ->where("cat.titre LIKE :text")
@@ -54,8 +60,8 @@ class CategoryRepository extends EntityRepository {
      * @author Eric
      * @return array
      */
-    public function getCategorysByPosition($form = false) {
-
+    public function getCategorysByPosition($form = false)
+    {
         $query = $this->createQueryBuilder('cat')
             ->orderBy('cat.position');
 
@@ -68,9 +74,11 @@ class CategoryRepository extends EntityRepository {
     /**
      * Retourne les catégories avec les produits associès
      * @author Eric
+     * 
      * @return array
      */
-    public function getCategorysWithProducts() {
+    public function getCategorysWithProducts()
+    {
 
         $query = $this->createQueryBuilder('cat')
             ->select('cat, prod')
@@ -83,12 +91,14 @@ class CategoryRepository extends EntityRepository {
     /**
      * Retourne une catégory avec ses produits associés
      * @author Eric
-     * @param $dataUrl array
+     * 
+     * @param array $dataUrl
      * @return mixed
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getCategoryWithProductsById($dataUrl) {
+    public function getCategoryWithProductsById($dataUrl)
+    {
 
         $query = $this->createQueryBuilder('cat')
             ->select('cat, prod, cover')
@@ -103,7 +113,8 @@ class CategoryRepository extends EntityRepository {
 
     /**
      * Retourne le nombre de produit d'une catégorie donnée
-     * @param $title
+     * 
+     * @param String $title
      * @return mixed
      */
     public function countProductFromCategory($title) {

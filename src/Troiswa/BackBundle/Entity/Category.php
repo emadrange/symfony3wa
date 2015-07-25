@@ -209,13 +209,16 @@ class Category
 
     /**
      * Validation pour tout le formulaire
+     * @author Eric
+     * 
      * @return bool
      *
      * @Assert\True(message="Catégorie invalide, la position 0 doit se nommer uniquement Accueil")
      */
-    public function isCategoryValid() {
-
-        if ($this->position == 0 && $this->titre != "Accueil") {
+    public function isCategoryValid()
+    {
+        if ($this->position == 0 && $this->titre != "Accueil")
+        {
             return false;
         }
 
@@ -243,11 +246,12 @@ class Category
 
     /**
      * Validation par Callback, le titre doit commencer par une majuscule
+     * @author Eric
      *
      * @Assert\Callback()
      */
-    public function validate(ExecutionContextInterface $context) {
-
+    public function validate(ExecutionContextInterface $context)
+    {
         if (!preg_match('/^[A-Z]/', $this->titre)) {
 
             // les doubles accolades sont une simple convention, on peut mettre ce que l'on veut

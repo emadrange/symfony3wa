@@ -14,14 +14,17 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Troiswa\BackBundle\Entity\Category;
 
-class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Fixtures catégorie
      * @author Eric
+     * 
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
 
         $categorys = [
             0 => [
@@ -56,7 +59,8 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
             ],
         ];
 
-        foreach($categorys as $category) {
+        foreach($categorys as $category)
+        {
             $cat = new Category();
             $cat->setTitre($category["titre"]);
             $cat->setDescription($category["description"]);
@@ -67,10 +71,6 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
 
             $this->addReference($category["reference"], $cat);
         }
-
-
-
-
     }
 
     /**

@@ -18,6 +18,8 @@ class UserCouponRepository extends EntityRepository
 {
     /**
      * Retourne les coupons d'un utilisateur
+     * @author Eric
+     * 
      * @param $id
      * @return array
      */

@@ -16,15 +16,17 @@ class MarqueRepository extends EntityRepository
     /**
      * Retourne la liste des marque par ordre alphabétique
      * @author Eric
-     * @param type $form
+     * 
+     * @param Boolean $form
      * @return mixed
      */
-    public function findAllBrandOrderByTitle($form = false) {
-        
+    public function findAllBrandOrderByTitle($form = false)
+    {
         $query = $this->createQueryBuilder('brand')
             ->orderBy('brand.title');
 
-        if ($form) {
+        if ($form)
+        {
             return $query;
         }
 
@@ -34,10 +36,12 @@ class MarqueRepository extends EntityRepository
     /**
      * Retourne la marque avec son logo
      * @author Eric
+     * 
      * @param array $dataUrl
      * @return mixed
      */
-    public function findOneBrandWithLogoById($dataUrl) {
+    public function findOneBrandWithLogoById($dataUrl)
+    {
 
         $query = $this->createQueryBuilder('brand')
                 ->select('brand, logo')

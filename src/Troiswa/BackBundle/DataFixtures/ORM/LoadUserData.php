@@ -13,15 +13,17 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Troiswa\BackBundle\Entity\User;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+{
     
     /**
      * Fixtures User
      * @author Eric
+     * 
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
-        
+    public function load(ObjectManager $manager)
+    {    
         $users = [
             1 => [
                 'username'  => 'roberto.domingo',
@@ -58,7 +60,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             ]
         ];
         
-        foreach ($users as $user) {
+        foreach ($users as $user)
+        {
             $newUser = new User();
             $newUser->setPseudo($user['username']);
             $newUser->setPassword($user['password']);
@@ -70,7 +73,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
             $newUser->setAddress($user['address']);
             
             $manager->persist($newUser);
-            
         }
         
         $manager->flush();

@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MainController extends Controller
 {
     /**
+     * Index du site
+     * @author Eric
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
@@ -26,5 +29,4 @@ class MainController extends Controller
             "productsByGreatestTag" => $productsByGreatestTag
         ]);
     }
-
 }

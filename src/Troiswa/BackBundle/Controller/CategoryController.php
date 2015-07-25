@@ -20,11 +20,12 @@ class CategoryController extends Controller {
     /**
      * Ajout d'une catégorie
      * @author Eric
+     * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addAction(Request $request) {
-
+    public function addAction(Request $request)
+    {
         $category = new Category();
 
         $formCategory = $this->createForm(new CategoryType(), $category, [
@@ -41,7 +42,8 @@ class CategoryController extends Controller {
 
         $formCategory->handleRequest($request);
 
-        if ($formCategory->isValid()) {
+        if ($formCategory->isValid())
+        {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
@@ -59,10 +61,11 @@ class CategoryController extends Controller {
     /**
      * Liste des catégories
      * @author Eric
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction() {
-
+    public function listAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $categorys = $em->getRepository("TroiswaBackBundle:Category")
             ->getCategorysWithProducts();
@@ -76,7 +79,8 @@ class CategoryController extends Controller {
     /**
      * Visualisation d'une catégorie
      * @author Eric
-     * @param $idcategory
+     * 
+     * @param Category $category
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -84,8 +88,8 @@ class CategoryController extends Controller {
      *      "mapping": {"idcategory": "id"},
      *      "repository_method": "getCategoryWithProductsById"})
      */
-    public function showAction(Category $category, Request $request) {
-
+    public function showAction(Category $category, Request $request)
+    {
         /*$em = $this->getDoctrine()->getManager();
         $category = $em->getRepository("TroiswaBackBundle:Category")
             ->find($idcategory);
@@ -103,14 +107,15 @@ class CategoryController extends Controller {
     /**
      * Edition d'une catégorie
      * @author Eric
+     * 
      * @param Request $request
-     * @param $idcategory
+     * @param Category $category
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
      */
-    public function editAction(Request $request, Category $category) {
-
+    public function editAction(Request $request, Category $category)
+    {
         $em = $this->getDoctrine()->getManager();
         /*$category = $em->getRepository("TroiswaBackBundle:Category")
             ->find($idcategory);
@@ -133,7 +138,8 @@ class CategoryController extends Controller {
 
         $formCategory->handleRequest($request);
 
-        if ($formCategory->isValid()) {
+        if ($formCategory->isValid())
+        {
 
             $em->flush();
 
@@ -151,13 +157,14 @@ class CategoryController extends Controller {
     /**
      * Suppression d'une catégorie
      * @author Eric
-     * @param $idcategory
+     * 
+     * @param Category $category
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @ParamConverter("category", options={"mapping": {"idcategory": "id"}})
      */
-    public function deleteAction(Category $category) {
-
+    public function deleteAction(Category $category)
+    {
         $em = $this->getDoctrine()->getManager();
 
         /*$category = $em->getRepository("TroiswaBackBundle:Category")
@@ -171,18 +178,18 @@ class CategoryController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add("success", "La catégorie a bien été supprimée");
+        
         return $this->redirectToRoute("troiswa_back_category_list");
-
     }
 
     /**
      * Liste des catégories pour la sidebar avec {{ render }}
      * @author Eric
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allCategoryAction()
     {
-
         $em = $this->getDoctrine()->getManager();
         $categorys = $em->getRepository("TroiswaBackBundle:Category")
             ->findBy([], ["position" => "ASC"]);
@@ -196,7 +203,8 @@ class CategoryController extends Controller {
      * 
      * @return type
      */
-    public function categoryAction() {
+    public function categoryAction()
+    {
         $categories = [
             1 => [
                 "id" => 1,
@@ -232,7 +240,8 @@ class CategoryController extends Controller {
      * @return type
      * @throws type
      */
-    public function infoAction($iditem) {
+    public function infoAction($iditem)
+    {
 
         $categories = [
             1 => [

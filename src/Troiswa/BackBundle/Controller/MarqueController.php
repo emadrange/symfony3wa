@@ -19,11 +19,12 @@ class MarqueController extends Controller {
     /**
      * Ajoute une marque
      * @author Eric
+     * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addAction(Request $request) {
-
+    public function addAction(Request $request)
+    {
         $marque = new Marque();
 
         $formMarque = $this->createForm(new MarqueType(), $marque, [
@@ -40,8 +41,8 @@ class MarqueController extends Controller {
 
         $formMarque->handleRequest($request);
 
-        if ($formMarque->isValid()) {
-
+        if ($formMarque->isValid())
+        {
             $em = $this->getDoctrine()->getManager();
             $em->getFilters()->disable('softdeleteable');
 
@@ -62,15 +63,16 @@ class MarqueController extends Controller {
         return $this->render("TroiswaBackBundle:Marque:add.html.twig", [
             "formMarque" => $formMarque->createView()
         ]);
-
     }
 
     /**
      * Liste les marques par ordre alphabétique
      * @author Eric
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction() {
+    public function listAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $marques = $em->getRepository("TroiswaBackBundle:Marque")
@@ -84,15 +86,16 @@ class MarqueController extends Controller {
     /**
      * Visualisation d'une marque
      * @author Eric
+     * 
+     * @param Marque $marque
      * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @ParamConverter("marque", options={
      *      "mapping": {"idmarque": "id"},
      *      "repository_method" = "findOneBrandWithLogoById"
      * })
      */
-    public function showAction(Marque $marque) {
-
+    public function showAction(Marque $marque)
+    {
         return $this->render("TroiswaBackBundle:Marque:show.html.twig", [
             "marque" => $marque
         ]);
@@ -101,12 +104,14 @@ class MarqueController extends Controller {
     /**
      * Edite une marque
      * @author Eric
+     * 
+     * @param Marque $marque
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @ParamConverter("marque", options={"mapping": {"idmarque": "id"}})
      */
-    public function editAction(Marque $marque, Request $request) {
-
+    public function editAction(Marque $marque, Request $request)
+    {
         $formMarque = $this->createForm(new MarqueType(), $marque, [
             "attr" => [
                 "novalidate" => "novalidate"
@@ -123,12 +128,11 @@ class MarqueController extends Controller {
 
         $formMarque->handleRequest($request);
 
-        if ($formMarque->isValid()) {
-
+        if ($formMarque->isValid())
+        {
             $logo = $marque->getLogo();
-            if ($logo->getAlt() == null) {
-                $logo->setAlt($marque->getTitle());
-            }
+            $logo->setAlt($marque->getTitle());
+
             //$logo->upload();
 
             $em->flush();
@@ -147,11 +151,13 @@ class MarqueController extends Controller {
     /**
      * Supprime une marque
      * @author Eric
+     * 
+     * @param Marque $marque
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @ParamConverter("marque", options={"mapping": {"idmarque": "id"}})
      */
-    public function deleteAction(Marque $marque) {
+    public function deleteAction(Marque $marque)
+    {
 
         $em = $this->getDoctrine()->getManager();
 

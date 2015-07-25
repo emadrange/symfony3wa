@@ -39,13 +39,16 @@
 
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
+                    {% if product.cover %}
                     <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}">
                         <img src="{{ asset(product.cover.getWebPath('thumb-medium')) }}" alt="{{ product.cover.alt }}">
                     </a>
+                    {% endif %}
                     <div class="caption">
-                        <h4 class="pull-right">{{ product.price | number_format(2, ',', '.') }} €</h4>
-                        <h4><a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}">{{ product.title }}</a>
+                        <h4>
+                            <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}">{{ product.title }}</a>
                         </h4>
+                        <h4 class="">{{ product.price | number_format(2, ',', '.') }} €</h4>
                         <p>{{ product.description }}</p>
                     </div>
                     <div class="ratings">

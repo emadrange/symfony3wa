@@ -33,7 +33,11 @@ class CategoryController extends Controller
     }
 
     /**
+     * Visualise une catégorie avec les produits associés
+     * @author Eric
+     * 
      * @param Category $category
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @ParamConverter("category", options={
@@ -43,7 +47,6 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category, Request $request)
     {
-
         return $this->render('TroiswaFrontBundle:Category:show.html.twig', [
             'category' => $category
         ]);

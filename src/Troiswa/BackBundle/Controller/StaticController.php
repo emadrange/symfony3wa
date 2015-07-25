@@ -12,7 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StaticController extends Controller {
 
-    public function indexAction() {
+    public function indexAction()
+    {
         return $this->render("TroiswaBackBundle:cgv:index.html.twig", [
             "firstname" => "éric",
             "lastname" => "madrange",
@@ -20,17 +21,20 @@ class StaticController extends Controller {
         ]);
     }
 
-    public function trainingAction($chaine) {
+    public function trainingAction($chaine)
+    {
         return $this->render("TroiswaBackBundle:Statics:training.html.twig", [
             "chaine" => $chaine
         ]);
     }
 
-    public function heritageAction() {
+    public function heritageAction()
+    {
        return $this->render("TroiswaBackBundle:Statics:heritage.html.twig");
     }
 
-    public function templatingAction() {
+    public function templatingAction()
+    {
        return $this->render("TroiswaBackBundle:Statics:templating.html.twig");
     }
 }

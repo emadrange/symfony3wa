@@ -297,7 +297,8 @@ class Marque
     /**
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
 
         return $this->title;
     }
@@ -307,19 +308,21 @@ class Marque
      * @author Eric
      * @return string
      */
-    public function getTitleAndDate() {
-
+    public function getTitleAndDate()
+    {
         return $this->title . ' (' . $this->created->format('d - m - Y') . ')';
     }
 
     /**
      * Validation de titre interdit par callback
      * @author Eric
+     * 
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context) {
-
-        if (strtolower($this->title) == "3wa" || strtolower($this->title == "troiswa")) {
+    public function validate(ExecutionContextInterface $context)
+    {
+        if (strtolower($this->title) == "3wa" || strtolower($this->title == "troiswa"))
+        {
             $context->buildViolation("La marque 3wa est interdite")
                 ->atPath('title')
                 ->addViolation();

@@ -15,9 +15,11 @@ class ProductRepository extends EntityRepository
     /**
      * Exercice du findAll()
      * @author Eric
+     * 
      * @return array
      */
-    public function findAllMaison() {
+    public function findAllMaison()
+    {
         $em = $this->getEntityManager();
 
         /* requete DQL */
@@ -31,9 +33,11 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne la liste des produits avec la catégorie associée
      * @author Eric
+     * 
      * @return array
      */
-    public function findAllProductWithCategory() {
+    public function findAllProductWithCategory()
+    {
 
         /*$query = $this->getEntityManager()->createQuery(
             "
@@ -59,7 +63,8 @@ class ProductRepository extends EntityRepository
      * @param array $dataUrl
      * @return mixed
      */
-    public function findOneProductWithAllElement($dataUrl) {
+    public function findOneProductWithAllElement($dataUrl)
+    {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, brand, cat, photo, tag')
@@ -76,10 +81,13 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne les produits avec leur marque et leur catégorie
+     * @author Eric
+     * 
      * @param boolean $isPaginable Pour la pagination
      * @return array
      */
-    public function findAllProductWithBrandAndCategory($isPaginable) {
+    public function findAllProductWithBrandAndCategory($isPaginable)
+    {
         
         $query = $this->createQueryBuilder('prod')
                 ->select('prod, cat, brand, logo')
@@ -87,7 +95,8 @@ class ProductRepository extends EntityRepository
                 ->leftJoin('prod.marque', 'brand')
                 ->leftJoin('brand.logo', 'logo');
 
-        if ($isPaginable) {
+        if ($isPaginable)
+        {
             return $query->getQuery();
         }
 
@@ -99,10 +108,12 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les produits par quandtité
      * @author Eric
+     * 
      * @param null $quantity
      * @return array
      */
-    public function findProductsByQuantity($quantity = null) {
+    public function findProductsByQuantity($quantity = null)
+    {
 
         $query = $this->createQueryBuilder("prod");
 
@@ -116,10 +127,12 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne le nombre de produit
+     * 
      * @author Eric
      * @return integer
      */
-    public function countActiveProduct() {
+    public function countActiveProduct()
+    {
         $query = $this->createQueryBuilder("prod");
 
         $query->select("COUNT(prod.title)")
@@ -130,10 +143,12 @@ class ProductRepository extends EntityRepository
 
     /**
      * Retourne le nombre de produit dont la quantité est à 0
+     * 
      * @author Eric
      * @return integer
      */
-    public function countProductByQuantityIsZero() {
+    public function countProductByQuantityIsZero()
+    {
 
         $query = $this->createQueryBuilder("prod");
 
@@ -146,10 +161,12 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les produits dont la quantité est inférieur à une valeur
      * @author Eric
+     * 
      * @param $quantity
      * @return array
      */
-    public function findProductsByMinimumQuantity($quantity) {
+    public function findProductsByMinimumQuantity($quantity)
+    {
 
         $query = $this->createQueryBuilder("prod");
 
@@ -160,11 +177,13 @@ class ProductRepository extends EntityRepository
     }
 
     /**
-     * Retroune le nombre d'actif et non actif
+     * Retroune le nombre de produit actif et non actif
      * @author Eric
+     * 
      * @return array
      */
-    public function countStatesActiveProduct() {
+    public function countStatesActiveProduct()
+    {
 
         $query = $this->createQueryBuilder("prod")
             ->select("COUNT(prod.active) AS nb, prod.active AS state")
@@ -176,11 +195,13 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les produits dont le prix est entre 2 valeurs
      * @author Eric
+     * 
      * @param $firstprice
      * @param $lastprice
      * @return array
      */
-    public function findPricesByBeetweenPrice($firstprice, $lastprice) {
+    public function findPricesByBeetweenPrice($firstprice, $lastprice)
+    {
 
         $query = $this->createQueryBuilder("prod")
             ->select("prod.title, prod.price")
@@ -197,10 +218,12 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les catégories dont les produits ont une marque donnée
      * @author Eric
+     * 
      * @param $brand
      * @return array
      */
-    public function getCategoryFromProductByBrand($brand) {
+    public function getCategoryFromProductByBrand($brand)
+    {
 
         $query = $this->createQueryBuilder("prod")
             ->select("cat.titre")
@@ -215,13 +238,16 @@ class ProductRepository extends EntityRepository
     /**
      * Retourne les n produits les plus cher
      * @author Eric
+     * 
+     * @param Interger $limit 
      * @return array
      */
-    public function getExpensiveProductsByLimit($nb = 3) {
+    public function getExpensiveProductsByLimit($limit = 3)
+    {
 
         $query = $this->createQueryBuilder("prod")
             ->orderBy('prod.price', 'DESC')
-            ->setMaxResults($nb);
+            ->setMaxResults($limit);
 
         return $query->getQuery()->getResult();
     }
@@ -282,6 +308,5 @@ class ProductRepository extends EntityRepository
             ->setParameter('listid', $listId);
 
         return $query->getQuery()->getResult();
-
     }
 }

@@ -68,7 +68,7 @@ class ProductType extends AbstractType
             ->add('tag', 'entity', [
                 'multiple' => true,
                 'class' => 'TroiswaBackBundle:Tag',
-                'property' => 'word'
+                'choice_label' => 'word'
             ]);
     }
     

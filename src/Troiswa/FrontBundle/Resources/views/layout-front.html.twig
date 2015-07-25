@@ -1,5 +1,6 @@
 {% extends '::base.html.twig' %}
 
+{#+++++++++ stylesheets - 07/2015 +++++++++#}
 
 {% block stylesheets %}
 
@@ -11,46 +12,51 @@
 
 {% endblock stylesheets %}
 
+{#+++++++++++++++++++++++++++++++++++++++++#}
+
+{#+++++++++ body - 07/2015 +++++++++#}
 
 {% block body %}
 
 <!-- Navigation -->
 
+{#+++++++++ header navigation - 07/2015 +++++++++#}
 {% include "TroiswaFrontBundle:Globals:header-nav.html.twig" only %}
-
+{#+++++++++++++++++++++++++++++++++++++++++++++++#}
 
 <!-- Page Content -->
 <div class="container">
 
     <div class="row">
-
+        {#+++++++++ category navigation - 072015 +++++++++#}
         {% include "TroiswaFrontBundle:Globals:category-nav.html.twig" only %}
-
+        {#++++++++++++++++++++++++++++++++++++++++++++++++#}
+        
+        {#+++++++++ contenu - 07/2015 +++++++++#}
         {% block content %}
 
-
         {% endblock content %}
-
+        {#+++++++++++++++++++++++++++++++++++++#}
     </div>
 
 </div>
 <!-- /.container -->
 
-
-
 <div class="container">
 
-
-
     <!-- Footer -->
+{#+++++++++ footer - 07/2015 +++++++++#}
 {% include "TroiswaFrontBundle:Globals:footer.html.twig" only %}
+{#++++++++++++++++++++++++++++++++++++#}
 
 </div>
 <!-- /.container -->
 
-
-
 {% endblock body %}
+
+{#++++++++++++++++++++++++++++++++++#}
+
+{#+++++++++ javascripts - 07/2015 +++++++++#}
 
 {% block javascripts %}
 
@@ -61,3 +67,5 @@
     <script src="{{ asset('assets/front/js/bootstrap.min.js') }}"></script>
 
 {% endblock javascripts %}
+
+{#+++++++++++++++++++++++++++++++++++++++++#}

@@ -13,10 +13,12 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Troiswa\BackBundle\Entity\Marque;
 
-class LoadMarqueData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadMarqueData extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
+     * @author Eric
      *
      * @param ObjectManager $manager
      */
@@ -37,7 +39,8 @@ class LoadMarqueData extends AbstractFixture implements OrderedFixtureInterface 
           ]
         ];
 
-        foreach ($brands as $key => $brand) {
+        foreach ($brands as $key => $brand)
+        {
             $marque = new Marque();
             $marque->setTitle($brand['title']);
             $marque->setDescription($brand['description']);
@@ -47,7 +50,6 @@ class LoadMarqueData extends AbstractFixture implements OrderedFixtureInterface 
 
             $this->addReference('brand' . $key, $marque);
         }
-
     }
 
     /**

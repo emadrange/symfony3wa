@@ -103,10 +103,8 @@ class MainController extends Controller
         // Retourne le nombre de produit dont la catégorie est "Diesel"
         $nbProductFromCategory = $em->getRepository("TroiswaBackBundle:Category")->countProductFromCategory("Diesel");
 
-
         //dump($nbProductFromCategory);
         //die();
-
 
         return $this->render("TroiswaBackBundle:Main:index.html.twig", [
             //"products" => $products,
@@ -129,11 +127,12 @@ class MainController extends Controller
     /**
      * Contact avec utilisation du formulaire ContactType
      * @author Eric
+     * 
      * @param Request $request
      * @return Response
      */
-    public function contactAction(Request $request) {
-
+    public function contactAction(Request $request)
+    {
         //$formContact = $this->createFormBuilder(null, [
         //    "attr" => [
         //        "novalidate" => "novalidate"
@@ -158,7 +157,8 @@ class MainController extends Controller
         //    $formContact->submit($request);
 
         $formContact->handleRequest($request);
-            if ($formContact->isValid()) {
+            if ($formContact->isValid())
+            {
                 $data = $formContact->getData();
 
                 //dump($data);
@@ -191,22 +191,20 @@ class MainController extends Controller
             }
         //}
 
-
-
         return $this->render("TroiswaBackBundle:Main:contact.html.twig", [
             "formContact" => $formContact->createView()
-
         ]);
     }
 
     /**
      * Feedback
      * @author Eric
+     * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function feedbackAction(Request $request) {
-
+    public function feedbackAction(Request $request)
+    {
         $formFeedback = $this->createFormBuilder(null, [
             "attr" => [
                 "novalidate" => "novalidate"
@@ -307,7 +305,9 @@ class MainController extends Controller
         ->getForm();
 
         $formFeedback->handleRequest($request);
-        if ($formFeedback->isValid()) {
+        
+        if ($formFeedback->isValid())
+        {
             $data = $formFeedback->getData();
 
             $message = \Swift_Message::newInstance()

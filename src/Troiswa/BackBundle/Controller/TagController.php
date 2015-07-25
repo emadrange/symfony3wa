@@ -16,8 +16,10 @@ class TagController extends Controller
 {
 
     /**
-     * Lists all Tag entities.
-     *
+     * Liste les tags
+     * @author Eric
+     * 
+     * @return type
      */
     public function indexAction()
     {
@@ -29,9 +31,13 @@ class TagController extends Controller
             'entities' => $entities,
         ));
     }
+    
     /**
-     * Creates a new Tag entity.
-     *
+     * Création d'un tag
+     * @author Eric
+     * 
+     * @param Request $request
+     * @return type
      */
     public function createAction(Request $request)
     {
@@ -96,8 +102,12 @@ class TagController extends Controller
     }
 
     /**
-     * Finds and displays a Tag entity.
-     *
+     * Visualise un tag
+     * @author Eric
+     * 
+     * @param type $id
+     * @return type
+     * @throws type
      */
     public function showAction($id)
     {
@@ -118,8 +128,12 @@ class TagController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Tag entity.
-     *
+     * Edite un tag
+     * @author Eric
+     * 
+     * @param type $id
+     * @return type
+     * @throws type
      */
     public function editAction($id)
     {
@@ -167,6 +181,7 @@ class TagController extends Controller
 
         return $form;
     }
+    
     /**
      * Edits an existing Tag entity.
      *
@@ -197,9 +212,15 @@ class TagController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    
     /**
-     * Deletes a Tag entity.
-     *
+     * Supprime un tag
+     * author Eric
+     * 
+     * @param Request $request
+     * @param type $id
+     * @return type
+     * @throws type
      */
     public function deleteAction(Request $request, $id)
     {

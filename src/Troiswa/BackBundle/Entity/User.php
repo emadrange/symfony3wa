@@ -310,15 +310,18 @@ class User implements UserInterface, \Serializable
     /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context) {
+    public function validate(ExecutionContextInterface $context)
+    {
 
-        if (strtolower($this->username) == "admin") {
+        if (strtolower($this->username) == "admin")
+        {
             $context->buildViolation("Ce mot est réservé")
                 ->atPath('username')
                 ->addViolation();
         }
 
-        if (strtolower($this->password == "admin")) {
+        if (strtolower($this->password == "admin"))
+        {
             $context->buildViolation("Ce mot est réservé")
                 ->atPath('password')
                 ->addViolation();

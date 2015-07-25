@@ -183,10 +183,12 @@ class BrandLogo
     /**
      * Formate le nom avant le persist
      * @author Eric
+     * 
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUpload() {
+    public function preUpload()
+    {
        
         // formatage du nom du logo
         $this->name = str_replace(' ', '-', $this->alt)
@@ -197,18 +199,25 @@ class BrandLogo
     /**
      * Upload le fichier sélectionné dans le formulaire après le persist
      * @author Eric
+     * 
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload() {
+    public function upload()
+    {
 
-        if (null == $this->logofile) {
+        if (null == $this->logofile)
+        {
             return;
         }
 
-        if ($this->oldLogo) {
+        if ($this->oldLogo)
+        {
             // supprime l'ancien logo
-            unlink($this->getUploadRootDir() . '/' . $this->oldLogo);
+            if (file_exists($this->getUploadRootDir() . '/' . $this->oldLogo))
+            {
+                unlink($this->getUploadRootDir() . '/' . $this->oldLogo);
+            }
         }
 
         // charge le logo dans le répertoire
@@ -221,19 +230,22 @@ class BrandLogo
     /**
      * Retourne le chemin des logos chargés
      * @author Eric
+     * 
      * @return string
      */
-    public function getUploadRootDir() {
-
+    public function getUploadRootDir()
+    {
         return __DIR__ . '/../../../../web' . $this->getUploadDir();
     }
 
     /**
      * Retourne le chemin du logo depuis la racine web
      * @author Eric
+     * 
      * @return string
      */
-    public function getWebPath() {
+    public function getWebPath()
+    {
 
         return $this->getUploadDir() . "/" . $this->name;
     }
@@ -241,6 +253,7 @@ class BrandLogo
     /**
      * Retourne le chemin absolu
      * @author Eric
+     * 
      * @return string
      */
     public function getAbsolutePath()
@@ -251,9 +264,11 @@ class BrandLogo
     /**
      * Retourne le chemin des logos
      * @author Eric
+     * 
      * @return string
      */
-    private function getUploadDir() {
+    private function getUploadDir()
+    {
 
         return '/upload/logos';
     }

@@ -83,7 +83,8 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
             ]
         ];
 
-        foreach ($products as $product) {
+        foreach ($products as $product)
+        {
             $prod = new Product();
             $prod->setTitle($product['title']);
             $prod->setDescription($product['description']);

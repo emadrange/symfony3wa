@@ -21,12 +21,12 @@ class ProductController extends Controller {
     /**
      * Ajout d'un produit
      * @author Eric
+     * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addAction(Request $request) {
-
-
+    public function addAction(Request $request)
+    {
         // Interdit l'accès aux utilisateur si ils ne sont pas administrateur
         /*if (!$this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
@@ -49,7 +49,8 @@ class ProductController extends Controller {
 
         $formProduct->handleRequest($request);
 
-        if ($formProduct->isValid()) {
+        if ($formProduct->isValid())
+        {
 
             $cover = $product->getCover();
             $cover->setAlt($product->getTitle());
@@ -81,10 +82,12 @@ class ProductController extends Controller {
     /**
      * Liste des produits
      * @author Eric
+     * 
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(Request $request) {
-
+    public function listAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
             ->findAllProductWithBrandAndCategory(true);
@@ -110,7 +113,8 @@ class ProductController extends Controller {
     /**
      * Visualisation d'un produit
      * @author Eric
-     * @param $idproduct
+     * 
+     * @param Product $product
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @ParamConverter("product", options={
@@ -118,8 +122,8 @@ class ProductController extends Controller {
      *      "repository_method" = "findOneProductWithAllElement"
      * })
      */
-    public function showAction(Product $product) {
-
+    public function showAction(Product $product)
+    {
         //var_dump($product);
         //dump($product);
         //die();
@@ -142,7 +146,8 @@ class ProductController extends Controller {
     /**
      * Edition d'un produit
      * @author Eric
-     * @param $idproduct
+     * 
+     * @param Product $product
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
@@ -152,8 +157,8 @@ class ProductController extends Controller {
      *
      *  Security("has_role('ROLE_ADMIN')")
      */
-    public function editAction(Product $product, Request $request) {
-
+    public function editAction(Product $product, Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
         /*$product = $em->getRepository("TroiswaBackBundle:Product")
@@ -175,15 +180,12 @@ class ProductController extends Controller {
             ]
         ]);
 
-
         $formEditProduct->handleRequest($request);
 
-        if ($formEditProduct->isValid()) {
-
+        if ($formEditProduct->isValid())
+        {
             $cover = $product->getCover();
-            if ($cover->getAlt() == null) {
-                $cover->setAlt($product->getTitle());
-            }
+            $cover->setAlt($product->getTitle());
             
             //$cover->upload();
 
@@ -204,14 +206,15 @@ class ProductController extends Controller {
     /**
      * Suppression d'un produit
      * @author Eric
-     * @param $idproduct
+     * 
+     * @param Product $product
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @ParamConverter("product", options={"mapping": {"idproduct":"id"}})
      */
-    public function deleteAction(Product $product, Request $request) {
-
+    public function deleteAction(Product $product, Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
         /*$product = $em->getRepository("TroiswaBackBundle:Product")
@@ -224,27 +227,25 @@ class ProductController extends Controller {
         $em->remove($product);
         $em->flush();
 
-
         $this->get('session')->getFlashBag()->add("success", "Le produit a bien été supprimé");
+        
         return $this->redirectToRoute("troiswa_back_product_list");
     }
 
     /**
      * Liste des produits actifs
      * @author Eric
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listActiveAction() {
-
-        //$products = [];
-
+    public function listActiveAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
             ->findBy(["active" => true], ["title" => "ASC"]);
 
         //dump($products);
         //die();
-
 
         return $this->render("TroiswaBackBundle:Product:active-products.html.twig", [
             "products" => $products
@@ -253,11 +254,13 @@ class ProductController extends Controller {
 
     /**
      * Liste des produits avec limite
+     * @author Eric
+     * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listLimitAction(Request $request) {
-
+    public function listLimitAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $limit = $request->query->get("limit");
@@ -278,17 +281,19 @@ class ProductController extends Controller {
     /**
      * Changement de l'état active
      * @author Eric
+     * 
      * @param $idproduct
      * @param $statut
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function changeActiveAction($idproduct, $statut) {
-
+    public function changeActiveAction($idproduct, $statut)
+    {
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository("TroiswaBackBundle:Product")
             ->find($idproduct);
 
-        if (!$product) {
+        if (!$product)
+        {
             throw $this->createNotFoundException("Produit inconnu...");
         }
 
@@ -298,7 +303,14 @@ class ProductController extends Controller {
         return $this->redirectToRoute("troiswa_back_product_list");
     }
 
-    public function listProductByPriceAction() {
+    /**
+     * Retourne une liste de produit par prix
+     * @author Eric
+     * 
+     * @return type
+     */
+    public function listProductByPriceAction()
+    {
 
         $em = $this->getDoctrine()->getEntityManager();
 
