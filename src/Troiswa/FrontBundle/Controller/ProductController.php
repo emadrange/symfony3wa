@@ -35,6 +35,24 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+    
+    public function listAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('TroiswaBackBundle:Product')
+                ->findAllProductWithBrandAndCategory(true);
+        
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1)/*page number*/,
+            6/*limit per page*/
+        );
+        
+        return $this->render('TroiswaFrontBundle:Product:list.html.twig', [
+            'pagination' => $pagination
+        ]);
+    }
 
     /**
      * Gestion de l'ajout de produit avec leur quantité dans le caddie

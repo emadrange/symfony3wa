@@ -1,3 +1,7 @@
+troiswa_front_product_list:
+    path: /list
+    defaults: { _controller: TroiswaFrontBundle:Product:list }
+
 troiswa_front_product_show:
     path: /show/{idproduct}
     defaults: { _controller: TroiswaFrontBundle:Product:show }
