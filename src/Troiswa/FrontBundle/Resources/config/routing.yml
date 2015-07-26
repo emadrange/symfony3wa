@@ -4,6 +4,10 @@ troiswa_front_homepage:
     path:     /
     defaults: { _controller: TroiswaFrontBundle:Main:index }
 
+troiswa_front_contact:
+    path: /contact
+    defaults: { _controller: TroiswaFrontBundle:Main:contact }
+
 # dynamics
 
 troiswa_front_resource_product:

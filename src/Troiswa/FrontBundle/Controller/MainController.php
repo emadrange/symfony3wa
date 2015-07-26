@@ -3,6 +3,8 @@
 namespace Troiswa\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Troiswa\BackBundle\Form\ContactType;
 
 class MainController extends Controller
 {
@@ -27,6 +29,57 @@ class MainController extends Controller
         return $this->render('TroiswaFrontBundle:Main:index.html.twig', [
             'imageProducts' => $imageProducts,
             "productsByGreatestTag" => $productsByGreatestTag
+        ]);
+    }
+    
+    /**
+     * Page contact
+     * @author Eric
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function contactAction(Request $request)
+    {
+        $formContact = $this->createForm(new ContactType(), null, [
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
+        ])
+                ->add('submit', 'submit', [
+                    'label' => 'Envoyer',
+                    'attr' => [
+                        'class' => 'btn btn-default'
+                    ]
+                ]);
+        
+        $formContact->handleRequest($request);
+        
+        if ($formContact->isValid())
+        {
+            $datas = $formContact->getData();
+            
+            $message = \Swift_Message::newInstance()
+                ->setSubject($datas["subject"])
+                ->setFrom('send@example.com')
+                ->setTo($datas["email"])
+                ->setBody($this->renderView('TroiswaBackBundle:Mails:contact-email.html.twig', [
+                    "data" => $datas
+                ]), 'text/html')
+                ->addPart($this->renderView('TroiswaBackBundle:Mails:contact-email.txt.twig', [
+                    "data" => $datas
+                ]), 'text/plain'
+                );
+
+            $this->get('mailer')->send($message);
+
+            $this->get('session')->getFlashBag()->add("success", "Votre mail a bien été envoyé");
+            
+            return $this->redirectToRoute('troiswa_front_homepage');
+        }
+        
+        return $this->render('TroiswaFrontBundle:Main:contact.html.twig', [
+            'form_contact' => $formContact->createView()
         ]);
     }
 }
