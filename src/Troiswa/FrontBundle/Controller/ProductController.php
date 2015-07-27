@@ -9,7 +9,6 @@
 namespace Troiswa\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Product;
@@ -65,10 +64,14 @@ class ProductController extends Controller
      */
     public function cartAddAction(Product $product, Request $request)
     {
-
         $quantity = $request->request->getInt('quantity');
 
-        if ($quantity > 0)
+        // récupération du service
+        $cart = $this->get('troiswa_front.cart');
+        // method du service
+        $cart->add($product->getId(), $quantity);
+
+        /*if ($quantity > 0)
         {
             $session = $request->getSession();
             //$session->remove('cart');
@@ -91,7 +94,7 @@ class ProductController extends Controller
 
             $session->set('cart', json_encode($cart));
 
-        }
+        }*/
         
         //dump($product);
         //dump($request->request->get('quantity'));
@@ -101,35 +104,133 @@ class ProductController extends Controller
     }
 
     /**
-     * Affichage du caddie avec ses produits sélectionnés
+     * Caddie avec ses produits sélectionnés
+     * @author Eric
      *
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function cartAction(Request $request)
     {
-        $session = $request->getSession();
-        dump($session->get('cart'));
-        dump(json_decode($session->get('cart')));
-        $cart = (array)json_decode($session->get('cart')); // LIGNE PERMETTANT DE RECUP LE PANIER
-        //dump($cart);
+        /*$session = $request->getSession();
+        $cart = json_decode($session->get('cart'), true);
 
-
-        $ids_product = [];
-
-        foreach ($cart as $c)
+        if ($cart)
         {
-            array_push($ids_product, $c->id_product);
+            $em = $this->getDoctrine()->getManager();
+            $idProducts = array_keys($cart);
+            $products = $em->getRepository('TroiswaBackBundle:Product')
+                ->findProductsByListId($idProducts);
+        }*/
+
+        $cart = $this->get('troiswa_front.cart');
+
+        return $this->render('TroiswaFrontBundle:Product:cart.html.twig', [
+            'products' => $cart->getProducts(),
+            'cart' => $cart->getCart()
+        ]);
+    }
+
+    /**
+     * Supprime un élément du caddie
+     * @author Eric
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @ParamConverter("product", options={"mapping": {"idproduct": "id"}})
+     */
+    public function cartRemoveAction(Product $product, Request $request)
+    {
+
+        $cart = $this->get('troiswa_front.cart');
+
+        $cart->remove($product->getId());
+
+        /*$session = $request->getSession();
+        $cart = json_decode($session->get('cart'), true);
+
+        if (array_key_exists($product->getId(), $cart))
+        {
+            unset($cart[$product->getId()]);
+            $session->set('cart', json_encode($cart));
+        }*/
+
+        return $this->redirectToRoute('troiswa_front_cart');
+    }
+
+    /**
+     * Incrémente la quantité d'un produit
+     * @author Eric
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @ParamConverter("product", options={"mapping": {"idproduct": "id"}})
+     */
+    public function cartIncrementAction(Product $product, Request $request)
+    {
+
+        $cart = $this->get('troiswa_front.cart');
+
+        $cart->increment($product->getId());
+        /*$session = $request->getSession();
+        $cart = json_decode($session->get('cart'), true);
+
+        if (array_key_exists($product->getId(), $cart))
+        {
+            $cart[$product->getId()]['quantity'] += 1;
+            $session->set('cart', json_encode($cart));
+        }*/
+
+        return $this->redirectToRoute('troiswa_front_cart');
+    }
+
+    /**
+     * Décrémente la quantité d'un produit
+     * @author Eric
+     *
+     * @param Product $product
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @ParamConverter("product", options={"mapping": {"idproduct": "id"}})
+     */
+    public function cartDecrementAction(Product $product)
+    {
+        $cart = $this->get('troiswa_front.cart');
+        $cart->decrement($product->getId());
+
+        return $this->redirectToRoute('troiswa_front_cart');
+    }
+
+    /**
+     * Vide le caddie
+     * @author Eric
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function clearCartAction()
+    {
+        $cart = $this->get('troiswa_front.cart');
+
+        $cart->clearCart();
+
+        return $this->redirectToRoute('troiswa_front_cart');
+    }
+
+    public function cartCouponAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $coupon = $em->getRepository('TroiswaBackBundle:Coupon')
+            ->findOneByCode($request->request->get('coupon'));
+
+        if ($coupon)
+        {
+
         }
 
-        //$ids_product = implode(',', $ids_product);
+        //dump($coupon);
+        //die;
 
-        $em = $this->getDoctrine()->getManager();
-
-        $products = $em->getRepository('TroiswaBackBundle:Product')
-            ->findProductsByListId($ids_product);
-
-        dump($products);
-
-        die;
+        return $this->redirectToRoute('troiswa_front_cart');
     }
 }

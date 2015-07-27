@@ -1,0 +1,133 @@
+{% extends "TroiswaFrontBundle::layout-front.html.twig" %}
+
+{% block title %}Votre caddie{% endblock %}
+
+{% block content %}
+    <h1>Votre caddie</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-8">
+                {% if cart is empty %}
+                    <div class="alert-danger"><h4>Votre caddie est vide</h4></div>
+                {% else %}
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th class="text-center">Prix</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set total = 0 %}
+                    {% for product in products %}
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="{{ path('troiswa_front_product_show', { 'idproduct': product.id }) }}"> <img class="media-object" src="{{ asset(product.cover.getWebPath('thumb_small')) }}" style="width: 72px; height: 72px;"> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="{{ path('troiswa_front_product_show', { 'idproduct': product.id }) }}">{{ product.title }}</a></h4>
+                                    <h5 class="media-heading">{{ product.marque.title }}</h5>
+                                    <span class="text-success"><strong>{{ product.quantity > 0 ? 'en Stock' : 'En rupture' }}</strong></span>
+                                </div>
+                            </div>
+                        </td>
+                        {% set quantity = cart[product.id].quantity %}
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                            <input type="email" class="form-control" id="exampleInputEmail1" value="{{ quantity }}">
+                            <a href="{{ path('troiswa_front_product_cartdecrement', {'idproduct': product.id}) }}" class="btn btn-xs btn-{{ quantity < 2 ? 'danger' : 'warning' }}">-</a>
+                            <a href="{{ path('troiswa_front_product_cartincrement', {'idproduct': product.id}) }}" class="btn btn-xs btn-success">+</a>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{ product.price | number_format(2, ',', '.') }}€</strong></td>
+                        {% set productTotal = product.price * quantity %}
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{ productTotal | number_format(2, ',', '.') }}€</strong></td>
+                        {% set total = total + productTotal %}
+                        <td class="col-sm-1 col-md-1">
+                            <!--button type="button" class="btn btn-danger"-->
+                                <a href="{{ path('troiswa_front_product_cartremove', { 'idproduct': product.id }) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                            <!--/button-->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Sous-total</h5></td>
+                        <td class="text-right"><h5><strong>{{ total | number_format(2, ',', '.') }}€</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><h5>Coupon</h5></td>
+                        <td>
+                            <form method="POST" action="{{ path('troiswa_front_product_cartcoupon') }}">
+                                <input type="text" size="8" name="coupon"><button type="submit" class="btn btn-sm btn-default">Ok</button>
+                            </form>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Frais de port</h5></td>
+                        <td class="text-right"><h5><strong>4,25€</strong></h5></td>
+                        {% set total = total + 4.25 %}
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>{{ total | number_format(2, ',', '.') }}€</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                            <a href="" class="btn btn-warning" onclick="clearCart();">Vider le caddie</a>
+                        </td>
+                        <td>
+                            <!--button type="button" class="btn btn-default"-->
+                                <a href="{{ path('troiswa_front_product_list') }}" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> Continuer les achats</a>
+                            <!--/button-->
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">
+                                Payer <span class="glyphicon glyphicon-play"></span>
+                            </button></td>
+                    </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('assets/js/remove.js') }}"></script>
+
+    <script>
+
+        function clearCart()
+        {
+            if (confirm('Voulez-vous vider le caddie ?'))
+            {
+                $.ajax({
+                    url: "{{ path('troiswa_front_product_clearcart') }}"
+                });
+
+            }
+        }
+
+    </script>
+{% endblock %}

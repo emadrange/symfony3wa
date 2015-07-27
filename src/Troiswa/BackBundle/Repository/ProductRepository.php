@@ -304,6 +304,7 @@ class ProductRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('prod')
             ->leftJoin('prod.cover', 'cover')
+            ->leftJoin('prod.marque', 'brand')
             ->where('prod.id IN (:listid)')
             ->setParameter('listid', $listId);
 

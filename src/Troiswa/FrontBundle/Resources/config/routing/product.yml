@@ -17,3 +17,29 @@ troiswa_front_product_cartadd:
 troiswa_front_cart:
     path: /cart
     defaults: { _controller: TroiswaFrontBundle:Product:cart }
+
+troiswa_front_product_cartremove:
+    path: /cart/remove/{idproduct}
+    defaults: { _controller: TroiswaFrontBundle:Product:cartRemove }
+    requirements:
+        idproduct: \d+
+
+troiswa_front_product_cartincrement:
+    path: /cart/inc/{idproduct}
+    defaults: { _controller: TroiswaFrontBundle:Product:cartIncrement }
+    requirements:
+        idproduct: \d+
+
+troiswa_front_product_cartdecrement:
+    path: /cart/dec/{idproduct}
+    defaults: { _controller: TroiswaFrontBundle:Product:cartDecrement }
+    requirements:
+        idproduct: \d+
+
+troiswa_front_product_clearcart:
+    path: /cart/clear
+    defaults: { _controller: TroiswaFrontBundle:Product:clearCart }
+
+troiswa_front_product_cartcoupon:
+    path: /cart/coupon
+    defaults: { _controller: TroiswaFrontBundle:Product:cartCoupon }
