@@ -19,14 +19,20 @@ class Cart
 {
 
     /**
+     * 
      * @var Session
      */
     private $session;
 
+    /**
+     *
+     * @var doctrine.orm.entity_manager 
+     */
     private $entityManager;
 
     /**
      * @param Session $session
+     * @param doctrine.orm.entity_manager $em
      */
     public function __construct(Session $session, $em)
     {
@@ -90,7 +96,7 @@ class Cart
     {
         if ($quantity > 0)
         {
-            // pour effacer la session sans fermer le navigateur
+            // pour vider la session 'cart' sans fermer le navigateur
             //$this->session->remove('cart');
 
             if ($this->session->get('cart'))
@@ -110,7 +116,6 @@ class Cart
             $cart[$id] = ['quantity' => $quantity];
 
             $this->session->set('cart', json_encode($cart));
-
         }
     }
 

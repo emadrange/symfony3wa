@@ -28,7 +28,10 @@
 
                             <p>{{ product.description }}</p>
                             <p>
-                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}" class="btn btn-default">More Info</a>
+                                <form method="POST" action="{{ path('troiswa_front_product_cartadd', {'idproduct': product.id}) }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter</button><!--a href="#" class="btn btn-primary">Acheter</a--> <a href="{{ path('troiswa_front_product_show', {'idproduct': product.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span> Plus d'info</a>
+                                </form>
                             </p>
                         </div>
                     </div>
