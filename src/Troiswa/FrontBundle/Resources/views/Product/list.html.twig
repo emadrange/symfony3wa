@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Tous les produits</h1>
+    <h1>Tous les produits ({{ pagination.getTotalItemCount }})</h1>
     
     <div class="row col-sm-8">
         {% for product in pagination %}

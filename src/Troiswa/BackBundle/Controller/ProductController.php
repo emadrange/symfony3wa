@@ -90,7 +90,7 @@ class ProductController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository("TroiswaBackBundle:Product")
-            ->findAllProductWithBrandAndCategory(true);
+            ->findAllProductWithAllElement(true);
             //->findBy([], ["title" => "ASC"]);
             //->findAll();
 

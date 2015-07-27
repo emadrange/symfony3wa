@@ -35,11 +35,16 @@ class ProductController extends Controller
         ]);
     }
     
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
     public function listAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('TroiswaBackBundle:Product')
-                ->findAllProductWithBrandAndCategory(true);
+                ->findAllProductWithAllElement(true);
         
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

@@ -86,13 +86,15 @@ class ProductRepository extends EntityRepository
      * @param boolean $isPaginable Pour la pagination
      * @return array
      */
-    public function findAllProductWithBrandAndCategory($isPaginable)
+    public function findAllProductWithAllElement($isPaginable)
     {
         
         $query = $this->createQueryBuilder('prod')
-                ->select('prod, cat, brand, logo')
+                ->select('prod, cat, brand, logo, cover, tag')
                 ->leftJoin('prod.cat', 'cat')
+                ->leftJoin('prod.tag', 'tag')
                 ->leftJoin('prod.marque', 'brand')
+                ->leftJoin('prod.cover', 'cover')
                 ->leftJoin('brand.logo', 'logo');
 
         if ($isPaginable)
@@ -283,7 +285,7 @@ class ProductRepository extends EntityRepository
     public function findProductsByGreatestTag($limit = 5)
     {
         $query = $this->createQueryBuilder('prod')
-            ->select('COUNT(tag.id) AS HIDDEN nbtag, prod')
+            ->select('COUNT(tag.id) AS HIDDEN nbtag, prod, cover')
             //->select('COUNT(tag.id) AS nbtag, prod.id')
             //->addSelect('prod.title, prod.price, prod.description')
             //->addSelect('cover.name, cover.alt')
@@ -297,12 +299,16 @@ class ProductRepository extends EntityRepository
     }
 
     /**
+     * Retourne les pdroduits d'une liste d'id
+     * @author Eric
+     * 
      * @param string $listId
      * @return array
      */
     public function findProductsByListId($listId)
     {
         $query = $this->createQueryBuilder('prod')
+            ->select('prod, cover, brand')
             ->leftJoin('prod.cover', 'cover')
             ->leftJoin('prod.marque', 'brand')
             ->where('prod.id IN (:listid)')
