@@ -14,41 +14,44 @@ $(document).ready(function(){
 
         var $product = $(this).closest('.item-product');
 
-        $.ajax({
-            url: $(this).attr('href'),
-            dataType: 'json'
-        }).done(function(data, textStatus){
+        if (confirm('Voulez-vous enlever ce produit'))
+        {    
+            $.ajax({
+                url: $(this).attr('href'),
+                dataType: 'json'
+            }).done(function(data, textStatus){
 
-            var productTotal = $product.find('.product-total').text();
-            var subTotal = $('.sub-total').text() - productTotal;
-            var total = subTotal + 4.25
+                var productTotal = $product.find('.product-total').text();
+                var subTotal = $('.sub-total').text() - productTotal;
+                var total = subTotal + 4.25;
 
-            $('.sub-total').text(parseFloat(subTotal).toFixed(2));
-            $('.total').text(parseFloat(total).toFixed(2));
+                $('.sub-total').text(parseFloat(subTotal).toFixed(2));
+                $('.total').text(parseFloat(total).toFixed(2));
 
-            $product.fadeOut(700, function(){
-                $(this).remove();
-
-                $('.alert-info').css('visibility', 'hidden');
-                $('.alert-danger h4').text(data);
-                $('.alert-danger').css('visibility', 'visible');
-            });
-
-            if (subTotal == 0)
-            {
-                $('#detailCart').fadeOut(700, function(){
+                $product.fadeOut(700, function(){
                     $(this).remove();
 
-                    $('.alert-danger h4').text('Votre caddie est vide');
-                    $('.alert-danger').css('visibility', 'visible');
-                })
-            }
-        });
+                    $('.alert-info').fadeOut("slow");
+                    $('.alert-danger h4').text(data);
+                    $('.alert-danger').fadeIn("slow");
+                });
+
+                if (subTotal === 0)
+                {
+                    $('#detailCart').fadeOut(700, function(){
+                        $(this).remove();
+
+                        $('.alert-danger h4').text('Votre caddie est vide');
+                        $('.alert-danger').fadeIn("slow");
+                    });
+                }
+            });
+        }
     });
 
-    /**************************/
-    /* Décrémente la quantité */
-    /**************************/
+    /***************************************/
+    /* Décrémente la quantité d'un élément */
+    /***************************************/
 
     $('#detailCart').on('click', '.btn-warning', function(event){
 
@@ -57,34 +60,36 @@ $(document).ready(function(){
         var $product = $(this).closest('.item-product');
         var quantity = parseFloat($product.find('.quantity').val()) - 1;
 
-        if (quantity == 0)
+        if (quantity === 0)
         {
             $product.find('.btn-danger').trigger('click');
         }
+        else
+        {
+            $.ajax({
+                url: $(this).attr('href'),
+                dataType: 'json'
+            }).done(function(data, textStatus){
 
-        $.ajax({
-            url: $(this).attr('href'),
-            dataType: 'json'
-        }).done(function(data, textStatus){
+                $product.find('.quantity').val(quantity);
 
-            $product.find('.quantity').val(quantity);
+                var productPrice = $product.find('.product-price').text();
+                $product.find('.product-total').text(parseFloat(productPrice * quantity).toFixed(2));
 
-            var productPrice = $product.find('.product-price').text();
-            $product.find('.product-total').text(parseFloat(productPrice * quantity).toFixed(2));
+                var subTotal = parseFloat($('.sub-total').text()) - productPrice;
+                $('.sub-total').text(parseFloat(subTotal).toFixed(2));
+                $('.total').text(parseFloat(subTotal + 4.25).toFixed(2));
 
-            var subTotal = parseFloat($('.sub-total').text()) - productPrice;
-            $('.sub-total').text(parseFloat(subTotal).toFixed(2));
-            $('.total').text(parseFloat(subTotal + 4.25).toFixed(2));
-
-            $('.alert-danger').css('visibility', 'hidden');
-            $('.alert-info h4').text(data);
-            $('.alert-info').css('visibility', 'visible');
-        });
+                $('.alert-danger').fadeOut("slow");
+                $('.alert-info h4').text(data);
+                $('.alert-info').fadeIn("slow");
+            });
+        }
     });
 
-    /**************************/
-    /* Incrémente la quantité */
-    /**************************/
+    /***************************************/
+    /* Incrémente la quantité d'un élément */
+    /***************************************/
 
     $('#detailCart').on('click', '.btn-success', function(event){
 
@@ -107,11 +112,9 @@ $(document).ready(function(){
             $('.sub-total').text(parseFloat(subTotal).toFixed(2));
             $('.total').text(parseFloat(subTotal + 4.25).toFixed(2));
 
-            $('.alert-danger').css('visibility', 'hidden');
+            $('.alert-danger').fadeOut("slow");
             $('.alert-info h4').text(data);
-            $('.alert-info').css('visibility', 'visible');
+            $('.alert-info').fadeIn("slow");
         });
-
-
     });
 });
