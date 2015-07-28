@@ -11,7 +11,9 @@
                 {% if cart is empty %}
                     <div class="alert-danger"><h4>Votre caddie est vide</h4></div>
                 {% else %}
-                <table class="table table-hover">
+                <div class="alert-danger" style="visibility: hidden"><h4></h4></div>
+                <div class="alert-info" style="visibility: hidden"><h4></h4></div>
+                <table class="table table-hover" id="detailCart">
                     <thead>
                     <tr>
                         <th>Produit</th>
@@ -24,7 +26,7 @@
                     <tbody>
                     {% set total = 0 %}
                     {% for product in products %}
-                    <tr>
+                    <tr class="item-product">
                         <td class="col-sm-8 col-md-6">
                             <div class="media">
                                 <a class="thumbnail pull-left" href="{{ path('troiswa_front_product_show', { 'idproduct': product.id }) }}"> <img class="media-object" src="{{ asset(product.cover.getWebPath('thumb_small')) }}" style="width: 72px; height: 72px;"> </a>
@@ -37,17 +39,17 @@
                         </td>
                         {% set quantity = cart[product.id].quantity %}
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="email" class="form-control" id="exampleInputEmail1" value="{{ quantity }}">
-                            <a href="{{ path('troiswa_front_product_cartdecrement', {'idproduct': product.id}) }}" class="btn btn-xs btn-{{ quantity < 2 ? 'danger' : 'warning' }}">-</a>
+                            <input type="text" class="form-control quantity" id="exampleInputEmail1" value="{{ quantity }}">
+                            <a href="{{ path('troiswa_front_product_cartdecrement', {'idproduct': product.id}) }}" class="btn btn-xs btn-warning">-</a>
                             <a href="{{ path('troiswa_front_product_cartincrement', {'idproduct': product.id}) }}" class="btn btn-xs btn-success">+</a>
                         </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{ product.price | number_format(2, ',', '.') }}€</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="product-price">{{ product.price | number_format(2, '.', '') }}</strong>€</td>
                         {% set productTotal = product.price * quantity %}
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{ productTotal | number_format(2, ',', '.') }}€</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong class="product-total">{{ productTotal | number_format(2, '.', '') }}</strong>€</td>
                         {% set total = total + productTotal %}
                         <td class="col-sm-1 col-md-1">
                             <!--button type="button" class="btn btn-danger"-->
-                                <a href="{{ path('troiswa_front_product_cartremove', { 'idproduct': product.id }) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                                <a href="{{ path('troiswa_front_product_cartremove', { 'idproduct': product.id }) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                             <!--/button-->
                         </td>
                     </tr>
@@ -57,7 +59,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Sous-total</h5></td>
-                        <td class="text-right"><h5><strong>{{ total | number_format(2, ',', '.') }}€</strong></h5></td>
+                        <td class="text-right"><h5><strong class="sub-total">{{ total | number_format(2, '.', '') }}</strong>€</h5></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -75,7 +77,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Frais de port</h5></td>
-                        <td class="text-right"><h5><strong>4,25€</strong></h5></td>
+                        <td class="text-right"><h5><strong>4.25</strong>€</h5></td>
                         {% set total = total + 4.25 %}
                     </tr>
                     <tr>
@@ -83,7 +85,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>{{ total | number_format(2, ',', '.') }}€</strong></h3></td>
+                        <td class="text-right"><h3><strong class="total">{{ total | number_format(2, '.', '') }}</strong>€</h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
@@ -114,8 +116,8 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script type="text/javascript" src="{{ asset('assets/js/remove.js') }}"></script>
-
+    <!--script type="text/javascript" src="{#{ asset('assets/js/remove.js') }#}"></script-->
+    <script type="text/javascript" src="{{ asset('assets/front/js/cart.js') }}"></script>
     <script>
 
         function clearCart()

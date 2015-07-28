@@ -51,6 +51,11 @@ class Cart
         return json_decode($this->session->get('cart'), true);
     }
 
+    public function countCartElement()
+    {
+        $cart = json_decode($this->session->get('cart'), true);
+    }
+
     /**
      * Vide le caddie
      * @author Eric

@@ -82,4 +82,20 @@ class MainController extends Controller
             'form_contact' => $formContact->createView()
         ]);
     }
+
+    /**
+     * Retourne le nombre d'article du caddie
+     * @author Eric
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function cartCountAction()
+    {
+        $cart = $this->get('troiswa_front.cart');
+
+        $nbArticle = count($cart->getCart());
+        return $this->render('TroiswaFrontBundle:Main:cart-count.html.twig', [
+            'nbArticle' => $nbArticle
+        ]);
+    }
 }

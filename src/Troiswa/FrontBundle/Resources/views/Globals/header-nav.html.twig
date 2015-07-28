@@ -17,7 +17,7 @@
                     <a href="{{ path('troiswa_front_product_list') }}"><i class="glyphicon glyphicon-book"></i> Tous les produits</a>
                 </li>
                 <li>
-                    <a href="{{ path('troiswa_front_cart') }}"><i class="glyphicon glyphicon-shopping-cart"></i> Votre caddie</a>
+                    <a href="{{ path('troiswa_front_cart') }}"><i class="glyphicon glyphicon-shopping-cart"></i> Votre caddie {#{ render(controller('TroiswaFrontBundle:Main:cartCount')) }#}</a>
                 </li>
                 <li>
                     <a href="{{ path('troiswa_front_contact') }}"><i class="glyphicon glyphicon-envelope"></i> Contact</a>

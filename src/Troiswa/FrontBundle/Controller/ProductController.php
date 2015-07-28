@@ -10,6 +10,7 @@ namespace Troiswa\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Product;
 
@@ -137,7 +138,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Supprime un élément du caddie
+     * Supprime un élément du caddie (Ajax)
      * @author Eric
      *
      * @param Product $product
@@ -147,10 +148,13 @@ class ProductController extends Controller
      */
     public function cartRemoveAction(Product $product, Request $request)
     {
+        if ($request->isXmlHttpRequest())
+        {
+            $cart = $this->get('troiswa_front.cart');
+            $cart->remove($product->getId());
 
-        $cart = $this->get('troiswa_front.cart');
-
-        $cart->remove($product->getId());
+            return new JsonResponse("Produit supprimé");
+        }
 
         /*$session = $request->getSession();
         $cart = json_decode($session->get('cart'), true);
@@ -165,7 +169,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Incrémente la quantité d'un produit
+     * Incrémente la quantité d'un produit (Ajax)
      * @author Eric
      *
      * @param Product $product
@@ -175,10 +179,14 @@ class ProductController extends Controller
      */
     public function cartIncrementAction(Product $product, Request $request)
     {
+        if ($request->isXmlHttpRequest())
+        {
+            $cart = $this->get('troiswa_front.cart');
+            $cart->increment($product->getId());
 
-        $cart = $this->get('troiswa_front.cart');
+            return new JsonResponse("Produit ajouté");
+        }
 
-        $cart->increment($product->getId());
         /*$session = $request->getSession();
         $cart = json_decode($session->get('cart'), true);
 
@@ -192,17 +200,22 @@ class ProductController extends Controller
     }
 
     /**
-     * Décrémente la quantité d'un produit
+     * Décrémente la quantité d'un produit (Ajax)
      * @author Eric
      *
      * @param Product $product
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @ParamConverter("product", options={"mapping": {"idproduct": "id"}})
      */
-    public function cartDecrementAction(Product $product)
+    public function cartDecrementAction(Product $product, Request $request)
     {
-        $cart = $this->get('troiswa_front.cart');
-        $cart->decrement($product->getId());
+        if ($request->isXmlHttpRequest())
+        {
+            $cart = $this->get('troiswa_front.cart');
+            $cart->decrement($product->getId());
+
+            return new JsonResponse("Produit enlevé");
+        }
 
         return $this->redirectToRoute('troiswa_front_cart');
     }
