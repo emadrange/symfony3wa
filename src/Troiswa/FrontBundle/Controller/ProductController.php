@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Troiswa\BackBundle\Entity\Product;
+use Troiswa\FrontBundle\Entity\Comment;
+use Troiswa\FrontBundle\Form\CommentType;
 
 class ProductController extends Controller
 {
@@ -31,8 +33,46 @@ class ProductController extends Controller
      */
     public function showAction(Product $product, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $comment = new Comment();
+        $comment->setProduct($product);
+
+        $formComment = $this->createForm(new CommentType(), $comment, [
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
+        ])
+            ->add('submit', 'submit', [
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ]);
+
+        $formComment->handleRequest($request);
+
+        if ($formComment->isValid())
+        {
+            $comment->setClient($this->getUser());
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add("success", "Le commenataire a bien été ajouté");
+
+            return $this->redirectToRoute('troiswa_front_product_show', [
+                'idproduct' => $product->getId()
+            ]);
+        }
+
+        $comments = $em->getRepository('TroiswaFrontBundle:Comment')
+            ->findCommentsByProductId($product->getId());
+
+
         return $this->render('TroiswaFrontBundle:Product:show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'form_comment' => $formComment->createView(),
+            'comments' => $comments
         ]);
     }
     

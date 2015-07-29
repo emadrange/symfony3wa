@@ -5,3 +5,14 @@ services:
 
     troiswa_back.monsuperservice:
         class: Troiswa\BackBundle\Util\Utility
+
+    troiswa_back.twig_extension:
+        class: Troiswa\BackBundle\Twig\Extension
+        tags:
+            - { name: twig.extension }
+
+    troiswa_back.maintenance:
+        class: Troiswa\BackBundle\Listener\MaintenanceListener
+        arguments: [%ismaintenance%, "@twig"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onMaintenance }

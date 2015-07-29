@@ -8,6 +8,12 @@ troiswa_front_product_show:
     requirements:
         idproduct: \d+
 
+#troiswa_front_product_commentremove:
+#    path: /comment/remove/{id}
+#    defaults: { _controller: TroiswaFrontBundle:Product:commentRemove }
+#    requirements:
+#        id: \d+
+
 troiswa_front_product_cartadd:
     path: /cart/add/{idproduct}
     defaults: { _controller: TroiswaFrontBundle:Product:cartAdd }

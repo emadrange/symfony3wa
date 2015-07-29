@@ -118,6 +118,8 @@ class Product
     private $deletedAt;
 
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id")
      */
@@ -125,6 +127,7 @@ class Product
 
     /**
      * @var
+     *
      * @ORM\ManyToOne(targetEntity="Troiswa\BackBundle\Entity\Marque", inversedBy="products")
      * @ORM\JoinColumn(name="id_marque", referencedColumnName="id", nullable=false)
      * @Assert\NotBlank(message="marque obligatoire")
@@ -133,6 +136,7 @@ class Product
 
     /**
      * @var
+     *
      * @ORM\OneToOne(targetEntity="Troiswa\BackBundle\Entity\ProductCover", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="id_cover", referencedColumnName="id")
      * @Assert\Valid
@@ -153,6 +157,13 @@ class Product
      * )
      */
     private $tag;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Troiswa\FrontBundle\Entity\Comment", mappedBy="product")
+     */
+    private $comments;
 
     /**
      * Constructor
@@ -506,5 +517,38 @@ class Product
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Troiswa\FrontBundle\Entity\Comment $comments
+     * @return Product
+     */
+    public function addComment(\Troiswa\FrontBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Troiswa\FrontBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Troiswa\FrontBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

@@ -95,6 +95,13 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var
+     *
+     * @ORM\Column(name="civility", type="boolean")
+     */
+    private $civility;
+
+    /**
+     * @var
      */
     private $username;
 
@@ -260,6 +267,8 @@ class User implements UserInterface, \Serializable
     {
         return $this->pseudo;
     }
+
+    
 
     /**
      * Set address
@@ -497,5 +506,28 @@ class User implements UserInterface, \Serializable
     {
         // TODO: Implement unserialize() method.
         list ($this->id) = unserialize($serialized);
+    }
+
+    /**
+     * Set civility
+     *
+     * @param boolean $civility
+     * @return User
+     */
+    public function setCivility($civility)
+    {
+        $this->civility = $civility;
+
+        return $this;
+    }
+
+    /**
+     * Get civility
+     *
+     * @return boolean 
+     */
+    public function getCivility()
+    {
+        return $this->civility;
     }
 }
